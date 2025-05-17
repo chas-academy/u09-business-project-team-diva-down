@@ -11,6 +11,7 @@
     "dev": "npx tsc && node build/index.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "express": "^5.1.0",
     "node": "^20.19.2"
   },
