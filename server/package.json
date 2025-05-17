@@ -1,0 +1,20 @@
+{
+  "name": "trivia-game",
+  "version": "1.0.0",
+  "description": "A trivia game backend API to connect to Trivia API and do routing",
+  "license": "ISC",
+  "author": "Ciarán Hayes - David Segerbro",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tsc && node build/index.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "node": "^20.19.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
