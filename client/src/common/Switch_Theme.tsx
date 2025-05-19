@@ -1,6 +1,5 @@
 
-
-export default function ChangeTheme() {
+export function ChangeTheme(e: React.MouseEvent) {
 
     const container = document.getElementById('container');
     // const button = document.getElementById('switch');
@@ -11,5 +10,4 @@ export default function ChangeTheme() {
     } else {
         container?.setAttribute('data-theme', 'light');
     }
-
 }
