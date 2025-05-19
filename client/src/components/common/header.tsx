@@ -1,6 +1,7 @@
 import Register from "../hoc/loc/register_button";
 import { ChangeTheme } from "../../common/Switch_Theme";
 import { useState } from "react";
+import Login from "../hoc/loc/login_button";
 
 const Header = () => {
 
@@ -53,7 +54,7 @@ const Header = () => {
                         style={{ pointerEvents: isTransitioning ? 'none' : 'auto' }}
                     >
                     </button>
-                    <button>Logins</button>
+                    <Login />
                     <Register />
                 </div>
             </header>
