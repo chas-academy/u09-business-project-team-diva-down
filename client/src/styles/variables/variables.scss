@@ -1,6 +1,4 @@
 // Darkmode variables
-
-
 :root {
     --bg1: #050505;
     --bg2: #0A0A0A;
@@ -9,10 +7,18 @@
     --p3: #b32EE8;
     --t1: #E2E2E2;
     --t2: #FAFAFA;
+    --sw1: #FAFAFA;
+    --sw2: #050505;
 }
 
-:root[data-theme="light"] {
+[data-theme="light"] {
     --bg1: #FAFAFA;
+    --bg2: #F8F9FA;
+    --p1: #00A8FF;
+    --p2: #FF00AA;
+    --p3: #9C27FF;
+    --t1: #666;
+    --t2: #333;
 }
 
 $bg1: var(--bg1);
@@ -22,6 +28,8 @@ $p2: var(--p2);
 $p3: var(--p3);
 $t1: var(--t1);
 $t2: var(--t2);
+$sw1: var(--sw1);
+$sw2: var(--sw2);
 
 $font1: "Titillium Web", sans-serif;
 $font2: "Tilt Warp", sans-serif;

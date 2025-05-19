@@ -171,10 +171,18 @@ iframe {
   --p3: #b32EE8;
   --t1: #E2E2E2;
   --t2: #FAFAFA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
 }
 
-:root[data-theme=light] {
+[data-theme=light] {
   --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
 }
 
 .Homepage {
@@ -195,10 +203,18 @@ iframe {
   --p3: #b32EE8;
   --t1: #E2E2E2;
   --t2: #FAFAFA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
 }
 
-:root[data-theme=light] {
+[data-theme=light] {
   --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
 }
 
 .navbar {
@@ -242,10 +258,32 @@ iframe {
   align-items: center;
 }
 .navbar .button-container .switch {
-  background-color: var(--p2);
+  background-color: var(--sw1);
   border-radius: 50%;
-  height: 24px;
-  width: 24px;
+  height: 1.5rem;
+  width: 1.5rem;
+  position: relative;
+  cursor: pointer;
+  border: 0.5px solid rgba(10, 10, 10, 0.2);
+}
+.navbar .button-container .switch::before {
+  height: 80%;
+  width: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, var(--sw2) 50%, var(--sw1) 50%);
+  content: "";
+  border-radius: 50%;
+  transform-origin: 50% 50%;
+  transition: transform 0.5s ease-in-out;
+}
+.navbar .button-container .switch.spin-forward::before {
+  transform: translate(-50%, -50%) rotate(-180deg);
+}
+.navbar .button-container .switch.spin-backward::before {
+  transform: translate(-50%, -50%) rotate(0);
 }
 
 :root {
@@ -256,10 +294,18 @@ iframe {
   --p3: #b32EE8;
   --t1: #E2E2E2;
   --t2: #FAFAFA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
 }
 
-:root[data-theme=light] {
+[data-theme=light] {
   --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
 }
 
 .footer {
@@ -282,10 +328,18 @@ iframe {
   --p3: #b32EE8;
   --t1: #E2E2E2;
   --t2: #FAFAFA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
 }
 
-:root[data-theme=light] {
+[data-theme=light] {
   --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
 }
 
 .active_button {
