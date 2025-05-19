@@ -1,0 +1,12 @@
+@import '../variables/variables.scss';
+
+.Homepage {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg1);
+
+    .main {
+        flex: 1;
+    }
+}

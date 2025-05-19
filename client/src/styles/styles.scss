@@ -1,0 +1,12 @@
+// Reset File
+@use './reset/reset.scss';
+
+// Pages - structures
+@use './pages/Homepage.scss';
+
+// Components - styling
+@use './components/header.scss';
+@use './components/footer.scss';
+
+// Specific components
+@use './components/buttons.scss';
