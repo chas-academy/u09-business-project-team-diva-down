@@ -1,0 +1,31 @@
+// Darkmode variables
+
+
+:root {
+    --bg1: #050505;
+    --bg2: #0A0A0A;
+    --p1: #00F5FF;
+    --p2: #FF00FF;
+    --p3: #b32EE8;
+    --t1: #E2E2E2;
+    --t2: #FAFAFA;
+}
+
+:root[data-theme="light"] {
+    --bg1: #FAFAFA;
+}
+
+$bg1: var(--bg1);
+$bg2: var(--bg2);
+$p1: var(--p1);
+$p2: var(--p2);
+$p3: var(--p3);
+$t1: var(--t1);
+$t2: var(--t2);
+
+$font1: "Titillium Web", sans-serif;
+$font2: "Tilt Warp", sans-serif;
+
+// [data-theme="light"] {
+//     $bg1: #FFFFFF;
+// }
