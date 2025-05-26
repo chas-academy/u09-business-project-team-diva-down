@@ -1,0 +1,55 @@
+@property --t {
+  syntax: '<number>';
+  initial-value: 20;
+  inherits: true;
+}
+
+@property --s {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: true;
+}
+
+.countdown {
+  --t-initial: var(--t);
+  --s: calc(var(--t)/1);
+  display: grid;
+  margin: 1em auto;
+  width: var(--d);
+  height: var(--d);
+  animation: t calc(var(--t-initial)*1s) linear forwards;
+}
+
+.countdown::after {
+  grid-column: 1;
+  grid-row: 1;
+  place-self: center;
+  color: #FAFAFA;
+  font: calc(0.5*var(--d))/ 2 ubuntu mono, consolas, monaco, monospace;
+  font-weight: 500;
+  counter-reset: s var(--s);
+  content: counter(s, decimal-leading-zero);
+}
+
+@keyframes t {
+  from { --t: var(--t-initial); }
+  to { --t: 0; }
+}
+
+.countdown svg {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.countdown circle[r] {
+  fill: none;
+  stroke: silver;
+}
+
+.countdown circle[r] + circle[r] {
+  --k: calc(var(--t)/var(--t-initial)) !important;
+  transform: rotate(-90deg) !important;
+  stroke-linecap: round !important;
+  stroke: color-mix(in hsl shorter hue, var(--c1) calc(var(--k)*100%), var(--c2)) !important;
+  stroke-dasharray: var(--k) 1 !important;
+}

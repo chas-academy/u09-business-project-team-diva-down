@@ -2,6 +2,8 @@ import Register from "../hoc/loc/register_button";
 import { ChangeTheme } from "../../common/Switch_Theme";
 import { useState } from "react";
 import Login from "../hoc/loc/login_button";
+import { Link } from "react-router-dom";
+import { RouterContainer } from "../../routes/RouteContainer";
 
 const Header = () => {
 
@@ -40,7 +42,7 @@ const Header = () => {
                 <div className="logo">NEONIX</div>
                 <ul className="navlinks">
                     <li>Home</li>
-                    <li>Play</li>
+                    <Link to={RouterContainer.Gameloop}>Play</Link>
                     <li>Categories</li>
                     <li>Leaderboard</li>
                     <li>About</li>
