@@ -4,7 +4,8 @@ import { useState } from "react";
 import Countdown from "../components/common/CountDownTimer";
 import ChangeGameState from "../components/hoc/loc/TestingGameComp/ChangeGameState";
 import ResetTimerState from "../components/hoc/loc/Reset_Btn";
-
+import InsertData from "../components/TestComponents/InsertData";
+import AnswerCard from "../components/common/Answer_Card";
 
 type GameState = 'start' | 'playing' | 'finished';
 
@@ -31,8 +32,6 @@ const Gameloop: React.FC = () => {
         });
     }
 
-
-
     return (
         <>
             <div id="container" className="GameLoop">
@@ -47,6 +46,8 @@ const Gameloop: React.FC = () => {
                         <div className="progress">Progress</div>
                         <Countdown key={resetKey} />
                         <ResetTimerState onClick={handleReset}/>
+                        <InsertData name="Steven"/>
+                        <AnswerCard />
                         </>
                     )}
                     {gameState === 'finished' && (

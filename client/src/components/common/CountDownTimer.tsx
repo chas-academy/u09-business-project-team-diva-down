@@ -9,8 +9,8 @@ interface CountdownProps {
 }
 
 const Countdown: React.FC<CountdownProps> = ({
-  duration = 20,
-  size = '5em',
+  duration = 30,
+  size = '3em',
   color1 = '#00ccff',
   color2 = 'hotpink',
 }) => {

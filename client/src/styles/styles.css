@@ -613,6 +613,114 @@ iframe {
   --hft: "transparent";
 }
 
+.answer-container {
+  display: grid;
+  grid-template-columns: 50px repeat(4, 1fr);
+  grid-template-rows: auto repeat(3, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  padding-top: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  background-color: #333;
+  border-radius: 12px;
+}
+.answer-container .timer {
+  grid-area: 1/1/2/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.answer-container .question {
+  grid-area: 1/2/2/6;
+}
+.answer-container .question .question_box {
+  width: 550px;
+  height: 48px;
+  background-color: #888;
+  border-radius: 7px;
+  margin: 25px 0;
+}
+.answer-container .option1 {
+  grid-area: 2/2/3/4;
+}
+.answer-container .option1 .option_answer {
+  background-color: #888;
+  width: 250px;
+  height: 50px;
+  border-radius: 7px;
+}
+.answer-container .option2 {
+  grid-area: 2/4/3/6;
+}
+.answer-container .option2 .option_answer {
+  background-color: #888;
+  width: 250px;
+  height: 50px;
+  border-radius: 7px;
+  justify-self: flex-end;
+}
+.answer-container .option3 {
+  grid-area: 3/2/4/4;
+}
+.answer-container .option3 .option_answer {
+  background-color: #888;
+  width: 250px;
+  height: 50px;
+  border-radius: 7px;
+}
+.answer-container .option4 {
+  grid-area: 3/4/4/6;
+}
+.answer-container .option4 .option_answer {
+  background-color: #888;
+  width: 250px;
+  height: 50px;
+  border-radius: 7px;
+  justify-self: flex-end;
+}
+.answer-container .submit {
+  grid-area: 4/5/5/6;
+}
+.answer-container .submit .submit_box {
+  width: 100%;
+  justify-self: flex-end;
+  border-radius: 7px;
+  height: 50px;
+  background-color: #888;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+:root {
+  --bg1: #050505;
+  --rbg1: #E2E2E2;
+  --bg2: #0A0A0A;
+  --p1: #00F5FF;
+  --p2: #FF00FF;
+  --p3: #b32EE8;
+  --t1: #E2E2E2;
+  --t2: #FAFAFA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
+  --pt2: #F8F9FA;
+  --hft: #666;
+}
+
+[data-theme=light] {
+  --bg1: #FAFAFA;
+  --rbg1: #e2e2e2;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
+  --pt2: #E2E2E2;
+  --hft: "transparent";
+}
+
 @property --t {
   syntax: "<number>";
   initial-value: 20;
