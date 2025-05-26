@@ -1,3 +1,5 @@
+@import '../variables/variables.scss';
+
 @property --t {
   syntax: '<number>';
   initial-value: 20;
@@ -24,7 +26,7 @@
   grid-column: 1;
   grid-row: 1;
   place-self: center;
-  color: #FAFAFA;
+  color: $t1;
   font: calc(0.5*var(--d))/ 2 ubuntu mono, consolas, monaco, monospace;
   font-weight: 500;
   counter-reset: s var(--s);

@@ -267,6 +267,9 @@ iframe {
   flex-direction: column;
   margin-bottom: 15%;
 }
+.GameLoop .progress {
+  color: var(--t1);
+}
 
 :root {
   --bg1: #050505;
@@ -582,6 +585,34 @@ iframe {
   margin-top: 10px;
 }
 
+:root {
+  --bg1: #050505;
+  --rbg1: #E2E2E2;
+  --bg2: #0A0A0A;
+  --p1: #00F5FF;
+  --p2: #FF00FF;
+  --p3: #b32EE8;
+  --t1: #E2E2E2;
+  --t2: #FAFAFA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
+  --pt2: #F8F9FA;
+  --hft: #666;
+}
+
+[data-theme=light] {
+  --bg1: #FAFAFA;
+  --rbg1: #e2e2e2;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
+  --pt2: #E2E2E2;
+  --hft: "transparent";
+}
+
 @property --t {
   syntax: "<number>";
   initial-value: 20;
@@ -606,7 +637,7 @@ iframe {
   grid-column: 1;
   grid-row: 1;
   place-self: center;
-  color: #FAFAFA;
+  color: var(--t1);
   font: calc(0.5 * var(--d))/2 ubuntu mono, consolas, monaco, monospace;
   font-weight: 500;
   counter-reset: s var(--s);
