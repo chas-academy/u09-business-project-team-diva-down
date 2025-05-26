@@ -44,7 +44,7 @@ const Gameloop: React.FC = () => {
                     )}
                     {gameState == 'playing' && (
                         <>
-                        <div style={{color: 'white'}}>Progress</div>
+                        <div className="progress">Progress</div>
                         <Countdown key={resetKey} />
                         <ResetTimerState onClick={handleReset}/>
                         </>
