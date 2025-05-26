@@ -1,9 +1,11 @@
 import React from "react";
 
 export default function hollow_button1(WrappedComponent: React.ComponentType) {
-    return (props: any) => {
+    return ({ onClick, ...props }: { onClick?: React.MouseEventHandler<HTMLButtonElement> } & any) => {
         return (
-            <button className="hollow_active_button">
+            <button 
+                className="hollow_active_button"
+                onClick={onClick}>
                 <WrappedComponent {...props} />
             </button>
         );
