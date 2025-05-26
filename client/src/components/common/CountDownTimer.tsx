@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 // import css for the countdown
 
 interface CountdownProps {
@@ -6,6 +6,7 @@ interface CountdownProps {
     size?: string;
     color1?: string;
     color2?: string;
+    onTimeUpdate?: (remaingTime: number) => void;
 }
 
 const Countdown: React.FC<CountdownProps> = ({
@@ -13,8 +14,10 @@ const Countdown: React.FC<CountdownProps> = ({
   size = '3em',
   color1 = '#00ccff',
   color2 = 'hotpink',
+  onTimeUpdate,
 }) => {
   const countdownRef = useRef<HTMLDivElement>(null);
+  const [remainingTime, setRemainingTime] = useState(duration);
 
   useEffect(() => {
     // Set CSS custom properties when component mounts
@@ -25,7 +28,19 @@ const Countdown: React.FC<CountdownProps> = ({
       countdownRef.current.style.setProperty('--c1', color1);
       countdownRef.current.style.setProperty('--c2', color2);
     }
-  }, [duration, size, color1, color2]);
+
+    const timer = setInterval(() => {
+      setRemainingTime((prev) => {
+        const newTime = prev - 1;
+        if (onTimeUpdate) onTimeUpdate(newTime); // Notify parent
+        if (newTime <= 0) clearInterval(timer);
+        return newTime;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer); // Cleanup
+
+  }, [duration, size, color1, color2, onTimeUpdate]);
 
   return (
     <>

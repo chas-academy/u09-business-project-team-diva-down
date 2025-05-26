@@ -12,10 +12,19 @@ type GameState = 'start' | 'playing' | 'finished';
 const Gameloop: React.FC = () => {
     const [resetKey, setResetKey] = useState(0);
     const [gameState, setGameState] = useState<GameState>('start');
+    const [remaingTime, setRemainingTime] = useState<number | null>(null);
 
     const handleReset = () => {
         setResetKey(prev => prev + 1);
     };
+
+    const handleTimeUpdate = (time: number) => {
+        setRemainingTime(time);
+    };
+
+    const logTimeUpdate = () => {
+        console.log("Remaining Time: ", remaingTime);
+    }
 
     function Change() {
         setGameState(prev => {
@@ -37,6 +46,7 @@ const Gameloop: React.FC = () => {
             <div id="container" className="GameLoop">
                 <Header />
                 <main className="main">
+                <button onClick={logTimeUpdate} style={{color: 'hotpink', fontWeight: '600', textTransform: 'uppercase'}}>Check The Time</button>
                 <ChangeGameState onClick={Change}/>
                     {gameState === 'start' && (
                         <div style={{color: 'white'}}>Hello</div>
@@ -44,7 +54,7 @@ const Gameloop: React.FC = () => {
                     {gameState == 'playing' && (
                         <>
                         <div className="progress">Progress</div>
-                        <Countdown key={resetKey} />
+                        <Countdown key={resetKey} onTimeUpdate={handleTimeUpdate}/>
                         <ResetTimerState onClick={handleReset}/>
                         <InsertData name="Steven"/>
                         <AnswerCard />
