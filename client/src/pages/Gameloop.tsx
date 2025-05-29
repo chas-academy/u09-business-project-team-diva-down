@@ -20,6 +20,11 @@ const Gameloop: React.FC = () => {
 
     const handleTimeUpdate = (time: number) => {
         setRemainingTime(time);
+        if (remaingTime === 0) {
+            setTimeout(function() {
+                handleReset()
+            }, 10);
+        }
     };
 
     const logTimeUpdate = () => {
