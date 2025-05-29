@@ -11,13 +11,22 @@
     "dev": "npx tsc && node build/index.js"
   },
   "dependencies": {
+    "@types/express-session": "^1.18.1",
+    "@types/passport-google-oauth20": "^2.0.16",
     "bcryptjs": "^3.0.2",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "mongoose": "^8.15.0",
-    "node": "^20.19.2"
+    "express-openid-connect": "^2.18.1",
+    "express-session": "^1.18.1",
+    "node": "^20.19.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-oauth2": "^1.8.0"
   },
   "devDependencies": {
+    "@types/passport": "^1.0.17",
+    "@types/passport-oauth2": "^1.4.17",
     "typescript": "^5.8.3"
   }
 }
