@@ -14,7 +14,7 @@ const URI = process.env.MONGODB_URI;
 mongoose_1.default.connect(`${URI}`);
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.get('/', (req, res) => {
+app.get('/live', (req, res) => {
     res.send('API is live!');
 });
 app.use('/', registerUser_route_1.default);

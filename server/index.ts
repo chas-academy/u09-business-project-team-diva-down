@@ -5,6 +5,7 @@ import routerRegister from "./routes/registerUser.route";
 
 dotenv.config();
 
+
 const app = express();
 const port = 3000;
 const URI = process.env.MONGODB_URI;
@@ -13,7 +14,7 @@ mongoose.connect(`${URI}`)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+app.get('/live', (req, res) => {
     res.send('API is live!')
 });
 
