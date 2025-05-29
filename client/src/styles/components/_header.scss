@@ -5,22 +5,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $t1;
-    background-color: $bg2;
+    color: $text1;
+    background-color: $darker;
     margin-top: auto;
     height: auto;
     width: 100%;
-    border-bottom: 1px solid $hft;
+    border-bottom: 1px solid $border;
     box-shadow: 0px -10px 50px 0px rgb(0, 0, 0, 0.2);
 
     .logo {
         font-size: 2rem;
-        color: $p1;
-        
-        background: linear-gradient(to right, $p1, $p2);
+        color: $accent1;
+        background: linear-gradient(to right, $accent1, $accent2);
         -webkit-background-clip: text;
         background-clip: text;
-        
         -webkit-text-fill-color: transparent;
         color: transparent;
         font-weight: 600;
@@ -52,7 +50,7 @@
         }
 
         .switch {
-        background-color: $sw1;
+        background-color: $switch1;
         border-radius: 50%;
         height: 2rem;
         width: 2rem;
@@ -68,7 +66,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: linear-gradient(90deg, $sw2 50%, $sw1 50%);
+        background: linear-gradient(90deg, $switch2 50%, $switch1 50%);
         content: '';
         border-radius: 50%;
         transform-origin: 50% 50%;

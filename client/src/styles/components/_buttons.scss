@@ -1,0 +1,72 @@
+@import '../variables/variables.scss';
+
+.active_button {
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    font-family: $font2;
+    background-color: $accent1;
+    color: $text1;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+}
+
+.hollow_active_button {
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    font-family: $font2;
+    background-color: transparent;
+    border: 1px solid $accent1;
+    color: $accent1;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background-color: rgba(0, 180, 216, 0.2);
+        transform: translateY(-2px);
+    }
+}
+
+.hollow_active_button_version2 {
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    font-family: $font2;
+    background-color: transparent;
+    border: 1px solid $accent1;
+    color: $accent1;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background-color: rgba(0, 180, 216, 0.2);
+        transform: translateY(-2px);
+    }
+}
+
+.homepage_active_button {
+    width: 150px;
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    font-family: $font2;
+    background-color: $accent2;
+    color: $pt2;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
