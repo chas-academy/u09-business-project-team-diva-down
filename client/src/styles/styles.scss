@@ -4,6 +4,7 @@
 // Pages - structures
 @use './pages/Homepage.scss';
 @use './pages/Gameloop.scss';
+@use './pages/SingePlayerGameLoop.scss';
 
 // Components - styling
 @use './components/header.scss';
@@ -14,6 +15,7 @@
 @use './components/card.scss';
 @use './components/titles.scss';
 @use './components/answer_card.scss';
+@use './components/_settings_card.scss';
 
 // Special Components
 @use './special/timer.scss';

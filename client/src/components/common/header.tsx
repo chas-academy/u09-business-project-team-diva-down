@@ -42,7 +42,7 @@ const Header = () => {
                 <div className="logo">NEONIX</div>
                 <ul className="navlinks">
                     <li>Home</li>
-                    <Link to={RouterContainer.Gameloop}>Play</Link>
+                    <Link to={RouterContainer.SinglePlayer}>Play</Link>
                     <li>Categories</li>
                     <li>Leaderboard</li>
                     <li>About</li>
