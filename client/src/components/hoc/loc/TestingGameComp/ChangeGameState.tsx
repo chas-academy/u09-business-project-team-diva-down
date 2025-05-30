@@ -6,7 +6,7 @@ type ClickableGameStateProp = {
 
 const ChangeGameState = (props: ClickableGameStateProp) => {
     return (
-        <>Change Game</>
+        <button onClick={props.onClick}>Change Game</button>
     );
 };
 

@@ -29,9 +29,9 @@ const Header = () => {
         setIsTransitioning(false);
     };
 
-    const handleCombinedClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleCombinedClick = () => {
         handleClick();
-        ChangeTheme(e); // Passing the event to EChangeTheme where it's actually used
+        ChangeTheme(); // Passing the event to EChangeTheme where it's actually used
     };
 
 

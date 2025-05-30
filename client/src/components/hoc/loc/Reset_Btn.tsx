@@ -6,7 +6,7 @@ type ResetTimerProp = {
 
 const ResetTimerState = (props: ResetTimerProp) => {
     return (
-        <>Reset Timer</>
+        <button onClick={props.onClick}>Reset Timer</button>
     );
 };
 

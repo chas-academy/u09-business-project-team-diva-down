@@ -10,10 +10,15 @@ type GameState = 'prep' | 'playing' | 'finished';
 const SingePlayerGameLoop: React.FC = () => {
     const [gameState, setGameState] = useState<GameState>('prep');
 
+    const handleStartGame = () => {
+        setGameState('playing');
+    }
+
     return (
         <> 
             <div id="container" className="SinglePlayerGameLoop">
                 <Header />
+                <div onClick={handleStartGame} style={{display: 'none'}}>Random Button</div>
                 <main className="main">
                     {/* Here is where all the prep elements will be before the game starts */}
                     {gameState === 'prep' && (
