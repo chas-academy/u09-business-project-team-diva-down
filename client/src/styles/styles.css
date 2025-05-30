@@ -473,9 +473,15 @@ iframe {
   list-style-type: none;
   justify-content: space-between;
 }
-.navbar .navlinks li {
+.navbar .navlinks * {
   margin: 0 10px;
   font-size: 1rem;
+  color: var(--text1);
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+.navbar .navlinks *:hover {
+  color: var(--accent1);
 }
 .navbar .button-container {
   display: flex;
