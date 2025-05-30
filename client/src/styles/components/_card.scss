@@ -41,16 +41,119 @@
 
 */
 
+.radio-options {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0;
+
+  .input-styling {
+    min-width: 100px;
+    height: 40px;
+    border-radius: 7px;
+    background-color: $dark;
+    border: 1px solid $border;
+    color: $text1;
+    padding: 0 20px;
+    cursor: pointer;
+    font-family: $font1;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &:hover {
+      border-color: lighten(#333, 10%);
+      background-color: rgba(0, 180, 216, 0.2);
+    }
+
+    &.checked {
+      border: 1px solid rgba(0, 180, 216, 0.4);
+      box-shadow: 0 0 0 1px $accent1;
+      background-color: $dark;
+      color: $text1;
+      position: relative;
+    }
+
+    .hidden {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+  }
+}
+
 .category_dropdown {
     min-width: 200px;
-    height: 30px;
+    height: 40px;
     border-radius: 7px;
     background-color: $dark;
     border: 1px solid $border;
     color: $text1;
     padding: 5px;
     position: relative;
-    text-align: right;
-    padding: 4px;
     cursor: pointer;
+    font-family: $font1;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        border-color: lighten(#333, 10%);
+    }
+
+    .select-selected {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        height: 100%;
+    }
+
+    .dropdown-arrow {
+        transition: transform 0.2s ease;
+        font-size: 12px;
+        margin-left: 8px;
+
+        &.open {
+            transform: rotate(180deg);
+        }
+    }
+
+    .select-options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: $dark;
+        border: 1px solid $border;
+        border-radius: 7px;
+        margin-top: 5px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.2s ease;
+
+        .option {
+            padding: 10px 12px;
+            transition: background 0.2s ease;
+            color: $text1;
+
+            &:hover {
+                background: lighten(#121212, 10%);
+            }
+
+            &.selected {
+                background: lighten(#121212, 5%);
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
