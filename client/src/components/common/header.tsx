@@ -41,7 +41,7 @@ const Header = () => {
             <header className="navbar">
                 <div className="logo">NEONIX</div>
                 <ul className="navlinks">
-                    <li>Home</li>
+                    <Link to={RouterContainer.Homepage}>Home</Link>
                     <Link to={RouterContainer.SinglePlayer}>Play</Link>
                     <li>Categories</li>
                     <li>Leaderboard</li>
