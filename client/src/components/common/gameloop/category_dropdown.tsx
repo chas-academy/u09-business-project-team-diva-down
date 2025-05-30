@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+// import React, { useState, useRef, useEffect } from "react";
 
 const Category_Dropdown = () => {
 
-    const apiCall = 'https://opentdb.com/api_category.php'
+    // const apiCall = 'https://opentdb.com/api_category.php'
 
 
     return (

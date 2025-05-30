@@ -19,6 +19,8 @@ const Countdown: React.FC<CountdownProps> = ({
   const countdownRef = useRef<HTMLDivElement>(null);
   const [remainingTime, setRemainingTime] = useState(duration);
 
+  remainingTime === 0;
+
   useEffect(() => {
     // Set CSS custom properties when component mounts
     if (countdownRef.current) {

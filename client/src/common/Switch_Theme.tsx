@@ -1,5 +1,5 @@
 
-export function ChangeTheme(e: React.MouseEvent) {
+export function ChangeTheme() {
 
     const container = document.getElementById('container');
     const title = document.getElementById('homepage_main_title');
