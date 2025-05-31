@@ -11,15 +11,16 @@ interface Categories {
     name: string;
 }
 
+interface CategoryDropdownProps {
+    selectedOption: SelectOption;
+    onOptionChange: (option: SelectOption) => void;
+}
+
 const apiCall = 'https://opentdb.com/api_category.php';
 
-const Category_Dropdown = () => {
+const Category_Dropdown: React.FC<CategoryDropdownProps> = ({ selectedOption, onOptionChange }) => {
     const [categories, setCategories] = useState<Categories[]>([]);
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [selectedOption, setSelectedOption] = useState<SelectOption>({
-        value: '',
-        label: 'Select Category'
-    });
     const selectRef = useRef<HTMLDivElement>(null);
 
     const fetchCategories = async (): Promise<void> => {
@@ -44,10 +45,11 @@ const Category_Dropdown = () => {
     };
 
     const handleOptionClick = (category: Categories): void => {
-        setSelectedOption({
+        const newOption = {
             value: category.id,
             label: category.name
-        });
+        };
+        onOptionChange(newOption);
         setIsOpen(false);
     };
 

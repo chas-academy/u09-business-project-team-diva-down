@@ -9,6 +9,11 @@ const Header = () => {
 
     const [transition, setTransition] = useState<'spin-forward' | 'spin-backward'>('spin-forward');
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [Navbar, setNavMenu] = useState(false);
+
+    const toggleNavMenu = () => {
+        setNavMenu(!Navbar);
+    };    
 
     const handleClick = () => {
         if (isTransitioning) return;
@@ -56,9 +61,37 @@ const Header = () => {
                         style={{ pointerEvents: isTransitioning ? 'none' : 'auto' }}
                     >
                     </button>
-                    <Login />
-                    <Register />
+                    <span className="display_nav">
+                        <Login/>
+                        <Register/>
+                    </span>
+                    <div onClick={toggleNavMenu} id="nav_menu" className="hamburger_menu">
+                        <div className="hamburger_bar"></div>
+                        <div className="hamburger_bar"></div>
+                        <div className="hamburger_bar"></div>
+                    </div>
                 </div>
+                {Navbar === true && (
+                    <>
+                        <div className="mobile_nav_menu_container">
+                            <div onClick={toggleNavMenu} className="cross-placement">
+                                <div className="cross-container">
+                                    <div className="cross-bar top"></div>
+                                    <div className="cross-bar btm"></div>
+                                </div>
+                            </div>
+                            <ul className="mobile_navlinks">
+                                <li><Link to={RouterContainer.Homepage}>Home</Link></li>
+                                <li><Link to={RouterContainer.SinglePlayer}>Play</Link></li>
+                                <li>Categories</li>
+                                <li>Leaderboard</li>
+                                <li>About</li>
+                                <li>Login</li>
+                                <li>Register</li>
+                            </ul>
+                        </div>
+                    </>
+                )}
             </header>
         </>
     );

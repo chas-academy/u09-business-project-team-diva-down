@@ -3,11 +3,21 @@ import Home from "../../hoc/loc/Home_button";
 import Play from "../../hoc/loc/Play.button";
 import Category_Dropdown from "./category_dropdown";
 
+interface SelectOption {
+    value: string;
+    label: string;
+}
+
 const GameloopSettingsCard = () => {
   const [difficulty, setDifficulty] = useState("");
   const [ranked, setRanked] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<SelectOption>({
+      value: '',
+      label: 'Select Category'
+  });
 
   function checkStatus() {
+    console.log(selectedCategory);
     console.log(difficulty);
     console.log(ranked);
   }
@@ -16,7 +26,10 @@ const GameloopSettingsCard = () => {
     <div className="settings-container">
       <div className="settings-bar">
         <h2>Category</h2>
-        <Category_Dropdown />
+        <Category_Dropdown 
+          selectedOption={selectedCategory}
+          onOptionChange={setSelectedCategory}
+        />
       </div>
       <div className="settings-bar">
         <h2>Difficulty</h2>
