@@ -46,7 +46,7 @@ const Category_Dropdown: React.FC<CategoryDropdownProps> = ({ selectedOption, on
 
     const handleOptionClick = (category: Categories): void => {
         const newOption = {
-            value: category.id,
+            value: category.id.toString(),
             label: category.name
         };
         onOptionChange(newOption);

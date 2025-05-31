@@ -57,7 +57,7 @@
     cursor: pointer;
     font-family: $font1;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -97,7 +97,7 @@
     cursor: pointer;
     font-family: $font1;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 5px 0px rgba(0, 0, 0, 0.1);
 
     &:hover {
         border-color: lighten(#333, 10%);
@@ -133,7 +133,7 @@
         max-height: 200px;
         overflow-y: auto;
         z-index: 1000;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0px 5px 0px rgba(0, 0, 0, 0.2);
         animation: fadeIn 0.2s ease;
 
         .option {
@@ -156,4 +156,81 @@
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-5px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+.score_card {
+    margin-top: 20px;
+    height: auto;
+    width: 400px;
+    background-color: $darker;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+
+    h2 {
+        font-family: $font2;
+        color: $accent2;
+        font-weight: 400;
+    }
+
+    .score {
+        color: $accent2;
+        background-color: $accent2light;
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-size: 1.5rem;
+        font-weight: 600;
+        font-family: $font1;
+        margin: 10px;
+    }
+
+    .congrats-text {
+        color: $text1;
+        font-size: 1.2rem;
+        font-weight: 600;
+        font-family: $font1;
+        margin: 10px;
+    }
+
+    .stats {
+        width: 100%;
+        height: auto;
+        background-color: $card_bg;
+        color: $text1;
+        font-family: $font1;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+
+        .stats-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            border-bottom: 1px solid $border;
+        }
+
+        .none {
+            border-bottom: none;
+        }
+    }
+
+    .button-container {
+        display: flex;
+        width: 100%;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+
+        * {
+            text-decoration: none;
+        }
+    }
 }

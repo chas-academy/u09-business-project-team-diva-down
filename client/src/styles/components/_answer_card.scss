@@ -1,95 +1,125 @@
 @import '../variables/variables.scss';
 
-.answer-container {
-    display: grid;
-    grid-template-columns: 50px repeat(4, 1fr);
-    grid-template-rows: auto repeat(3, 1fr);
-    grid-column-gap: 20px;
-    grid-row-gap: 20px; 
-    padding-top: 40px; 
-    padding-left: 20px;  
-    padding-right: 20px;
-    padding-bottom: 20px;
-    background-color: #333;
-    border-radius: 12px;
+.game-screen {
+    margin-top: 20px;
+    height: auto;
+    width: 510px;
+    background-color: $darker;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    color: $text1;
+    font-family: $font1;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 
-
-    .timer {
-        grid-area: 1 / 1 / 2 / 2;
+    .game-info {
         display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+        justify-content: space-between;
+        border-bottom: 1px solid $border;
+        font-size: 1.5rem;
+        padding: 20px;
 
-    .question {
-        grid-area: 1 / 2 / 2 / 6;
-
-        .question_box {
-            width: 550px;
-            height: 48px;
-            background-color: #888;
-            border-radius: 7px;
-            margin: 25px 0;
+        .timer {
+            font-size: 0.75rem;
         }
     }
 
-    .option1 {
-        grid-area: 2 / 2 / 3 / 4;
+    .game-settings {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1rem;
+        padding: 20px;
 
-        .option_answer {
-            background-color: #888;
-            width: 250px;
-            height: 50px;
+        .category {
+            padding: 6px 12px;
             border-radius: 7px;
+            background-color: $accent2light;
+            color: $accent2;
+            font-weight: 600;
+        }
+
+        .difficulty {
+            color: $text2;
+            padding: 6px 0;
+
+            .capitalize {
+                text-transform: capitalize;
+            }
         }
     }
 
-    .option2 {
-       grid-area: 2 / 4 / 3 / 6; 
-
-        .option_answer {
-            background-color: #888;
-            width: 250px;
-            height: 50px;
-            border-radius: 7px;
-            justify-self: flex-end;
-        }
+    .question-text {
+        font-size: 1.25rem;
+        font-weight: 500;
+        display: flex;
+        justify-content: flex-start;
+        padding: 40px 20px;
+        text-wrap: wrap;
     }
 
-    .option3 {
-        grid-area: 3 / 2 / 4 / 4;
+    .answer-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        width: 100%;
+        padding: 20px;
 
-        .option_answer {
-            background-color: #888;
-            width: 250px;
-            height: 50px;
-            border-radius: 7px;
-        }
-    }
-
-    .option4 {
-        grid-area: 3 / 4 / 4 / 6;
-
-        .option_answer {
-            background-color: #888;
-            width: 250px;
-            height: 50px;
-            border-radius: 7px;
-            justify-self: flex-end;
-        }
-    }
-
-    .submit {
-        grid-area: 4 / 5 / 5 / 6;
-
-        .submit_box {
+        .answer-button {
             width: 100%;
-            justify-self: flex-end;
+            min-height: 50px;
+            padding: 5px;
+            background-color: $card_bg;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             border-radius: 7px;
-            height: 50px;
-            background-color: #888;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: 600;            
+            border: 1px solid $border;
+            color: $text1;
+            transition: all 0.2s ease-in-out;
+
+            &:hover:not(:disabled) {
+                background-color: $accent1light;
+                border-color: $accent1;
+            }
+
+            &:disabled {
+                cursor: not-allowed;
+            }
+            
+            &.correct {
+                background-color: $warning;
+                border-color: $warning;
+            }
+
+            &.incorrect {
+                background-color: $error;
+                border-color: $error;
+            }
+
+            &.correct-answer {
+                background-color: $success;
+                border-color: $success;
+            }
+        }
+    }
+
+    .next-button-container {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+        border-top: 1px solid $border;
+
+        .next-button {
+            color: $text1;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+            background-color: $accent1;
+            border-radius: 7px;
+            padding: 12px 24px;
+            font-weight: 600;
         }
     }
 }
