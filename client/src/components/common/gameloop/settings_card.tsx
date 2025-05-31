@@ -1,26 +1,33 @@
-import { useState } from "react";
 import Home from "../../hoc/loc/Home_button";
 import Play from "../../hoc/loc/Play.button";
 import Category_Dropdown from "./category_dropdown";
+import { RouterContainer } from "../../../routes/RouteContainer";
+import { Link } from "react-router-dom";
 
 interface SelectOption {
     value: string;
     label: string;
 }
 
-const GameloopSettingsCard = () => {
-  const [difficulty, setDifficulty] = useState("");
-  const [ranked, setRanked] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<SelectOption>({
-      value: '',
-      label: 'Select Category'
-  });
+interface GameloopSettingsCardProps {
+  selectedOption: SelectOption;
+  onOptionChange: (option: SelectOption) => void;
+  onDifficutlyChange: (difficulty: string) => void;
+  onRankedChange: (ranked: string) => void;
+  difficulty: string;
+  ranked: string;
+  checkStatus: () => void;
+}
 
-  function checkStatus() {
-    console.log(selectedCategory);
-    console.log(difficulty);
-    console.log(ranked);
-  }
+const GameloopSettingsCard: React.FC<GameloopSettingsCardProps> = ({ 
+  selectedOption: selectedCategory,
+  onOptionChange: setSelectedCategory,
+  onDifficutlyChange,
+  onRankedChange,
+  difficulty,
+  ranked,
+  checkStatus
+}) => {
 
   return (
     <div className="settings-container">
@@ -34,36 +41,36 @@ const GameloopSettingsCard = () => {
       <div className="settings-bar">
         <h2>Difficulty</h2>
         <div className="radio-options">
-          <label className={`input-styling ${difficulty === "Easy" ? "checked" : ""}`}>
+          <label className={`input-styling ${difficulty === "easy" ? "checked" : ""}`}>
             <input
               className="hidden"
               type="radio"
               name="difficulty"
-              value="Easy"
-              checked={difficulty === "Easy"}
-              onChange={(e) => setDifficulty(e.target.value)}
+              value="easy"
+              checked={difficulty === "easy"}
+              onChange={(e) => onDifficutlyChange(e.target.value)}
             />
             Easy
           </label>
-          <label className={`input-styling ${difficulty === "Medium" ? "checked" : ""}`}>
+          <label className={`input-styling ${difficulty === "medium" ? "checked" : ""}`}>
             <input
               className="hidden"
               type="radio"
               name="difficulty"
-              value="Medium"
-              checked={difficulty === "Medium"}
-              onChange={(e) => setDifficulty(e.target.value)}
+              value="medium"
+              checked={difficulty === "medium"}
+              onChange={(e) => onDifficutlyChange(e.target.value)}
             />
             Medium
           </label>
-          <label className={`input-styling ${difficulty === "Hard" ? "checked" : ""}`}>
+          <label className={`input-styling ${difficulty === "hard" ? "checked" : ""}`}>
             <input
               className="hidden"
               type="radio"
               name="difficulty"
-              value="Hard"
-              checked={difficulty === "Hard"}
-              onChange={(e) => setDifficulty(e.target.value)}
+              value="hard"
+              checked={difficulty === "hard"}
+              onChange={(e) => onDifficutlyChange(e.target.value)}
             />
             Hard
           </label>
@@ -79,7 +86,7 @@ const GameloopSettingsCard = () => {
               name="difficulty"
               value="Yes"
               checked={ranked === "Yes"}
-              onChange={(e) => setRanked(e.target.value)}
+              onChange={(e) => onRankedChange(e.target.value)}
             />
             Yes
             </label>
@@ -90,14 +97,14 @@ const GameloopSettingsCard = () => {
               name="difficulty"
               value="No"
               checked={ranked === "No"}
-              onChange={(e) => setRanked(e.target.value)}
+              onChange={(e) => onRankedChange(e.target.value)}
             />
             No
             </label>
         </div>
       </div>
       <div className="settings-bar empty">
-        <Home />
+        <Link style={{textDecoration: 'none', margin: '0'}} to={RouterContainer.Homepage}><Home /></Link>
         <Play onClick={checkStatus}/>
       </div>
     </div>
