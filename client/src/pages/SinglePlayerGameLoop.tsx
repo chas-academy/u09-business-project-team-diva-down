@@ -57,9 +57,8 @@ const SingePlayerGameLoop: React.FC = () => {
 
     // for debugging purpose
     function checkStatus() {
-        console.log(selectedCategory.value);
-        console.log(ranked);
-        console.log(difficulty);
+        console.log(score);
+        console.log();
     };
 
     const shuffleArray = (array: any[]): any[] => {
@@ -194,20 +193,15 @@ const SingePlayerGameLoop: React.FC = () => {
                             <div className="score_card">
                                 <h2 className="title">Quiz Completed!</h2>
                                 <div className="score">{score}/{questions.length} </div>
-                                {questions.length - score > 9 && (
-                                    <>
-                                    <div className="congrats-text">Execellent Work! You're a trivia master!</div>
-                                    </>
+                                {/* <div onClick={checkStatus} style={{color: '#FAFAFA'}}>Click me</div> */}
+                                {10 + (score - questions.length) >= 9 && (
+                                    <div className="congrats-text">Excellent Work! You're a trivia master!</div>
                                 )}
-                                {questions.length - score > 4 && (
-                                    <>
+                                {10 + (score - questions.length) >= 4 && questions.length - score < 10 && (
                                     <div className="congrats-text">Great Work! You did good!</div>
-                                    </>
                                 )}
-                                {questions.length - score <= 3 && (
-                                    <>
-                                    <div className="congrats-text">You tried your best! And thats whats counts!</div>
-                                    </>
+                                {10 + (score - questions.length) < 4 && (
+                                    <div className="congrats-text">You tried your best! And that's what counts!</div>
                                 )}
                                 <div className="stats">
                                     <div className="stats-bar"><span>Correct Answers: </span><span>{score}</span></div>

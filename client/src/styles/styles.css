@@ -1148,6 +1148,7 @@ iframe {
   font-weight: 600;
   font-family: "Titillium Web", sans-serif;
   margin: 10px;
+  text-align: center;
 }
 .score_card .stats {
   width: 100%;
