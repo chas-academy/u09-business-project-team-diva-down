@@ -1,17 +1,3 @@
-// import mongoose, { Schema } from "mongoose";
-
-// const userSchema = new Schema(
-//     {
-//         name: { type: String, required:true },
-//         email: { type: String, required: true, unique: true },
-//         password: { type: String, required: true},
-//         oauthProvider: { type: String},
-//         oauthID: { type: String},
-//     }, { collection: 'Users'}
-// );
-
-// const User = mongoose.model('User', userSchema );
-// export { User };
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface IUser extends Document {
@@ -22,6 +8,7 @@ export interface IUser extends Document {
     oauthID?: string;
     createdAt: Date;
     updatedAt: Date;
+    eloScore: number;
 }
 
 const userSchema = new Schema<IUser>(
@@ -31,6 +18,7 @@ const userSchema = new Schema<IUser>(
         password: { type: String },
         oauthProvider: { type: String }, 
         oauthID: { type: String },
+        eloScore: {type: Number}
     },
     { 
         collection: 'Users',
