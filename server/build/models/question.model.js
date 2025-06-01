@@ -41,6 +41,7 @@ const questionSchema = new mongoose_1.Schema({
     answerOp2: { type: String, required: true },
     answerOp3: { type: String, required: true },
     answerOp4: { type: String, required: true },
+    createdBy: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User' },
 }, {
     collection: 'Questions'
 });

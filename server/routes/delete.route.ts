@@ -6,4 +6,6 @@ dotenv.config();
 
 const deleteQuestionRouter = Router();
 
-deleteQuestion
+deleteQuestionRouter.delete('/delete/:_id', deleteQuestion);
+
+export default deleteQuestionRouter;

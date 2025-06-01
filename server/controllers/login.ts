@@ -1,6 +1,7 @@
 import { User } from "../models/User.model";
 import { Request, Response } from "express";
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 export async function loginUser(req: Request, res: Response): Promise<any> {
     try {
@@ -20,15 +21,23 @@ export async function loginUser(req: Request, res: Response): Promise<any> {
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid email or password.' });
         }
+        
+        
+        const token = jwt.sign(
+            { id: user.id.toString() }, 
+            process.env.JWT_SECRET!,
+            { expiresIn: '1h' }
+        );
 
-        return res.status(200).json({ 
-            message: 'Login successful', 
-            user: {
-                id: user._id,
-                name: user.name,
-                email: user.email
-            }
-        });
+        return res.status(200).json({
+        message: 'Login successful',
+        user: {
+            id: user.id,
+            name: user.name,
+            email: user.email
+        },
+        token
+    });
     } catch (error) {
         console.error('Login error:', error);
         return res.status(500).json({ message: 'Internal server error.' });

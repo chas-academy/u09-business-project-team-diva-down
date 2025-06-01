@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.loginUser = loginUser;
 const User_model_1 = require("../models/User.model");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function loginUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -31,13 +32,15 @@ function loginUser(req, res) {
             if (!isPasswordValid) {
                 return res.status(401).json({ message: 'Invalid email or password.' });
             }
+            const token = jsonwebtoken_1.default.sign({ id: user.id.toString() }, process.env.JWT_SECRET, { expiresIn: '1h' });
             return res.status(200).json({
                 message: 'Login successful',
                 user: {
-                    id: user._id,
+                    id: user.id,
                     name: user.name,
                     email: user.email
-                }
+                },
+                token
             });
         }
         catch (error) {
