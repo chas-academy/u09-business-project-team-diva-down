@@ -1,5 +1,4 @@
 "use strict";
-// import mongoose, { Schema } from "mongoose";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -34,29 +33,11 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
-// const userSchema = new Schema(
-//     {
-//         name: { type: String, required:true },
-//         email: { type: String, required: true, unique: true },
-//         password: { type: String, required: true},
-//         oauthProvider: { type: String},
-//         oauthID: { type: String},
-//     }, { collection: 'Users'}
-// );
-// const User = mongoose.model('User', userSchema );
-// export { User };
+exports.oauthUser = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-const userSchema = new mongoose_1.Schema({
-    name: { type: String, required: true },
+const oauthUserSchema = new mongoose_1.Schema({
+    googleId: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String },
-    oauthProvider: { type: String },
-    oauthID: { type: String },
-}, {
-    collection: 'Users',
-    timestamps: true
-});
-userSchema.index({ oauthProvider: 1, oauthID: 1 });
-const User = mongoose_1.default.model('User', userSchema);
-exports.User = User;
+    displayName: { type: String, required: true },
+}, { timestamps: true });
+exports.oauthUser = mongoose_1.default.model('User', oauthUserSchema);

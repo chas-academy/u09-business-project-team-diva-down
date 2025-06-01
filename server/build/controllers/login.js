@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.loginUser = loginUser;
 const User_model_1 = require("../models/User.model");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 function loginUser(req, res) {
@@ -20,18 +21,28 @@ function loginUser(req, res) {
             console.log('Login request received');
             const { email, password } = req.body;
             if (!email || !password) {
-                return res.status(400).json({ message: 'Username and password required' });
+                return res.status(400).json({ message: 'Email and password are required.' });
             }
             const user = yield User_model_1.User.findOne({ email });
-            if (!user) {
-                return res.status(401).json({ message: 'Invalid username or password' });
+            if (!user || !user.password) {
+                return res.status(401).json({ message: 'Invalid email or password.' });
             }
-            const PasswordValid = yield bcryptjs_1.default.compare(password, user.password);
-            if (!PasswordValid) {
-                return res.status(401).json({ message: 'Invalid username or password' });
+            const isPasswordValid = yield bcryptjs_1.default.compare(password, user.password);
+            if (!isPasswordValid) {
+                return res.status(401).json({ message: 'Invalid email or password.' });
             }
+            return res.status(200).json({
+                message: 'Login successful',
+                user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email
+                }
+            });
         }
-        catch (_a) {
+        catch (error) {
+            console.error('Login error:', error);
+            return res.status(500).json({ message: 'Internal server error.' });
         }
     });
 }

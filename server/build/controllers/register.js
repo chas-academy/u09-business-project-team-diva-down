@@ -30,6 +30,14 @@ function registerNewUser(req, res) {
                 password: hashedPassword,
             });
             yield newUser.save();
+            return res.status(201).json({
+                message: "User registered successfully",
+                user: {
+                    id: newUser._id,
+                    name: newUser.name,
+                    email: newUser.email,
+                }
+            });
         }
         catch (error) {
             console.error("Registration error:", error);
