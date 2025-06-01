@@ -7,6 +7,7 @@ interface IQuestions {
     answerOp3: string;
     answerOp4: string; 
     userID: string;
+    createdBy: Schema.Types.ObjectId;
 }
 
 const questionSchema = new Schema<IQuestions>(
@@ -16,7 +17,8 @@ const questionSchema = new Schema<IQuestions>(
         answerOp2: { type: String, required: true},
         answerOp3: { type: String, required: true},
         answerOp4: { type: String, required: true},
-    },
+        createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
+    }, 
     {
         collection: 'Questions'
     }
