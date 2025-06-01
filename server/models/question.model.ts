@@ -16,7 +16,6 @@ const questionSchema = new Schema<IQuestions>(
         answerOp2: { type: String, required: true},
         answerOp3: { type: String, required: true},
         answerOp4: { type: String, required: true},
-        userID: { type: String, required: true}
     },
     {
         collection: 'Questions'

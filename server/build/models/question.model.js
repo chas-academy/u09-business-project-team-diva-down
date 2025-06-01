@@ -33,19 +33,16 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Question = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-const userSchema = new mongoose_1.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String },
-    oauthProvider: { type: String },
-    oauthID: { type: String },
-    eloScore: { type: Number }
+const questionSchema = new mongoose_1.Schema({
+    question: { type: String, required: true },
+    rightAnswer: { type: String, required: true },
+    answerOp2: { type: String, required: true },
+    answerOp3: { type: String, required: true },
+    answerOp4: { type: String, required: true },
 }, {
-    collection: 'Users',
-    timestamps: true
+    collection: 'Questions'
 });
-userSchema.index({ oauthProvider: 1, oauthID: 1 });
-const User = mongoose_1.default.model('User', userSchema);
-exports.User = User;
+const Question = mongoose_1.default.model('Questions', questionSchema);
+exports.Question = Question;

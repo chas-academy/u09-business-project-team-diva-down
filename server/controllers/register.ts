@@ -20,7 +20,7 @@ async function registerNewUser(req: Request, res: Response): Promise<any> {
             password: hashedPassword,
         });
 
-        await newUser.save()
+        await newUser.save();
 
         return res.status(201).json({
             message: "User registered successfully",
