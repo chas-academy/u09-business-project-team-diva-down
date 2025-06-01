@@ -13,6 +13,7 @@ const auth_route_1 = __importDefault(require("./routes/auth.route"));
 const passport_config_1 = __importDefault(require("./config/passport.config"));
 const login_route_1 = __importDefault(require("./routes/login.route"));
 const createQuestion_route_1 = __importDefault(require("./routes/createQuestion.route"));
+const updateQuestion_route_1 = __importDefault(require("./routes/updateQuestion.route"));
 dotenv_1.default.config();
 (0, passport_config_1.default)();
 const app = (0, express_1.default)();
@@ -38,6 +39,7 @@ app.get('/live', (req, res) => {
 app.use('/', registerUser_route_1.default);
 app.use('/', login_route_1.default);
 app.use('/', createQuestion_route_1.default);
+app.use('/', updateQuestion_route_1.default);
 app.use('/auth', auth_route_1.default);
 mongoose_1.default.connect(URI)
     .then(() => {
