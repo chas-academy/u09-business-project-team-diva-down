@@ -1,6 +1,4 @@
 "use strict";
-// import { Question } from "../models/question.model";
-// import { Request, Response } from "express";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -16,7 +14,7 @@ const question_model_1 = require("../models/question.model");
 function createQuestion(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         var _a;
-        const authReq = req; // cast to AuthRequest inside the function
+        const authReq = req;
         const userId = (_a = authReq.user) === null || _a === void 0 ? void 0 : _a.id;
         const { question, rightAnswer, answerOp2, answerOp3, answerOp4 } = req.body;
         if (!userId) {
