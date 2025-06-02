@@ -1791,12 +1791,16 @@ iframe {
   background-color: var(--card_bg);
 }
 .user_friendslist .search_container .submit_button {
+  margin-right: 10px;
+  align-self: center;
+  height: 40px;
+  width: 150px;
   background-color: var(--success);
   color: var(--text1);
   border-radius: 12px;
-  padding: 12px 24px;
+  padding: 3px 6px;
   border: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
@@ -1822,6 +1826,10 @@ iframe {
     height: 50px;
     border-radius: 12px;
     margin-bottom: 10px;
+  }
+  .user_friendslist .search_container .submit_button {
+    width: 100%;
+    margin-right: 0;
   }
 }
 .user_friendslist .friend_container {
@@ -2516,8 +2524,10 @@ iframe {
 }
 .leaderboard_container .leaderboard_bar .username {
   color: var(--text1);
+  width: 150px;
 }
 .leaderboard_container .leaderboard_bar .rank {
+  display: flex;
   color: var(--text1);
 }
 .leaderboard_container .leaderboard_bar .eloRating {

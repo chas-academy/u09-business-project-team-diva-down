@@ -456,12 +456,16 @@
         background-color: $card_bg;
 
         .submit_button {
+            margin-right: 10px;
+            align-self: center;
+            height: 40px;
+            width: 150px;
             background-color: $success;
             color: $text1;
             border-radius: 12px;
-            padding: 12px 24px;
+            padding: 3px 6px;
             border: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             transition: all 0.3s ease-in-out;
             cursor: pointer;
 
@@ -489,6 +493,11 @@
                 height: 50px;
                 border-radius: 12px;
                 margin-bottom: 10px;
+            }
+
+            .submit_button {
+                width: 100%;
+                margin-right: 0;
             }
         }
 

@@ -25,9 +25,11 @@
 
         .username {
             color: $text1;
+            width: 150px;
 
         }
         .rank {
+            display: flex;
             color: $text1;
 
         }
