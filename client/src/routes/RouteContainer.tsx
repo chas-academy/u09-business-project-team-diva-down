@@ -5,5 +5,6 @@ export const RouterContainer = {
     SinglePlayer: "/SinglePlayer",
     UserDashboard: `/UserDashboard/:id`,
     Login: "/login",
-    Register: "/register"
+    Register: "/register",
+    Leaderboard: "/Leaderboard",
 }
