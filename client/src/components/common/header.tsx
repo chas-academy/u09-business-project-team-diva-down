@@ -49,8 +49,7 @@ const Header = () => {
                     <Link to={RouterContainer.SinglePlayer}>Play</Link>
                     {/* Temporary Link */}
                     <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
-                    <li>Leaderboard</li>
-                    <li>About</li>
+                    <Link to={RouterContainer.Leaderboard}>Leaderboard</Link>
                 </ul>
                 <div className="button-container">
                     <button 
@@ -63,7 +62,7 @@ const Header = () => {
                     </button>
                     <span className="display_nav">
                         <Link to={RouterContainer.Login}><Login/></Link>
-                        <Register/>
+                        <Link to={RouterContainer.Register}><Register/></Link>
                     </span>
                     <div onClick={toggleNavMenu} id="nav_menu" className="hamburger_menu">
                         <div className="hamburger_bar"></div>
@@ -85,8 +84,7 @@ const Header = () => {
                                 <Link to={RouterContainer.SinglePlayer}>Play</Link>
                                 {/* Temporary Link */}
                                 <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
-                                <li>Leaderboard</li>
-                                <li>About</li>
+                                <Link to={RouterContainer.Leaderboard}>Leaderboard</Link>
                             </ul>
                         </div>
                     </>

@@ -8,6 +8,7 @@
 @use './pages/UserDashboard';
 @use './pages/Login';
 @use './pages/Register';
+@use './pages/Leaderboard';
 
 // Components - styling
 @use './components/header.scss';
@@ -20,6 +21,7 @@
 @use './components/answer_card.scss';
 @use './components/_settings_card.scss';
 @use './components/login_card';
+@use './components/leaderboard_card';
 
 // Special Components
 @use './special/timer.scss';
