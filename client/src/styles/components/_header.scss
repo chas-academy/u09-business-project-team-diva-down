@@ -150,6 +150,10 @@
 
         .display_nav {
             display: flex;
+
+            * {
+                text-decoration: none;
+            }
         }
 
         .switch {
@@ -242,6 +246,10 @@
 
             .display_nav {
                 display: none;
+
+                * {
+                    text-decoration: none;
+                }
             }
 
             .hamburger_menu {

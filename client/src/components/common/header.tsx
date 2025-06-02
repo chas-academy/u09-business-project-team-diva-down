@@ -62,7 +62,7 @@ const Header = () => {
                     >
                     </button>
                     <span className="display_nav">
-                        <Login/>
+                        <Link to={RouterContainer.Login}><Login/></Link>
                         <Register/>
                     </span>
                     <div onClick={toggleNavMenu} id="nav_menu" className="hamburger_menu">
@@ -81,13 +81,12 @@ const Header = () => {
                                 </div>
                             </div>
                             <ul className="mobile_navlinks">
-                                <li><Link to={RouterContainer.Homepage}>Home</Link></li>
-                                <li><Link to={RouterContainer.SinglePlayer}>Play</Link></li>
-                                <li>Categories</li>
+                                <Link to={RouterContainer.Homepage}>Home</Link>
+                                <Link to={RouterContainer.SinglePlayer}>Play</Link>
+                                {/* Temporary Link */}
+                                <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
                                 <li>Leaderboard</li>
                                 <li>About</li>
-                                <li>Login</li>
-                                <li>Register</li>
                             </ul>
                         </div>
                     </>
