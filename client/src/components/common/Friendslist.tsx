@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { MockDataAllUsers } from "../../MockData/MockData";
+import { MockDataUserOwnData } from "../../MockData/MockData";
 
 const MockDataFriendsList = [
     {
@@ -30,6 +32,10 @@ const Friendslist_card = () => {
 
     const [friendsList, setFriendList] = useState(MockDataFriendsList);
     const [acceptList, setAcceptList] = useState(MockDataAcceptList);
+    const [allUsers, setAllUsers] = useState(MockDataAllUsers);
+    const [requestValue, setRequestValue] = useState('');
+    const [UserData, setUserData] = useState(MockDataUserOwnData); 
+    // Simulates the users data after they have logged into the application and started too use the website
 
     const RemoveFriend = (id: number) => {
         console.log(id);
@@ -52,14 +58,44 @@ const Friendslist_card = () => {
         }
     }
 
+    const handleSendingFriendRequest = (e: React.FormEvent) => {
+        e.preventDefault();
+        const SpecificUser = allUsers.find(data => data.username === requestValue);
+
+        if (SpecificUser) {
+            const AlreadyFriends = friendsList.find(data => data.id === UserData.id);
+            const AlreadySentRequest = acceptList.some(data => data.id === UserData.id);
+
+            if(AlreadyFriends) {
+                console.log("You already have them as your friend!");
+                setRequestValue('');
+            } else if (AlreadySentRequest) {
+                console.log("You have already sent them a friend Request!");
+                setRequestValue('');
+            } else {
+                setAcceptList([...acceptList, UserData]);
+                setRequestValue('');
+            }
+        } else {
+            console.log("Cant Find the user");
+            setRequestValue('');
+        }
+    }
+
     return (
         <>
             <div className="user_friendslist">
                 <div className="under_title">Freindslist</div>
-                <div className="search_container">
-                    <input className="input_field" type="text" />
-                    <button className="submit_button" type="submit">Send Request</button>
-                </div>
+                <form className="search_container" onSubmit={handleSendingFriendRequest}>
+                    <input 
+                        className="input_field" 
+                        type="text" 
+                        id="input_data"
+                        value={requestValue}
+                        onChange={(e) => setRequestValue(e.target.value)}
+                    />
+                    <input className="submit_button" type="submit" value="Send Request"/>
+                </form>
                 <div className="friend_container">
                     {friendsList.map((data) => {
                         return (
