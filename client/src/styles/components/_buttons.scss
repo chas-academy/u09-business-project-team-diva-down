@@ -71,3 +71,27 @@
         transform: translateY(-5px);
     }
 }
+
+.hollow_active_button_version3 {
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font1;
+    font-weight: 600;
+    font-size: 1rem;
+    background-color: transparent;
+    border: 1px solid $accent2;
+    color: $accent2;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background-color: $accent2light;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        padding: 12px 24px;
+    }
+}

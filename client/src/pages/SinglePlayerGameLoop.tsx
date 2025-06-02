@@ -10,7 +10,6 @@ import PlayAgain from "../components/hoc/loc/PlayAgain";
 import { Link } from "react-router-dom";
 import { RouterContainer } from "../routes/RouteContainer";
 
-
 type GameState = 'prep' | 'playing' | 'finished';
 
 interface selectedOption {
@@ -56,10 +55,10 @@ const SingePlayerGameLoop: React.FC = () => {
     };
 
     // for debugging purpose
-    function checkStatus() {
-        console.log(score);
-        console.log();
-    };
+    // function checkStatus() {
+    //     console.log(score);
+    //     console.log();
+    // };
 
     const shuffleArray = (array: any[]): any[] => {
         return [...array].sort(() => Math.random() - 0.5);
@@ -193,7 +192,6 @@ const SingePlayerGameLoop: React.FC = () => {
                             <div className="score_card">
                                 <h2 className="title">Quiz Completed!</h2>
                                 <div className="score">{score}/{questions.length} </div>
-                                {/* <div onClick={checkStatus} style={{color: '#FAFAFA'}}>Click me</div> */}
                                 {10 + (score - questions.length) >= 9 && (
                                     <div className="congrats-text">Excellent Work! You're a trivia master!</div>
                                 )}
