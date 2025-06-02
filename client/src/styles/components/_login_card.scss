@@ -1,0 +1,95 @@
+@import '../variables/variables.scss';
+
+
+.login-container {
+    color: $text1;
+    font-family: $font1;
+    background-color: $darker;
+    height: fit-content;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 12px;
+
+    .login-button {
+        color: $text1;
+        padding: 12px 24px;
+        background-color: $accent1light;
+        border: 1px solid $accent1;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        margin-top: 10px;
+
+        &:hover {
+            color: $accent1;
+            transform: scale(1.05);
+        }
+
+        &:active {
+            color: $text2;
+            transform: scale(1);
+        }
+    }
+
+    .login-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 300px;
+        padding: 20px;
+        
+
+        .login-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 90%;
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                margin: 10px 0;
+                width: 100%;
+
+                input {
+                    width: 100%;
+                    background-color: $card_bg;
+                    border-radius: 7px;
+                    border: 1px solid $border;
+                    padding: 6px 12px;
+                    color: $text2;
+                }
+            }
+
+            .form-options {
+                margin-top: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                * {
+                    color: $accent1;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+                
+            }
+        }
+
+        .login-footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            * {
+                color: $accent2;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+}

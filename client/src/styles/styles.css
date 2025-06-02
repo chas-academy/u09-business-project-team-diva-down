@@ -582,6 +582,162 @@ iframe {
   --rbg1: #e2e2e2;
 }
 
+.login_page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark);
+}
+.login_page .main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
+  margin-bottom: 15%;
+}
+
+:root {
+  --darker: #0A0A0A;
+  --dark: #121212;
+  --card_bg: #1E1E1E;
+  --accent1: #00B4D8;
+  --accent1light: #00B4D833;
+  --accent2: #FF5D8F;
+  --accent2light: #ff5d8f33;
+  --border: #333;
+  --successlight: #4CAF5033;
+  --success: #4CAF50;
+  --successdark: #4CAF50DD;
+  --warning: #FF9800;
+  --error: #FF5252;
+  --errorlight: #FF525233;
+  --text1: #E0E0E0;
+  --text2: #AAAAAA;
+  --switch1: #F8F9FA;
+  --switch2: #0A0A0A;
+  --bg1: #121212;
+  --bg2: #0A0A0A;
+  --cardbg: #1E1E1E;
+  --p1: #00F5FF;
+  --p2: #FF00FF;
+  --p3: #b32EE8;
+  --t1: #E0E0E0;
+  --t2: #AAAAAA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
+  --pt2: #F8F9FA;
+  --hft: #666;
+  --rbg1: #E2E2E2;
+}
+
+[data-theme=light] {
+  --darker: #F8F9FA;
+  --dark: #FFFFFF;
+  --card_bg: #FFFFFF;
+  --accent1: #0077B6;
+  --accent1light: #0077B633;
+  --accent2: #E63946;
+  --accent2light: #e6394633;
+  --border: #E0E0E0;
+  --successlight: #2E7D3233;
+  --success: #2E7D32;
+  --successdark: #2E7D32DD;
+  --warning: #FF8F00;
+  --error: #D32F2F;
+  --errorlight: #D32F2F33;
+  --text1: #333333;
+  --text2: #666666;
+  --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
+  --pt2: #E2E2E2;
+  --hft: "transparent";
+  --rbg1: #e2e2e2;
+}
+
+.Register_Page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark);
+}
+.Register_Page .main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
+  margin-bottom: 15%;
+}
+
+:root {
+  --darker: #0A0A0A;
+  --dark: #121212;
+  --card_bg: #1E1E1E;
+  --accent1: #00B4D8;
+  --accent1light: #00B4D833;
+  --accent2: #FF5D8F;
+  --accent2light: #ff5d8f33;
+  --border: #333;
+  --successlight: #4CAF5033;
+  --success: #4CAF50;
+  --successdark: #4CAF50DD;
+  --warning: #FF9800;
+  --error: #FF5252;
+  --errorlight: #FF525233;
+  --text1: #E0E0E0;
+  --text2: #AAAAAA;
+  --switch1: #F8F9FA;
+  --switch2: #0A0A0A;
+  --bg1: #121212;
+  --bg2: #0A0A0A;
+  --cardbg: #1E1E1E;
+  --p1: #00F5FF;
+  --p2: #FF00FF;
+  --p3: #b32EE8;
+  --t1: #E0E0E0;
+  --t2: #AAAAAA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
+  --pt2: #F8F9FA;
+  --hft: #666;
+  --rbg1: #E2E2E2;
+}
+
+[data-theme=light] {
+  --darker: #F8F9FA;
+  --dark: #FFFFFF;
+  --card_bg: #FFFFFF;
+  --accent1: #0077B6;
+  --accent1light: #0077B633;
+  --accent2: #E63946;
+  --accent2light: #e6394633;
+  --border: #E0E0E0;
+  --successlight: #2E7D3233;
+  --success: #2E7D32;
+  --successdark: #2E7D32DD;
+  --warning: #FF8F00;
+  --error: #D32F2F;
+  --errorlight: #D32F2F33;
+  --text1: #333333;
+  --text2: #666666;
+  --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
+  --pt2: #E2E2E2;
+  --hft: "transparent";
+  --rbg1: #e2e2e2;
+}
+
 .mobile_nav_menu_container {
   position: absolute;
   top: 0;
@@ -716,6 +872,9 @@ iframe {
 .navbar .button-container .display_nav {
   display: flex;
 }
+.navbar .button-container .display_nav * {
+  text-decoration: none;
+}
 .navbar .button-container .switch {
   background-color: var(--switch1);
   border-radius: 50%;
@@ -794,6 +953,9 @@ iframe {
   }
   .navbar .button-container .display_nav {
     display: none;
+  }
+  .navbar .button-container .display_nav * {
+    text-decoration: none;
   }
   .navbar .button-container .hamburger_menu {
     margin-left: 20px;
@@ -2044,6 +2206,149 @@ iframe {
 }
 .settings-container .empty * {
   margin: 0 10px;
+}
+
+:root {
+  --darker: #0A0A0A;
+  --dark: #121212;
+  --card_bg: #1E1E1E;
+  --accent1: #00B4D8;
+  --accent1light: #00B4D833;
+  --accent2: #FF5D8F;
+  --accent2light: #ff5d8f33;
+  --border: #333;
+  --successlight: #4CAF5033;
+  --success: #4CAF50;
+  --successdark: #4CAF50DD;
+  --warning: #FF9800;
+  --error: #FF5252;
+  --errorlight: #FF525233;
+  --text1: #E0E0E0;
+  --text2: #AAAAAA;
+  --switch1: #F8F9FA;
+  --switch2: #0A0A0A;
+  --bg1: #121212;
+  --bg2: #0A0A0A;
+  --cardbg: #1E1E1E;
+  --p1: #00F5FF;
+  --p2: #FF00FF;
+  --p3: #b32EE8;
+  --t1: #E0E0E0;
+  --t2: #AAAAAA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
+  --pt2: #F8F9FA;
+  --hft: #666;
+  --rbg1: #E2E2E2;
+}
+
+[data-theme=light] {
+  --darker: #F8F9FA;
+  --dark: #FFFFFF;
+  --card_bg: #FFFFFF;
+  --accent1: #0077B6;
+  --accent1light: #0077B633;
+  --accent2: #E63946;
+  --accent2light: #e6394633;
+  --border: #E0E0E0;
+  --successlight: #2E7D3233;
+  --success: #2E7D32;
+  --successdark: #2E7D32DD;
+  --warning: #FF8F00;
+  --error: #D32F2F;
+  --errorlight: #D32F2F33;
+  --text1: #333333;
+  --text2: #666666;
+  --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
+  --pt2: #E2E2E2;
+  --hft: "transparent";
+  --rbg1: #e2e2e2;
+}
+
+.login-container {
+  color: var(--text1);
+  font-family: "Titillium Web", sans-serif;
+  background-color: var(--darker);
+  height: fit-content;
+  width: fit-content;
+  padding: 20px;
+  border-radius: 12px;
+}
+.login-container .login-button {
+  color: var(--text1);
+  padding: 12px 24px;
+  background-color: var(--accent1light);
+  border: 1px solid var(--accent1);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+.login-container .login-button:hover {
+  color: var(--accent1);
+  transform: scale(1.05);
+}
+.login-container .login-button:active {
+  color: var(--text2);
+  transform: scale(1);
+}
+.login-container .login-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+  padding: 20px;
+}
+.login-container .login-card .login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+}
+.login-container .login-card .login-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  width: 100%;
+}
+.login-container .login-card .login-form .form-group input {
+  width: 100%;
+  background-color: var(--card_bg);
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  color: var(--text2);
+}
+.login-container .login-card .login-form .form-options {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-container .login-card .login-form .form-options * {
+  color: var(--accent1);
+  text-decoration: none;
+  cursor: pointer;
+}
+.login-container .login-card .login-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.login-container .login-card .login-footer * {
+  color: var(--accent2);
+  text-decoration: none;
+  cursor: pointer;
 }
 
 :root {

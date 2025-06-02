@@ -3,5 +3,7 @@ export const RouterContainer = {
     Homepage: "/",
     Gameloop: "/GameTest",
     SinglePlayer: "/SinglePlayer",
-    UserDashboard: `/UserDashboard/:id`
+    UserDashboard: `/UserDashboard/:id`,
+    Login: "/login",
+    Register: "/register"
 }
