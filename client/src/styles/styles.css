@@ -1793,11 +1793,11 @@ iframe {
 .user_friendslist .search_container .submit_button {
   margin-right: 10px;
   align-self: center;
-  height: 40px;
-  width: 150px;
+  height: 30px;
+  width: 125px;
   background-color: var(--success);
   color: var(--text1);
-  border-radius: 12px;
+  border-radius: 7px;
   padding: 3px 6px;
   border: none;
   font-size: 1rem;
