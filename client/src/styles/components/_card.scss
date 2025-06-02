@@ -235,3 +235,366 @@
         }
     }
 }
+
+
+
+
+
+// UserDashboard Specific Cards!
+
+
+.user_info {
+    background-color: $darker;
+    min-height: 820px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    font-family: $font1;
+    border-radius: 7px;
+
+    @media (max-width: 1100px) {
+        width: 90%;
+    }
+
+    .game_title {
+        width: 100%;
+        min-height: 48px;
+        color: $text1;
+        font-size: 2rem;
+    }
+
+    .game_stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        padding: 20px;
+        gap: 10px;
+        border-radius: 12px;
+        background-color: $card_bg;
+
+        .title {
+            display: flex;
+            align-items: center;
+            color: $text1;
+            width: auto;
+            font-size: 1.3rem;
+            height: 36px;
+        }
+
+        .data {
+            width: 100px;
+            height: 36px;
+            justify-self: flex-end;
+            color: $text1;
+            font-size: 1.3rem;
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .title {
+                text-align: center;
+            }
+
+            .data {
+                text-align: center;
+            }
+        }
+    }
+
+    .user_title {
+        width: 100%;
+        min-height: 48px;
+        color: $text1;
+        font-size: 2rem;
+    }
+
+    .sub_title {
+        width: 100%;
+        min-height: 36px;
+        color: $text2;
+        font-size: 1.5rem;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 50px;
+        width: 100%;
+        padding: 20px;
+        gap: 10px;
+        background-color: $card_bg;
+        font-size: 1.25rem;
+        text-align: left;
+        border-radius: 12px;
+
+        .title {
+            width: 100px;
+            height: 36px;
+            color: $text1;
+        }
+
+        .data {
+            display: flex;
+            width: auto;
+            min-height: 36px;
+            color: $text2;
+            word-break: normal;
+
+            @media (max-width: 442px) {
+                word-break: break-word;
+                overflow-wrap: anywhere;
+            }
+        }
+
+        @media (max-width: 768px) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+    .change_button {
+        height: 50px;
+        width: 200px;
+        font-size: 1.4rem;
+        color: $text1;
+        background-color: $accent2;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .account_title {
+        min-height: 48px;
+        width: 100%;
+        color: $text1;
+        font-size: 2rem;
+    }
+
+    .account_sub_title {
+        width: 100%;
+        min-height: 36px;
+        color: $text2;
+        font-size: 1rem;
+    }
+
+    .button_container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 20px;
+
+        @media (max-width: 478px) {
+            flex-direction: column;
+        }
+
+        .disable {
+            background-color: $error;
+            color: $text1;
+            width: 150px;
+            height: 50px; 
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .delete {
+            background-color: $errorlight;
+            color: $text1;
+            width: 150px;
+            height: 50px; 
+            border-radius: 12px;
+            border: 1px solid $error;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+    }
+}
+
+.user_friendslist {
+    background-color: $darker;
+    border-radius: 12px;
+    min-height: 820px;
+    width: 40%;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    gap: 20px;
+    font-family: $font1;
+
+    @media (max-width: 1100px) {
+        width: 90%;
+    }
+
+    .under_title {
+        width: 100%;
+        min-height: 48px;
+        color: $text1;
+        font-size: 2rem;
+    }
+
+    .search_container {
+        display: flex;
+        width: 100%;
+        min-height: 50px;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: $card_bg;
+
+        .submit_button {
+            background-color: $success;
+            color: $text1;
+            border-radius: 12px;
+            padding: 12px 24px;
+            border: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $successdark;
+            }
+        }
+
+        .input_field {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding: 0 10px;
+            color: $text2;
+            width: 80%;
+        }
+
+        @media (max-width: 568px) {
+            flex-direction: column;
+            background-color: transparent;
+
+            .input_field {
+                background-color: $card_bg;
+                width: 100%;
+                height: 50px;
+                border-radius: 12px;
+                margin-bottom: 10px;
+            }
+        }
+
+    }
+
+    .friend_container {
+        width: 100%;
+        min-height: 300px;
+        max-height: 300px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: auto;
+        padding-right: 5px;
+
+        .friend_bar {
+            width: 100%;
+            min-height: 50px;
+            gap: 10px;
+            background-color: $card_bg;
+            border-radius: 12px;
+            border: 1px solid $border;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: $text1;
+            padding: 10px;
+
+            .remove_friend {
+                background-color: $errorlight;
+                border: 1px solid $error;
+                color: $error;
+                border-radius: 7px;
+                padding: 3px 6px;
+            }
+
+            @media (max-width: 442px) {
+                flex-direction: column;
+            }
+        }
+    }
+
+    .accept_container {
+        width: 100%;
+        height: auto;
+        max-height: 230px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-right: 5px;
+
+        .accept_bar {
+            width: 100%;
+            min-height: 50px;
+            background-color: $card_bg;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            align-items: center;
+            font-size: 1.2rem;
+            color: $text1;
+            border-radius: 7px;
+            border: 1px solid $border;
+
+            .container {
+                display: flex;
+                gap: 10px;
+
+                .accept {
+                    background-color: $sucesslight;
+                    color: $success;
+                    border-radius: 12px;
+                    border: 1px solid $success;
+                    padding: 3px 6px;
+                }
+                
+                .decline {
+                    background-color: $errorlight;
+                    color: $error;
+                    border-radius: 12px;
+                    border: 1px solid $error;
+                    padding: 3px 6px;
+                }
+            }
+
+            .remove {
+                background-color: lightcoral;
+                border-radius: 12px;
+                padding: 6px 12px;
+            }
+
+            @media (max-width: 500px) {
+                .container {
+                    flex-direction: column;
+                }
+            }
+
+            @media (max-width: 400px) {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    }
+}

@@ -8,9 +8,12 @@
     --accent2: #FF5D8F;
     --accent2light: #ff5d8f33;
     --border: #333;
+    --successlight: #4CAF5033;
     --success: #4CAF50;
+    --successdark: #4CAF50DD;
     --warning: #FF9800;
     --error: #FF5252;
+    --errorlight: #FF525233;
     --text1: #E0E0E0;
     --text2: #AAAAAA;
     --switch1: #F8F9FA;
@@ -40,9 +43,12 @@
     --accent2: #E63946;
     --accent2light: #e6394633;
     --border: #E0E0E0;
+    --successlight: #2E7D3233;
     --success: #2E7D32;
+    --successdark: #2E7D32DD;
     --warning: #FF8F00;
     --error: #D32F2F;
+    --errorlight: #D32F2F33;
     --text1: #333333;
     --text2: #666666;
 
@@ -67,9 +73,12 @@ $accent1light: var(--accent1light);
 $accent2: var(--accent2);
 $accent2light: var(--accent2light);
 $border: var(--border);
+$successdark: var(--successdark);
 $success: var(--success);
+$sucesslight: var(--successlight);
 $warning: var(--warning);
 $error: var(--error);
+$errorlight: var(--errorlight);
 $text1: var(--text1);
 $text2: var(--text2);
 $switch1: var(--switch1);
