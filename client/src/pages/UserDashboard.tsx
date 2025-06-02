@@ -1,6 +1,7 @@
 import Header from "../components/common/header";
 import Footer from "../components/common/footer";
 import Edit from "../components/hoc/loc/Edit_button_dashboard";
+import Friendslist_card from "../components/common/Friendslist";
 
 const UserDashboard = () => {
 
@@ -39,7 +40,9 @@ const UserDashboard = () => {
                                 </div>
                             </section>
 
-                            <section className="user_friendslist">
+                            <Friendslist_card />
+
+                            {/* <section className="user_friendslist">
                                 <div className="under_title">Friendslist</div>
                                 <div className="search_container">
                                     <input className="input_field" type="text"></input>
@@ -61,7 +64,7 @@ const UserDashboard = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </section>
+                            </section> */}
                         </section>
                     </main>
                 <Footer />
