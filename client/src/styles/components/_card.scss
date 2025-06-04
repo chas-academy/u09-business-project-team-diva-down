@@ -333,6 +333,10 @@
         text-align: left;
         border-radius: 12px;
 
+        .grid-form {
+            display: contents;
+        }
+
         .title {
             width: 100px;
             height: 36px;
@@ -342,6 +346,7 @@
         .data {
             display: flex;
             width: auto;
+            padding: 0 3px;
             min-height: 36px;
             color: $text2;
             word-break: normal;
@@ -350,6 +355,13 @@
                 word-break: break-word;
                 overflow-wrap: anywhere;
             }
+        }
+
+        .data-edit {
+            background: transparent;
+            border: 1px solid $accent2;
+            color: $accent2;
+            border-radius: 7px;
         }
 
         @media (max-width: 768px) {
