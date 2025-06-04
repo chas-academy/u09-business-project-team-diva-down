@@ -1675,6 +1675,9 @@ iframe {
   text-align: left;
   border-radius: 12px;
 }
+.user_info .grid .grid-form {
+  display: contents;
+}
 .user_info .grid .title {
   width: 100px;
   height: 36px;
@@ -1683,6 +1686,7 @@ iframe {
 .user_info .grid .data {
   display: flex;
   width: auto;
+  padding: 0 3px;
   min-height: 36px;
   color: var(--text2);
   word-break: normal;
@@ -1692,6 +1696,12 @@ iframe {
     word-break: break-word;
     overflow-wrap: anywhere;
   }
+}
+.user_info .grid .data-edit {
+  background: transparent;
+  border: 1px solid var(--accent2);
+  color: var(--accent2);
+  border-radius: 7px;
 }
 @media (max-width: 768px) {
   .user_info .grid {
@@ -2541,6 +2551,93 @@ iframe {
   text-align: center;
   padding: 12px;
   font-weight: 600;
+}
+
+:root {
+  --darker: #0A0A0A;
+  --dark: #121212;
+  --card_bg: #1E1E1E;
+  --accent1: #00B4D8;
+  --accent1light: #00B4D833;
+  --accent2: #FF5D8F;
+  --accent2light: #ff5d8f33;
+  --border: #333;
+  --successlight: #4CAF5033;
+  --success: #4CAF50;
+  --successdark: #4CAF50DD;
+  --warning: #FF9800;
+  --error: #FF5252;
+  --errorlight: #FF525233;
+  --text1: #E0E0E0;
+  --text2: #AAAAAA;
+  --switch1: #F8F9FA;
+  --switch2: #0A0A0A;
+  --bg1: #121212;
+  --bg2: #0A0A0A;
+  --cardbg: #1E1E1E;
+  --p1: #00F5FF;
+  --p2: #FF00FF;
+  --p3: #b32EE8;
+  --t1: #E0E0E0;
+  --t2: #AAAAAA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
+  --pt2: #F8F9FA;
+  --hft: #666;
+  --rbg1: #E2E2E2;
+}
+
+[data-theme=light] {
+  --darker: #F8F9FA;
+  --dark: #FFFFFF;
+  --card_bg: #FFFFFF;
+  --accent1: #0077B6;
+  --accent1light: #0077B633;
+  --accent2: #E63946;
+  --accent2light: #e6394633;
+  --border: #E0E0E0;
+  --successlight: #2E7D3233;
+  --success: #2E7D32;
+  --successdark: #2E7D32DD;
+  --warning: #FF8F00;
+  --error: #D32F2F;
+  --errorlight: #D32F2F33;
+  --text1: #333333;
+  --text2: #666666;
+  --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
+  --pt2: #E2E2E2;
+  --hft: "transparent";
+  --rbg1: #e2e2e2;
+}
+
+.password-background {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Titillium Web", sans-serif;
+  color: var(--text1);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.password-background .change-password-container {
+  height: 200px;
+  width: 200px;
+  background-color: var(--darker);
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.password-background .change-password-container button {
+  color: var(--text1);
 }
 
 :root {

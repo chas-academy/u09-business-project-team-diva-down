@@ -1,6 +1,6 @@
 import Header from "../components/common/header";
 import Footer from "../components/common/footer";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SinglePlayer_title from "../components/hoc/loc/SinglePlayer_title";
 import SettingsCard from "../components/common/gameloop/settings_card";
 import axios from "axios";
@@ -38,6 +38,14 @@ const SingePlayerGameLoop: React.FC = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [score, setScore] = useState<number>(0);
     const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+    const [resetKey, setResetKey] = useState(0);
+    const [remainingTime, setRemainingTime] = useState<number>(30);
+    const hasTimeExpired = useRef(false);
+    const [skippedQuestions, setSkippedQuestions] =  useState<number>(0);
+
+    const handleReset = () => {
+        setResetKey(prev => prev + 1);
+    };
 
     const changeGameState = () => {
         setGameState(prev => {
@@ -78,6 +86,7 @@ const SingePlayerGameLoop: React.FC = () => {
                 setQuestions(formattedQuestions);
                 setCurrentQuestionIndex(0);
                 setScore(0);
+                setSkippedQuestions(0);
                 console.log(response);
                 console.log(custom_apicall);
                 changeGameState();
@@ -100,6 +109,7 @@ const SingePlayerGameLoop: React.FC = () => {
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex((prev) => prev + 1);
             setSelectedAnswer(null);
+            handleReset();
         } else {
             setGameState('finished');
         }
@@ -137,8 +147,24 @@ const SingePlayerGameLoop: React.FC = () => {
                                         Question {currentQuestionIndex + 1}/{questions.length}
                                     </div>
                                     <div className="timer">
-                                        <Countdown />
+                                        <Countdown 
+                                            key={resetKey}
+                                            onTimeUpdate={(time) => {
+                                                setRemainingTime(time);
+                                                if (time <= 0 && !hasTimeExpired.current) {
+                                                    console.log("Missed Question!");
+                                                    setSkippedQuestions((prev) => prev + 1);
+                                                    handleNextQuestion();
+                                                    hasTimeExpired.current = true;
+                                                }
+                                                if (time > 0) {
+                                                    hasTimeExpired.current = false;
+                                                }
+                                            }}
+                                        />
                                     </div>
+                                    {/* For debugging */}
+                                    <button onClick={handleReset} style={{color: '#FAFAFA'}}>Reset Timer</button>
                                 </div>
 
                                 <div className="game-settings">
@@ -203,8 +229,8 @@ const SingePlayerGameLoop: React.FC = () => {
                                 )}
                                 <div className="stats">
                                     <div className="stats-bar"><span>Correct Answers: </span><span>{score}</span></div>
-                                    <div className="stats-bar"><span>Incorrect Answers: </span><span>{questions.length - score}</span></div>
-                                    <div className="stats-bar none"><span>Skipped Answers: </span><span>In Waiting</span></div>
+                                    <div className="stats-bar"><span>Incorrect Answers: </span><span>{questions.length - score - skippedQuestions}</span></div>
+                                    <div className="stats-bar none"><span>Skipped Answers: </span><span>{skippedQuestions}</span></div>
                                 </div>
                                 <div className="button-container">
                                     <Link to={RouterContainer.Homepage}><Home_button /></Link>
