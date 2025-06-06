@@ -10,6 +10,7 @@ import loginRouter from "./routes/login.route";
 import createQuestionRouter from "./routes/createQuestion.route";
 import updateQuestionRouter from "./routes/updateQuestion.route";
 import deleteQuestionRouter from "./routes/delete.route";
+import friendRouter from "./routes/friends.route";
 dotenv.config();
 configurePassport();
 
@@ -45,7 +46,8 @@ app.use('/', loginRouter);
 app.use('/', createQuestionRouter);
 app.use('/', updateQuestionRouter);
 app.use('/', deleteQuestionRouter);
-app.use('/auth', authRouter); 
+app.use('/auth', authRouter);
+app.use('/friends', friendRouter);
 
 mongoose.connect(URI!)
     .then(() => {
