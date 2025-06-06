@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import session from 'express-session';
 import passport from 'passport';
+import http from 'http';
 import routerRegister from "./routes/registerUser.route";
 import authRouter from "./routes/auth.route";
 import configurePassport from "./config/passport.config";
@@ -11,12 +12,15 @@ import createQuestionRouter from "./routes/createQuestion.route";
 import updateQuestionRouter from "./routes/updateQuestion.route";
 import deleteQuestionRouter from "./routes/delete.route";
 import friendRouter from "./routes/friends.route";
+import { WebSocketServer, WebSocket } from "ws";
 dotenv.config();
 configurePassport();
 
 const app = express();
+const server = http.createServer(app);
 const port = process.env.PORT || 3000;
 const URI = process.env.MONGODB_URI;
+const socket = new WebSocketServer({ server });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -49,10 +53,30 @@ app.use('/', deleteQuestionRouter);
 app.use('/auth', authRouter);
 app.use('/friends', friendRouter);
 
+socket.on('connection', (ws: WebSocket) => {
+    console.log('User Connected to Websocket');
+
+    ws.on('message', (message: string | Buffer) => {
+        const text = message.toString();
+
+        console.log('Received: ', text);
+
+        socket.clients.forEach(client => {
+            if(client.readyState === WebSocket.OPEN) {
+                client.send(`Message: ${text}`)
+            }
+        });
+    });
+
+    ws.on('close', () => {
+        console.log('Client disconnected');
+    });
+})
+
 mongoose.connect(URI!)
     .then(() => {
         console.log('Connected to MongoDB successfully.');
-        app.listen(port, () => {
+        server.listen(port, () => {
             console.log(`Server running at http://localhost:${port}`);
         });
     })
