@@ -49,6 +49,9 @@ app.use('/', updateQuestion_route_1.default);
 app.use('/', delete_route_1.default);
 app.use('/auth', auth_route_1.default);
 app.use('/friends', friends_route_1.default);
+app.get('/', (_, res) => {
+    res.send('WebSocket server is running');
+});
 socket.on('connection', (ws) => {
     console.log('User Connected to Websocket');
     ws.on('message', (message) => {

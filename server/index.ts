@@ -52,6 +52,9 @@ app.use('/', updateQuestionRouter);
 app.use('/', deleteQuestionRouter);
 app.use('/auth', authRouter);
 app.use('/friends', friendRouter);
+app.get('/', (_, res) => {
+    res.send('WebSocket server is running')
+})
 
 socket.on('connection', (ws: WebSocket) => {
     console.log('User Connected to Websocket');
