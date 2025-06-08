@@ -16,6 +16,9 @@ const passport_1 = __importDefault(require("passport"));
 const passport_google_oauth20_1 = require("passport-google-oauth20");
 const User_model_1 = require("../models/User.model");
 const configurePassport = () => {
+    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET || !process.env.GOOGLE_CALLBACK_URL) {
+        throw new Error('Google OAuth environment variables not configured');
+    }
     passport_1.default.use(new passport_google_oauth20_1.Strategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -41,7 +44,7 @@ const configurePassport = () => {
         }
     })));
     passport_1.default.serializeUser((user, done) => {
-        done(null, user.id);
+        done(null, user._id);
     });
     passport_1.default.deserializeUser((id, done) => __awaiter(void 0, void 0, void 0, function* () {
         try {

@@ -11,7 +11,7 @@ export async function authenticate(
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: string };
-    req.user = { id: decoded.id }; // make sure you did global typing for this
+    req.user = { id: decoded.id };
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Invalid token' });
