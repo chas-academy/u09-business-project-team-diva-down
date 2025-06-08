@@ -10,11 +10,12 @@ interface SelectValue {
 }
 
 const UserInfo = () => {
-    const [UsersOwnData, SetUsersOwnData] = useState(MockDataUserOwnData);
+    const UsersOwnData = MockDataUserOwnData;
     const [toggleWindow, setToggleWindow] = useState(false);
     const [editUsername, setEditUsername] = useState(false);
     const [editEmail, setEditEmail] = useState(false);
-
+    const [newEmailValue, setNewEmailValue] = useState(UsersOwnData.email);
+    const [newUsernameValue, setNewUsernameValue] = useState(UsersOwnData.username);
 
     const ToggleWindowFunction = () => {
         setToggleWindow(!toggleWindow);
@@ -45,6 +46,17 @@ const UserInfo = () => {
         console.log("Event Registerd!");
     }
 
+    const FetchInputData = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log(newEmailValue);
+        setEditEmail(false);
+    }
+
+    const FetchUsernameData = (e: React.FormEvent) => {
+        e.preventDefault();
+        setEditUsername(false);
+    }
+
     return (
         <>
             <div className="user_info">
@@ -63,10 +75,10 @@ const UserInfo = () => {
                     <>
                     <div className="grid">
                         <div className="title">Username</div>
-                        <div className="data">{UsersOwnData.username}</div>
+                        <div className="data">{newUsernameValue}</div>
                         <Edit onClick={ToggleEditUsernameFunction}/>
                         <div className="title">Email</div>
-                        <div className="data">{UsersOwnData.email}</div>
+                        <div className="data">{newEmailValue}</div>
                         <Edit onClick={ToggleEditEmailFunction}/>
                     </div>
                     </>
@@ -74,27 +86,38 @@ const UserInfo = () => {
                 {editEmail === true && (
                     <div className="grid">
                         <div className="title">Username</div>
-                        <div className="data">{UsersOwnData.username}</div>
+                        <div className="data">{newUsernameValue}</div>
                         <Back onClick={ToggleResetEditForm}/>
-                        <form className="grid-form">
+                        <form className="grid-form" onSubmit={FetchInputData}>
                             <div className="title">Email</div>
-                            <input type="text" className="data data-edit" placeholder={UsersOwnData.email} />
+                            <input 
+                                id="EmailData" 
+                                type="text" 
+                                className="data data-edit" 
+                                placeholder={newEmailValue}
+                                value={newEmailValue}
+                                onChange={(e) => setNewEmailValue(e.target.value)} 
+                            />
                             <Save className="action"/>
                         </form>
                     </div>
                 )}
                 {editUsername === true && (
                     <div className="grid">
-                        <form className="grid-form" onSubmit={TestConsole}>
+                        <form className="grid-form" onSubmit={FetchUsernameData}>
                             <div className="title">Username</div>
-                            <input type="text" className="data data-edit" placeholder={UsersOwnData.username} />
+                            <input 
+                                type="text"
+                                className="data data-edit"
+                                placeholder={newUsernameValue}
+                                value={newUsernameValue}
+                                onChange={(e) => setNewUsernameValue(e.target.value)}
+                             />
                             <Save className="action"/>
                         </form>
-                        <form className="grid-form">
-                            <div className="title">Email</div>
-                            <div className="data">{UsersOwnData.email}</div>
-                            <Save className="action"/>
-                        </form>
+                        <div className="title">Email</div>
+                        <div className="data">{newEmailValue}</div>
+                        <Back className="action" onClick={ToggleResetEditForm}/>
                     </div>
                 )}
                 <button onClick={ToggleWindowFunction} className="change_button">Change Password</button>
