@@ -66,7 +66,7 @@ socket.on('connection', (ws: WebSocket) => {
 
         socket.clients.forEach(client => {
             if(client.readyState === WebSocket.OPEN) {
-                client.send(`Message: ${text}`)
+                client.send(`${text}`)
             }
         });
     });

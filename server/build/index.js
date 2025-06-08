@@ -59,7 +59,7 @@ socket.on('connection', (ws) => {
         console.log('Received: ', text);
         socket.clients.forEach(client => {
             if (client.readyState === ws_1.WebSocket.OPEN) {
-                client.send(`Message: ${text}`);
+                client.send(`${text}`);
             }
         });
     });

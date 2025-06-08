@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
+
 const Chat: React.FC = () => {
     const [messages, setMessages] = useState<string[]>([]);
     const [input, setInput] = useState('');
@@ -36,7 +37,10 @@ const Chat: React.FC = () => {
 
             <ul>
                 {messages.map((msg, i) => (
-                    <li key={i}>{msg}</li>
+                    <div>
+                        <p>{}</p>
+                        <li key={i}>{msg}</li>
+                    </div>
                 ))}
             </ul>
         </div>
