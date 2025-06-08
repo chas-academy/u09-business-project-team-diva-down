@@ -1,0 +1,102 @@
+// Darkmode variables
+:root {
+    --darker: #0A0A0A;
+    --dark: #121212;
+    --card_bg: #1E1E1E;
+    --accent1: #00B4D8;
+    --accent1light: #00B4D833;
+    --accent2: #FF5D8F;
+    --accent2light: #ff5d8f33;
+    --border: #333;
+    --successlight: #4CAF5033;
+    --success: #4CAF50;
+    --successdark: #4CAF50DD;
+    --warning: #FF9800;
+    --error: #FF5252;
+    --errorlight: #FF525233;
+    --text1: #E0E0E0;
+    --text2: #AAAAAA;
+    --switch1: #F8F9FA;
+    --switch2: #0A0A0A;
+
+    --bg1: #121212;
+    --bg2: #0A0A0A;
+    --cardbg: #1E1E1E;
+    --p1: #00F5FF;
+    --p2: #FF00FF;
+    --p3: #b32EE8;
+    --t1: #E0E0E0;
+    --t2: #AAAAAA;
+    --sw1: #FAFAFA;
+    --sw2: #050505;
+    --pt2: #F8F9FA;
+    --hft: #666;
+    --rbg1: #E2E2E2;
+}
+
+[data-theme="light"] {
+    --darker: #F8F9FA;
+    --dark: #FFFFFF;
+    --card_bg: #FFFFFF;
+    --accent1: #0077B6;
+    --accent1light: #0077B633;
+    --accent2: #E63946;
+    --accent2light: #e6394633;
+    --border: #E0E0E0;
+    --successlight: #2E7D3233;
+    --success: #2E7D32;
+    --successdark: #2E7D32DD;
+    --warning: #FF8F00;
+    --error: #D32F2F;
+    --errorlight: #D32F2F33;
+    --text1: #333333;
+    --text2: #666666;
+
+
+    --bg1: #FAFAFA;
+    --bg2: #F8F9FA;
+    --p1: #00A8FF;
+    --p2: #FF00AA;
+    --p3: #9C27FF;
+    --t1: #666;
+    --t2: #333;
+    --pt2: #E2E2E2;
+    --hft: 'transparent';
+    --rbg1: #e2e2e2;
+}
+
+$darker: var(--darker);
+$dark: var(--dark);
+$card_bg: var(--card_bg);
+$accent1: var(--accent1);
+$accent1light: var(--accent1light);
+$accent2: var(--accent2);
+$accent2light: var(--accent2light);
+$border: var(--border);
+$successdark: var(--successdark);
+$success: var(--success);
+$sucesslight: var(--successlight);
+$warning: var(--warning);
+$error: var(--error);
+$errorlight: var(--errorlight);
+$text1: var(--text1);
+$text2: var(--text2);
+$switch1: var(--switch1);
+$switch2: var(--switch2);
+
+
+$hft: var(--hft);
+$rbg1: var(--rbg1);
+$bg1: var(--bg1);
+$bg2: var(--bg2);
+$p1: var(--p1);
+$p2: var(--p2);
+$p3: var(--p3);
+$t1: var(--t1);
+$t2: var(--t2);
+$sw1: var(--sw1);
+$sw2: var(--sw2);
+$pt2: var(--pt2);
+
+$font1: "Titillium Web", sans-serif;
+$font2: "Tilt Warp", sans-serif;

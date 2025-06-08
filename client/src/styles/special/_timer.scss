@@ -16,7 +16,6 @@
   --t-initial: var(--t);
   --s: calc(var(--t)/1);
   display: grid;
-  margin: 1em auto;
   width: var(--d);
   height: var(--d);
   animation: t calc(var(--t-initial)*1s) linear forwards;
@@ -26,9 +25,10 @@
   grid-column: 1;
   grid-row: 1;
   place-self: center;
-  color: $t1;
+  color: $text1;
   font: calc(0.5*var(--d))/ 2 ubuntu mono, consolas, monaco, monospace;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: $font1;
   counter-reset: s var(--s);
   content: counter(s, decimal-leading-zero);
 }
@@ -52,6 +52,6 @@
   --k: calc(var(--t)/var(--t-initial)) !important;
   transform: rotate(-90deg) !important;
   stroke-linecap: round !important;
-  stroke: color-mix(in hsl shorter hue, var(--c1) calc(var(--k)*100%), var(--c2)) !important;
+  stroke: color-mix(in hsl shorter hue, $accent1 calc(var(--k)*100%), $accent2) !important;
   stroke-dasharray: var(--k) 1 !important;
 }

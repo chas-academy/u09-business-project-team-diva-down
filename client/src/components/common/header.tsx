@@ -4,11 +4,17 @@ import { useState } from "react";
 import Login from "../hoc/loc/login_button";
 import { Link } from "react-router-dom";
 import { RouterContainer } from "../../routes/RouteContainer";
+import { id } from "../../common/GenerateUserId";
 
 const Header = () => {
 
     const [transition, setTransition] = useState<'spin-forward' | 'spin-backward'>('spin-forward');
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [Navbar, setNavMenu] = useState(false);
+
+    const toggleNavMenu = () => {
+        setNavMenu(!Navbar);
+    };    
 
     const handleClick = () => {
         if (isTransitioning) return;
@@ -34,18 +40,16 @@ const Header = () => {
         ChangeTheme(e); // Passing the event to EChangeTheme where it's actually used
     };
 
-
-
     return (
         <>
             <header className="navbar">
                 <div className="logo">NEONIX</div>
                 <ul className="navlinks">
-                    <li>Home</li>
-                    <Link to={RouterContainer.Gameloop}>Play</Link>
-                    <li>Categories</li>
-                    <li>Leaderboard</li>
-                    <li>About</li>
+                    <Link to={RouterContainer.Homepage}>Home</Link>
+                    <Link to={RouterContainer.SinglePlayer}>Play</Link>
+                    {/* Temporary Link */}
+                    <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
+                    <Link to={RouterContainer.Leaderboard}>Leaderboard</Link>
                 </ul>
                 <div className="button-container">
                     <button 
@@ -56,9 +60,35 @@ const Header = () => {
                         style={{ pointerEvents: isTransitioning ? 'none' : 'auto' }}
                     >
                     </button>
-                    <Login />
-                    <Register />
+                    <span className="display_nav">
+                        <Link to={RouterContainer.Login}><Login/></Link>
+                        <Link to={RouterContainer.Register}><Register/></Link>
+                    </span>
+                    <div onClick={toggleNavMenu} id="nav_menu" className="hamburger_menu">
+                        <div className="hamburger_bar"></div>
+                        <div className="hamburger_bar"></div>
+                        <div className="hamburger_bar"></div>
+                    </div>
                 </div>
+                {Navbar === true && (
+                    <>
+                        <div className="mobile_nav_menu_container">
+                            <div onClick={toggleNavMenu} className="cross-placement">
+                                <div className="cross-container">
+                                    <div className="cross-bar top"></div>
+                                    <div className="cross-bar btm"></div>
+                                </div>
+                            </div>
+                            <ul className="mobile_navlinks">
+                                <Link to={RouterContainer.Homepage}>Home</Link>
+                                <Link to={RouterContainer.SinglePlayer}>Play</Link>
+                                {/* Temporary Link */}
+                                <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
+                                <Link to={RouterContainer.Leaderboard}>Leaderboard</Link>
+                            </ul>
+                        </div>
+                    </>
+                )}
             </header>
         </>
     );

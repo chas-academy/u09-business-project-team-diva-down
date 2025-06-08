@@ -9,7 +9,7 @@
     width: 100%;
 
     h2 {
-        background: linear-gradient(90deg, $p1, $p2);
+        background: linear-gradient(90deg, $accent1, $accent2);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -21,7 +21,7 @@
     }
 
     p {
-        color: $t1;
+        color: $text1;
         font-family: $font1;
         font-weight: 500;
         width: 60%;
