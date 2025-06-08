@@ -9,6 +9,7 @@ import Home_button from "../components/hoc/loc/Home_button";
 import PlayAgain from "../components/hoc/loc/PlayAgain";
 import { Link } from "react-router-dom";
 import { RouterContainer } from "../routes/RouteContainer";
+import { MockDataGameLoop } from "../MockData/MockDataGameLoop";
 
 type GameState = 'prep' | 'playing' | 'finished';
 
@@ -78,12 +79,14 @@ const SingePlayerGameLoop: React.FC = () => {
         } else {
             try {
                 const custom_apicall = `https://opentdb.com/api.php?amount=10&category=${selectedCategory.value}&difficulty=${difficulty}&type=multiple`;
-                const response = await axios.get(custom_apicall);
+                // const response = await axios.get(custom_apicall);
+                const response = MockDataGameLoop;
                 const formattedQuestions = response.data.results.map((q: any) => ({
                     ...q,
                     all_answers: shuffleArray([...q.incorrect_answers, q.correct_answer])
                 }));
                 setQuestions(formattedQuestions);
+                console.log(response);
                 setCurrentQuestionIndex(0);
                 setScore(0);
                 setSkippedQuestions(0);
@@ -164,7 +167,7 @@ const SingePlayerGameLoop: React.FC = () => {
                                         />
                                     </div>
                                     {/* For debugging */}
-                                    <button onClick={handleReset} style={{color: '#FAFAFA'}}>Reset Timer</button>
+                                    {/* <button onClick={handleReset} style={{color: '#FAFAFA'}}>Reset Timer</button> */}
                                 </div>
 
                                 <div className="game-settings">
