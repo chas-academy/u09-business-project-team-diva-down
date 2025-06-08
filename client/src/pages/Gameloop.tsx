@@ -48,7 +48,7 @@ const Gameloop: React.FC = () => {
 
     return (
         <>
-            <div id="container" className="GameLoop">
+            <div className="GameLoop">
                 <Header />
                 <main className="main">
                 <button onClick={logTimeUpdate} style={{color: 'hotpink', fontWeight: '600', textTransform: 'uppercase'}}>Check The Time</button>
