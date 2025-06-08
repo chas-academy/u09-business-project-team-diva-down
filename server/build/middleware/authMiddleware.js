@@ -22,7 +22,7 @@ function authenticate(req, res, next) {
             return res.status(401).json({ message: 'No token provided' });
         try {
             const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
-            req.user = { id: decoded.id }; // make sure you did global typing for this
+            req.user = { id: decoded.id };
             next();
         }
         catch (err) {
