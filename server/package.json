@@ -8,7 +8,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx tsc && node build/index.js"
+    "dev": "npx tsc && node build/index.js",
+    "build": "tsc",
+    "start": "node build/index.js"
   },
   "dependencies": {
     "@types/express-session": "^1.18.1",
