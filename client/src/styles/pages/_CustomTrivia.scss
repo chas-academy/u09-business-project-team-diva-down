@@ -1,0 +1,19 @@
+@import '../variables/variables';
+
+.CustomTrivia_Page {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background-color: $dark;
+
+    .main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 20px;
+        margin-bottom: 15%;
+
+    }
+}

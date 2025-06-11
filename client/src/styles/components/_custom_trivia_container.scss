@@ -1,0 +1,186 @@
+@import '../variables/variables';
+
+.custom_trivia_container {
+    min-width: 400px;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: $font1;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        gap: 50px;
+
+        h1 {
+            color: $accent1;
+            font-size: 2.2em;
+            text-shadow: 0 0 10px $accent1light;
+        }
+
+        .create-btn {
+            color: $success;
+            font-size: 1rem;
+            border: 1px solid $success;
+            border-radius: 12px;
+            padding: 6px 12px;
+            background-color: $sucesslight;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: $successdark;
+                color: $switch1;
+            }
+        }
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #1e1e1e;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+        td {
+            padding:12px;
+            color: $text1;
+
+            .title {
+                font-size: 1.1rem;
+            }
+        }
+
+        tr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 12px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid $border;
+        }
+
+        tr:last-child {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: $dark;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+
+            .btn {
+                padding: 8px 15px;
+                border-radius: 12px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+            .edit-btn {
+                background-color: $sucesslight;
+                border: 1px solid $success;
+                color: $success;
+
+                &:hover {
+                    background-color: $successdark;
+                    color: $switch1;
+                }
+            }
+
+            .delete-btn {
+                background-color: $errorlight;
+                border: 1px solid $error;
+                color: $error;
+
+                &:hover {
+                    background-color: $errordark;
+                    color: $switch1;
+                }
+            }
+
+            .start-btn {
+                background-color: $accent1light;
+                border: 1px solid $accent1;
+                color: $accent1;
+
+                &:hover {
+                    background-color: $accent1;
+                    color: $switch1;
+                }
+            }
+        }
+    }
+}
+
+.createNewTriviaContainer {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form {
+        background-color: $dark;
+        border-radius: 7px;
+        color: $text1;
+        padding: 12px;
+        font-family: $font1;
+        display: flex;
+        gap: 10px;
+        border: 1px solid $border;
+
+        label {
+            padding: 6px 12px;
+            font-weight: 600;
+        }
+
+        .submit {
+            border-radius: 7px;
+            background-color: $sucesslight;
+            border: 1px solid $success;
+            padding: 6px 12px;
+            color: $success;
+            font-weight: 600;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: $success;
+                color: $switch1;
+            }
+        }
+
+        .user_input {
+            background-color: $darker;
+            border-radius: 7px;
+            border: 1px solid $accent1;
+            color: $text1;
+            padding: 0 10px;
+            font-weight: 600;
+        }
+
+        .cancel {
+            border-radius: 7px;
+            background-color: $errorlight;
+            border: 1px solid $error;
+            padding: 6px 12px;
+            color: $error;
+            font-weight: 600;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: $error;
+                color: $switch1;
+            }
+        }
+    }
+}

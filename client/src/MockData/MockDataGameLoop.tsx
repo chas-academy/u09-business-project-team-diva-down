@@ -14,3 +14,18 @@ export const MockDataGameLoop = {
         ]
     }
 };
+
+export const MockDataCustomTrivaTitles = [
+    {
+        title: "Movie Night Trivia",
+        id: 1,
+    },
+    {
+        title: "Coffee Shop Trivia",
+        id: 2,
+    },
+    {
+        title: "Talk Show Trivia",
+        id: 3,
+    }
+]
