@@ -16,6 +16,7 @@ const Login = () => {
                                 <header className="login-header">
                                     <Login_Title />
                                 </header>
+                                {/* Put it into a sepearate function that then calls the backend API Call so it can be wrapped with a redirect function */}
                                 <form className="login-form" action="/login" method="POST">
                                     <div className="form-group">
                                         <label>Email Address</label>

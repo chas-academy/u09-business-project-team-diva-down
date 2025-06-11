@@ -2820,6 +2820,150 @@ iframe {
   --rbg1: #e2e2e2;
 }
 
+.edit_trivia_container {
+  min-width: 400px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Titillium Web", sans-serif;
+}
+.edit_trivia_container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+.edit_trivia_container .header .title_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.edit_trivia_container .header .title_container h1 {
+  color: var(--accent1);
+  font-size: 2.2em;
+  text-shadow: 0 0 10px var(--accent1light);
+}
+.edit_trivia_container .header .title_container .edit {
+  border-radius: 12px;
+  border: 1px solid var(--success);
+  color: var(--success);
+  background-color: var(--successlight);
+  font-size: 1.25rem;
+  padding: 3px 6px;
+  margin-left: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.edit_trivia_container .header .title_container .edit:hover {
+  background-color: var(--success);
+  color: var(--switch1);
+}
+.edit_trivia_container .header .btn-container {
+  display: flex;
+  gap: 20px;
+}
+.edit_trivia_container .header .btn-container .btn {
+  border-radius: 12px;
+  border: 1px solid;
+  font-size: 1.25rem;
+  padding: 3px 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.edit_trivia_container .header .btn-container .add_question {
+  border-color: var(--accent2);
+  background-color: var(--accent2light);
+  color: var(--accent2);
+}
+.edit_trivia_container .header .btn-container .add_question:hover {
+  background-color: var(--accent2);
+  color: var(--switch1);
+}
+.edit_trivia_container .header .btn-container .back {
+  background-color: var(--errorlight);
+  color: var(--error);
+  border-color: var(--error);
+}
+.edit_trivia_container .header .btn-container .back:hover {
+  background-color: var(--error);
+  color: var(--switch1);
+}
+.edit_trivia_container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: var(--card_bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.edit_trivia_container table th {
+  color: var(--accent1);
+}
+.edit_trivia_container table td {
+  padding: 12px;
+  color: var(--text1);
+}
+.edit_trivia_container table td .title {
+  font-size: 1.1rem;
+}
+.edit_trivia_container table tr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid var(--border);
+}
+.edit_trivia_container table tr:last-child {
+  border-bottom: none;
+}
+.edit_trivia_container table tr:first-child:hover {
+  background-color: var(--card_bg);
+}
+.edit_trivia_container table tr:hover {
+  background-color: var(--dark);
+}
+.edit_trivia_container table .btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.edit_trivia_container table .btn-group .btn {
+  padding: 8px 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.edit_trivia_container table .btn-group .edit-btn {
+  background-color: var(--successlight);
+  border: 1px solid var(--success);
+  color: var(--success);
+}
+.edit_trivia_container table .btn-group .edit-btn:hover {
+  background-color: var(--successdark);
+  color: var(--switch1);
+}
+.edit_trivia_container table .btn-group .delete-btn {
+  background-color: var(--errorlight);
+  border: 1px solid var(--error);
+  color: var(--error);
+}
+.edit_trivia_container table .btn-group .delete-btn:hover {
+  background-color: var(--errordark);
+  color: var(--switch1);
+}
+.edit_trivia_container table .btn-group .start-btn {
+  background-color: var(--accent1light);
+  border: 1px solid var(--accent1);
+  color: var(--accent1);
+}
+.edit_trivia_container table .btn-group .start-btn:hover {
+  background-color: var(--accent1);
+  color: var(--switch1);
+}
+
 .custom_trivia_container {
   min-width: 400px;
   max-width: 900px;
@@ -2856,7 +3000,7 @@ iframe {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background-color: #1e1e1e;
+  background-color: var(--card_bg);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -2924,6 +3068,7 @@ iframe {
 
 .createNewTriviaContainer {
   position: fixed;
+  top: -20%;
   height: 100%;
   width: 100%;
   z-index: 1000;

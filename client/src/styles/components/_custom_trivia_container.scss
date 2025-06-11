@@ -1,5 +1,176 @@
 @import '../variables/variables';
 
+.edit_trivia_container {
+    min-width: 400px;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: $font1;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        gap: 20px;
+
+        .title_container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h1 {
+                color: $accent1;
+                font-size: 2.2em;
+                text-shadow: 0 0 10px $accent1light;
+            }
+
+            .edit {
+                border-radius: 12px;
+                border: 1px solid $success;
+                color: $success;
+                background-color: $sucesslight;
+                font-size: 1.25rem;
+                padding: 3px 6px;
+                margin-left: 20px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $success;
+                    color: $switch1;
+                }
+            }
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+
+            .btn {
+                border-radius: 12px;
+                border: 1px solid;
+                font-size: 1.25rem;
+                padding: 3px 6px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+
+            .add_question {
+                border-color: $accent2;
+                background-color: $accent2light;
+                color: $accent2;
+
+                &:hover {
+                    background-color: $accent2;
+                    color: $switch1;
+                }
+            }
+
+            .back {
+                background-color: $errorlight;
+                color: $error;
+                border-color: $error;
+
+                &:hover {
+                    background-color: $error;
+                    color: $switch1;
+                }
+            }
+        }
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: $card_bg;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+        th {
+            color: $accent1;
+        }
+
+        td {
+            padding:12px;
+            color: $text1;
+
+            .title {
+                font-size: 1.1rem;
+            }
+        }
+
+        tr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 12px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid $border;
+        }
+
+        tr:last-child {
+            border-bottom: none;
+        }
+
+        tr:first-child:hover {
+            background-color: $card_bg;
+        }
+
+        tr:hover {
+            background-color: $dark;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+
+            .btn {
+                padding: 8px 15px;
+                border-radius: 12px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+            .edit-btn {
+                background-color: $sucesslight;
+                border: 1px solid $success;
+                color: $success;
+
+                &:hover {
+                    background-color: $successdark;
+                    color: $switch1;
+                }
+            }
+
+            .delete-btn {
+                background-color: $errorlight;
+                border: 1px solid $error;
+                color: $error;
+
+                &:hover {
+                    background-color: $errordark;
+                    color: $switch1;
+                }
+            }
+
+            .start-btn {
+                background-color: $accent1light;
+                border: 1px solid $accent1;
+                color: $accent1;
+
+                &:hover {
+                    background-color: $accent1;
+                    color: $switch1;
+                }
+            }
+        }
+    }
+}
+
 .custom_trivia_container {
     min-width: 400px;
     max-width: 900px;
@@ -40,7 +211,7 @@
         width: 100%;
         border-collapse: collapse;
         margin-top: 20px;
-        background-color: #1e1e1e;
+        background-color: $card_bg;
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -122,6 +293,7 @@
 
 .createNewTriviaContainer {
     position: fixed;
+    top: -20%;
     height: 100%;
     width: 100%;
     z-index: 1000;
