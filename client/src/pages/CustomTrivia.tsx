@@ -154,8 +154,67 @@ const CustomTrivia: React.FC = () => {
                         </>
                     )}
                     {toggleAddQuestion && (
-                        <>
-                            <div className="div">Hello</div>
+                        <>      
+                        <div className="add_question_container">
+                            <div className="header">
+                                <h1>Add Question</h1>
+                            </div>
+                            <div className="form_container">
+                                <form>
+                                <div className="form_group">
+                                    <label>Question</label>
+                                    <input type="text" id="question" className="user_input"/>
+                                </div>
+                                <div className="form_group">
+                                    <label>Category</label>
+                                    <input type="text" id="category" className="user_input"/>
+                                </div>
+                                <div className="form_group">
+                                    <label>Difficulty</label>
+                                    <div className="radio_container">
+                                    <label className="difficulty easy">
+                                        Easy
+                                        <input 
+                                        type="radio" 
+                                        name="difficulty" 
+                                        value="easy" 
+                                        className="radio-btn easy"
+                                        />
+                                    </label>
+                                    <label className="difficulty medium">
+                                        Medium
+                                        <input 
+                                        type="radio" 
+                                        name="difficulty" 
+                                        value="medium" 
+                                        className="radio-btn medium"
+                                        />
+                                    </label>
+                                    <label className="difficulty hard">
+                                        Hard
+                                        <input 
+                                        type="radio" 
+                                        name="difficulty" 
+                                        value="hard" 
+                                        className="radio-btn hard"
+                                        />
+                                    </label>
+                                    </div>
+                                </div>
+                                <div className="form_group">
+                                    <label>Options</label>
+                                    <input type="text" id="option1" className="user_input"/>
+                                    <input type="text" id="option2" className="user_input"/>
+                                    <input type="text" id="option3" className="user_input"/>
+                                    <input type="text" id="option4" className="user_input"/>
+                                </div>
+                                <div className="btn-container">
+                                    <button className="btn cancel">Cancel</button>
+                                    <input type="submit" className="btn submit" id="submit"/>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
                         </>
                     )}
 
