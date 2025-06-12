@@ -1,11 +1,45 @@
 import Header from "../components/common/header";
 import Footer from "../components/common/footer";
 import Login_Title from "../components/hoc/loc/Login_Title";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RouterContainer } from "../routes/RouteContainer";
+import { useState } from "react";
 
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:3000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email,
+                    password
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Login Failed");
+            }
+
+            localStorage.setItem("token", data.token);
+            navigate(RouterContainer.Homepage);
+        } catch (err) {
+            console.error("Login error", err);
+        }
+    }
+
+
     return (
         <>
             <div className="login_page">
@@ -16,7 +50,7 @@ const Login = () => {
                                 <header className="login-header">
                                     <Login_Title />
                                 </header>
-                                <form className="login-form" action="/login" method="POST">
+                                <form className="login-form" onSubmit={handleLogin} method="POST">
                                     <div className="form-group">
                                         <label>Email Address</label>
                                         <input 
@@ -26,6 +60,8 @@ const Login = () => {
                                         placeholder="your@email.com" 
                                         required
                                         aria-describedby="email-help"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>
 
@@ -38,6 +74,8 @@ const Login = () => {
                                             name="password" 
                                             placeholder="" 
                                             required
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
                                         />
                                         </div>
                                     </div>
