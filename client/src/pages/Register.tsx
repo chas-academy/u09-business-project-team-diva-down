@@ -2,6 +2,7 @@ import Header from "../components/common/header";
 import Footer from "../components/common/footer";
 import { Link } from "react-router-dom";
 import Register_Title from "../components/hoc/loc/Register_Title";
+import { RouterContainer } from "../routes/RouteContainer";
 
 const Register_Page = () => {
     return (
@@ -64,6 +65,11 @@ const Register_Page = () => {
                                     <button type="submit" className="login-button">Register</button>
                                    
                                 </form>
+
+                                <footer className="login-footer">
+                                    Already got an account?
+                                    <div className="link"><Link to={RouterContainer.Login}>Log in</Link></div>
+                                </footer>
                             </div>
                         </div>
                     </main>

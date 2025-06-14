@@ -13,6 +13,8 @@ import updateQuestionRouter from "./routes/updateQuestion.route";
 import deleteQuestionRouter from "./routes/delete.route";
 import friendRouter from "./routes/friends.route";
 import { WebSocketServer, WebSocket } from "ws";
+import cors from 'cors';
+
 dotenv.config();
 configurePassport();
 
@@ -24,7 +26,7 @@ const socket = new WebSocketServer({ server });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors());
 
 app.use(session({
     secret: process.env.SESSION_SECRET!,

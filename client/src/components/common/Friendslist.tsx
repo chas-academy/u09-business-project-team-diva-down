@@ -85,7 +85,7 @@ const Friendslist_card = () => {
     return (
         <>
             <div className="user_friendslist">
-                <div className="under_title">Freindslist</div>
+                <div className="under_title">Friendslist</div>
                 <form className="search_container" onSubmit={handleSendingFriendRequest}>
                     <input 
                         className="input_field" 

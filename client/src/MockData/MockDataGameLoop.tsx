@@ -1,4 +1,6 @@
 export const MockDataGameLoop = {
+    id: 21,
+    title: "Custom Trivia Title",
     data: {
         results: [
             {
@@ -14,3 +16,18 @@ export const MockDataGameLoop = {
         ]
     }
 };
+
+export const MockDataCustomTrivaTitles = [
+    {
+        title: "Movie Night Trivia",
+        id: 1,
+    },
+    {
+        title: "Coffee Shop Trivia",
+        id: 2,
+    },
+    {
+        title: "Talk Show Trivia",
+        id: 3,
+    }
+]

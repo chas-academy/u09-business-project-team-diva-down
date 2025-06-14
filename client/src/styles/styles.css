@@ -175,7 +175,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -209,7 +211,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -272,7 +276,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -306,7 +312,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -353,7 +361,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -387,7 +397,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -431,7 +443,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -465,7 +479,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -531,7 +547,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -565,7 +583,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -609,7 +629,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -643,7 +665,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -687,7 +711,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -721,7 +747,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -765,7 +793,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -799,7 +829,92 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
+  --error: #D32F2F;
+  --errorlight: #D32F2F33;
+  --text1: #333333;
+  --text2: #666666;
+  --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
+  --pt2: #E2E2E2;
+  --hft: "transparent";
+  --rbg1: #e2e2e2;
+}
+
+.CustomTrivia_Page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark);
+}
+.CustomTrivia_Page .main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 15%;
+}
+
+:root {
+  --darker: #0A0A0A;
+  --dark: #121212;
+  --card_bg: #1E1E1E;
+  --accent1: #00B4D8;
+  --accent1light: #00B4D833;
+  --accent2: #FF5D8F;
+  --accent2light: #ff5d8f33;
+  --border: #333;
+  --successlight: #4CAF5033;
+  --success: #4CAF50;
+  --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
+  --warning: #FF9800;
+  --errordark: #FF5252DD;
+  --error: #FF5252;
+  --errorlight: #FF525233;
+  --text1: #E0E0E0;
+  --text2: #AAAAAA;
+  --switch1: #F8F9FA;
+  --switch2: #0A0A0A;
+  --bg1: #121212;
+  --bg2: #0A0A0A;
+  --cardbg: #1E1E1E;
+  --p1: #00F5FF;
+  --p2: #FF00FF;
+  --p3: #b32EE8;
+  --t1: #E0E0E0;
+  --t2: #AAAAAA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
+  --pt2: #F8F9FA;
+  --hft: #666;
+  --rbg1: #E2E2E2;
+}
+
+[data-theme=light] {
+  --darker: #F8F9FA;
+  --dark: #FFFFFF;
+  --card_bg: #FFFFFF;
+  --accent1: #0077B6;
+  --accent1light: #0077B633;
+  --accent2: #E63946;
+  --accent2light: #e6394633;
+  --border: #E0E0E0;
+  --successlight: #2E7D3233;
+  --success: #2E7D32;
+  --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
+  --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -820,7 +935,7 @@ iframe {
   position: absolute;
   top: 0;
   left: 0;
-  min-height: 100vh;
+  height: 100vh;
   min-width: 100vw;
   background-color: var(--dark);
   display: flex;
@@ -982,7 +1097,7 @@ iframe {
   transform: translate(-50%, -50%) rotate(0);
 }
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
   .navbar {
     padding: 10px 50px;
     display: flex;
@@ -1091,7 +1206,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -1125,7 +1242,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -1168,7 +1287,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -1202,7 +1323,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -1227,7 +1350,7 @@ iframe {
   padding: 12px 24px;
   font-family: "Tilt Warp", sans-serif;
   background-color: var(--accent1);
-  color: var(--text1);
+  color: var(--switch1);
   transition: all 0.3s ease-in-out;
 }
 .active_button:hover {
@@ -1280,7 +1403,7 @@ iframe {
   padding: 12px 24px;
   font-family: "Tilt Warp", sans-serif;
   background-color: var(--accent2);
-  color: var(--pt2);
+  color: var(--switch1);
   transition: all 0.3s ease-in-out;
 }
 .homepage_active_button:hover {
@@ -1323,7 +1446,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -1357,7 +1482,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -1395,6 +1522,7 @@ iframe {
 .card_component_homepage p {
   font-family: "Titillium Web", sans-serif;
   color: var(--t1);
+  padding: 0 5px;
 }
 
 .card_component_homepage:hover {
@@ -1498,16 +1626,29 @@ iframe {
   box-shadow: 0 0px 5px 0px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.2s ease;
 }
+.category_dropdown .select-options::-webkit-scrollbar {
+  width: 8px;
+}
+.category_dropdown .select-options::-webkit-scrollbar-track {
+  background-color: var(--card_bg);
+  border-radius: 0 7px 7px 0;
+}
+.category_dropdown .select-options::-webkit-scrollbar-thumb {
+  background-color: var(--accent1);
+  border-radius: 4px;
+}
 .category_dropdown .select-options .option {
   padding: 10px 12px;
   transition: background 0.2s ease;
   color: var(--text1);
 }
 .category_dropdown .select-options .option:hover {
-  background: #2c2c2c;
+  background: var(--accent1light);
+  color: var(--accent1);
 }
 .category_dropdown .select-options .option.selected {
-  background: #1f1f1f;
+  background: var(--accent1);
+  color: var(--switch1);
   font-weight: bold;
 }
 
@@ -1601,6 +1742,7 @@ iframe {
   gap: 20px;
   font-family: "Titillium Web", sans-serif;
   border-radius: 7px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 @media (max-width: 1100px) {
   .user_info {
@@ -1621,6 +1763,7 @@ iframe {
   gap: 10px;
   border-radius: 12px;
   background-color: var(--card_bg);
+  border: 1px solid var(--border);
 }
 .user_info .game_stats .title {
   display: flex;
@@ -1674,6 +1817,7 @@ iframe {
   font-size: 1.25rem;
   text-align: left;
   border-radius: 12px;
+  border: 1px solid var(--border);
 }
 .user_info .grid .grid-form {
   display: contents;
@@ -1716,12 +1860,17 @@ iframe {
   height: 50px;
   width: 200px;
   font-size: 1.4rem;
-  color: var(--text1);
+  color: var(--switch1);
   background-color: var(--accent2);
   border-radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.user_info .change_button:hover {
+  background-color: var(--accent2light);
+  border: 1px solid var(--accent2);
+  color: var(--accent2);
 }
 .user_info .account_title {
   min-height: 48px;
@@ -1746,20 +1895,9 @@ iframe {
     flex-direction: column;
   }
 }
-.user_info .button_container .disable {
-  background-color: var(--error);
-  color: var(--text1);
-  width: 150px;
-  height: 50px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.1rem;
-}
 .user_info .button_container .delete {
   background-color: var(--errorlight);
-  color: var(--text1);
+  color: var(--error);
   width: 150px;
   height: 50px;
   border-radius: 12px;
@@ -1768,6 +1906,10 @@ iframe {
   justify-content: center;
   align-items: center;
   font-size: 1.1rem;
+}
+.user_info .button_container .delete:hover {
+  background-color: var(--error);
+  color: var(--switch1);
 }
 
 .user_friendslist {
@@ -1780,6 +1922,7 @@ iframe {
   flex-direction: column;
   gap: 20px;
   font-family: "Titillium Web", sans-serif;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 @media (max-width: 1100px) {
   .user_friendslist {
@@ -1799,6 +1942,7 @@ iframe {
   border-radius: 12px;
   overflow: hidden;
   background-color: var(--card_bg);
+  border: 1px solid var(--border);
 }
 .user_friendslist .search_container .submit_button {
   margin-right: 10px;
@@ -1806,7 +1950,7 @@ iframe {
   height: 30px;
   width: 125px;
   background-color: var(--success);
-  color: var(--text1);
+  color: var(--switch1);
   border-radius: 7px;
   padding: 3px 6px;
   border: none;
@@ -1816,6 +1960,10 @@ iframe {
 }
 .user_friendslist .search_container .submit_button:hover {
   background-color: var(--successdark);
+  scale: 1.05;
+}
+.user_friendslist .search_container .submit_button:active {
+  scale: 1;
 }
 .user_friendslist .search_container .input_field {
   background-color: transparent;
@@ -1875,6 +2023,10 @@ iframe {
   border-radius: 7px;
   padding: 3px 6px;
 }
+.user_friendslist .friend_container .friend_bar .remove_friend:hover {
+  background-color: var(--error);
+  color: var(--switch1);
+}
 @media (max-width: 442px) {
   .user_friendslist .friend_container .friend_bar {
     flex-direction: column;
@@ -1915,12 +2067,20 @@ iframe {
   border: 1px solid var(--success);
   padding: 3px 6px;
 }
+.user_friendslist .accept_container .accept_bar .container .accept:hover {
+  background-color: var(--success);
+  color: var(--switch1);
+}
 .user_friendslist .accept_container .accept_bar .container .decline {
   background-color: var(--errorlight);
   color: var(--error);
   border-radius: 12px;
   border: 1px solid var(--error);
   padding: 3px 6px;
+}
+.user_friendslist .accept_container .accept_bar .container .decline:hover {
+  background-color: var(--error);
+  color: var(--switch1);
 }
 .user_friendslist .accept_container .accept_bar .remove {
   background-color: lightcoral;
@@ -1951,7 +2111,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -1985,7 +2147,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -2042,7 +2206,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -2076,7 +2242,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -2213,7 +2381,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -2247,7 +2417,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -2316,7 +2488,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -2350,7 +2524,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -2375,9 +2551,12 @@ iframe {
   width: fit-content;
   padding: 20px;
   border-radius: 12px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 .login-container .login-button {
-  color: var(--text1);
+  color: var(--accent1);
+  font-weight: 600s;
+  text-transform: uppercase;
   padding: 12px 24px;
   background-color: var(--accent1light);
   border: 1px solid var(--accent1);
@@ -2434,6 +2613,10 @@ iframe {
   text-decoration: none;
   cursor: pointer;
 }
+.login-container .login-card .login-form .form-options *:hover {
+  color: var(--accent1light);
+  font-weight: 600;
+}
 .login-container .login-card .login-footer {
   display: flex;
   flex-direction: column;
@@ -2441,10 +2624,14 @@ iframe {
   align-items: center;
   gap: 10px;
 }
-.login-container .login-card .login-footer * {
+.login-container .login-card .login-footer .link * {
   color: var(--accent2);
   text-decoration: none;
   cursor: pointer;
+}
+.login-container .login-card .login-footer .link *:hover {
+  color: var(--accent2light);
+  font-weight: 600;
 }
 
 :root {
@@ -2459,7 +2646,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -2493,7 +2682,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -2514,6 +2705,8 @@ iframe {
   max-height: 600px;
   width: 600px;
   background-color: var(--darker);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -2565,7 +2758,9 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -2599,7 +2794,9 @@ iframe {
   --successlight: #2E7D3233;
   --success: #2E7D32;
   --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -2652,7 +2849,779 @@ iframe {
   --successlight: #4CAF5033;
   --success: #4CAF50;
   --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
   --warning: #FF9800;
+  --errordark: #FF5252DD;
+  --error: #FF5252;
+  --errorlight: #FF525233;
+  --text1: #E0E0E0;
+  --text2: #AAAAAA;
+  --switch1: #F8F9FA;
+  --switch2: #0A0A0A;
+  --bg1: #121212;
+  --bg2: #0A0A0A;
+  --cardbg: #1E1E1E;
+  --p1: #00F5FF;
+  --p2: #FF00FF;
+  --p3: #b32EE8;
+  --t1: #E0E0E0;
+  --t2: #AAAAAA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
+  --pt2: #F8F9FA;
+  --hft: #666;
+  --rbg1: #E2E2E2;
+}
+
+[data-theme=light] {
+  --darker: #F8F9FA;
+  --dark: #FFFFFF;
+  --card_bg: #FFFFFF;
+  --accent1: #0077B6;
+  --accent1light: #0077B633;
+  --accent2: #E63946;
+  --accent2light: #e6394633;
+  --border: #E0E0E0;
+  --successlight: #2E7D3233;
+  --success: #2E7D32;
+  --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
+  --warning: #FF8F00;
+  --errordark: #D32F2FDD;
+  --error: #D32F2F;
+  --errorlight: #D32F2F33;
+  --text1: #333333;
+  --text2: #666666;
+  --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
+  --pt2: #E2E2E2;
+  --hft: "transparent";
+  --rbg1: #e2e2e2;
+}
+
+.add_question_container {
+  min-width: 400px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Titillium Web", sans-serif;
+}
+.add_question_container .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.add_question_container .header h1 {
+  color: var(--accent1);
+  text-shadow: 0 0 10px var(--accent1);
+}
+.add_question_container .form_container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--darker);
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text1);
+}
+.add_question_container .form_container form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.add_question_container .form_container form .form_group {
+  display: flex;
+  flex-direction: column;
+}
+.add_question_container .form_container form .form_group label {
+  color: var(--accent1);
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  position: relative;
+}
+.add_question_container .form_container form .form_group label .radio-btn {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.add_question_container .form_container form .form_group label .radio-btn::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--accent1);
+}
+.add_question_container .form_container form .form_group .user_input {
+  border-radius: 7px;
+  background-color: var(--card_bg);
+  border: 2px solid var(--border);
+  color: var(--text2);
+  padding: 5px;
+  outline: none;
+  margin-bottom: 5px;
+}
+.add_question_container .form_container form .form_group .user_input:focus {
+  border-color: var(--accent1);
+}
+.add_question_container .form_container form .form_group .radio_container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.add_question_container .form_container form .form_group .radio_container .difficulty {
+  padding: 6px 12px;
+  border: 1px solid;
+  display: flex;
+  gap: 10px;
+  border-radius: 7px;
+}
+.add_question_container .form_container form .form_group .radio_container .easy {
+  color: var(--success);
+  background-color: var(--successlight);
+}
+.add_question_container .form_container form .form_group .radio_container .medium {
+  color: var(--warning);
+  background-color: var(--warninglight);
+}
+.add_question_container .form_container form .form_group .radio_container .hard {
+  color: var(--error);
+  background-color: var(--errorlight);
+}
+
+.edit_trivia_container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: "Titillium Web", sans-serif;
+  background-color: var(--darker);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+.edit_trivia_container .header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.edit_trivia_container .header .title_container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.edit_trivia_container .header .title_container h1 {
+  color: var(--accent1);
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(var(--accent1light), 0.3);
+}
+.edit_trivia_container .header .title_container .edit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--success);
+  color: var(--success);
+  background-color: rgba(var(--success), 0.1);
+  font-size: 1rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+.edit_trivia_container .header .title_container .edit:hover {
+  background-color: var(--success);
+  color: white;
+  transform: translateY(-1px);
+}
+.edit_trivia_container .header .title_container .edit:active {
+  transform: translateY(0);
+}
+.edit_trivia_container .header .btn-container {
+  display: flex;
+  gap: 1rem;
+}
+.edit_trivia_container .header .btn-container .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.edit_trivia_container .header .btn-container .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+.edit_trivia_container .header .btn-container .btn:active {
+  transform: translateY(0);
+}
+.edit_trivia_container .header .btn-container .add_question {
+  border-color: var(--accent2);
+  background-color: rgba(var(--accent2), 0.1);
+  color: var(--accent2);
+}
+.edit_trivia_container .header .btn-container .add_question:hover {
+  background-color: var(--accent2);
+  color: white;
+}
+.edit_trivia_container .header .btn-container .back {
+  background-color: rgba(var(--error), 0.1);
+  color: var(--error);
+  border-color: var(--error);
+}
+.edit_trivia_container .header .btn-container .back:hover {
+  background-color: var(--error);
+  color: white;
+}
+.edit_trivia_container table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: var(--card_bg);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.edit_trivia_container table thead {
+  background-color: var(--dark);
+}
+.edit_trivia_container table thead th {
+  color: var(--accent1);
+  font-weight: 600;
+  padding: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  vertical-align: center;
+  width: 20%;
+}
+.edit_trivia_container table tbody tr {
+  transition: all 0.2s ease;
+}
+.edit_trivia_container table tbody tr:last-child {
+  border-bottom: none;
+}
+.edit_trivia_container table tbody tr:hover {
+  background-color: var(--accent1light);
+}
+.edit_trivia_container table tbody tr td {
+  padding: 1rem;
+  color: var(--text1);
+  text-align: center;
+  color: var(--text1);
+  font-size: 1rem;
+  vertical-align: center;
+  position: relative;
+  width: 20%;
+}
+.edit_trivia_container table tbody tr td:hover {
+  color: var(--accent1);
+}
+.edit_trivia_container table tbody tr .correct_option {
+  position: relative;
+}
+.edit_trivia_container table tbody tr .correct_option .other_options {
+  display: none;
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 40%;
+  background-color: var(--card_bg);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100000;
+  margin-top: 5px;
+  transition: all 0.3s ease;
+}
+.edit_trivia_container table tbody tr .correct_option .other_options li {
+  padding: 10px 15px;
+  text-align: center;
+  color: var(--text1);
+  list-style: none;
+}
+.edit_trivia_container table tbody tr .correct_option .other_options li:hover {
+  background-color: var(--accent1light);
+  color: var(--accent1);
+}
+.edit_trivia_container table tbody tr .correct_option .other_options li:last-child {
+  border-radius: 0 0 10px 10px;
+}
+.edit_trivia_container table tbody tr .btn_container {
+  display: flex;
+  gap: 20px;
+}
+.edit_trivia_container table tbody tr .btn_container .btn {
+  border-radius: 7px;
+  border: 1px solid;
+  padding: 6px 12px;
+  font-weight: 600;
+}
+.edit_trivia_container table tbody tr .btn_container .edit-btn {
+  background-color: var(--accent2light);
+  color: var(--accent2);
+  border-color: var(--accent2);
+}
+.edit_trivia_container table tbody tr .btn_container .edit-btn:hover {
+  background-color: var(--accent2);
+  color: var(--switch1);
+}
+.edit_trivia_container table tbody tr .btn_container .delete-btn {
+  background-color: var(--errorlight);
+  color: var(--error);
+  border-color: var(--error);
+}
+.edit_trivia_container table tbody tr .btn_container .delete-btn:hover {
+  background-color: var(--error);
+  color: var(--switch1);
+}
+.edit_trivia_container table .btn-group {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+}
+.edit_trivia_container table .btn-group .btn {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+.edit_trivia_container table .btn-group .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.edit_trivia_container table .btn-group .btn:active {
+  transform: translateY(0);
+}
+.edit_trivia_container table .btn-group .edit-btn {
+  background-color: rgba(var(--success), 0.1);
+  border-color: var(--success);
+  color: var(--success);
+}
+.edit_trivia_container table .btn-group .edit-btn:hover {
+  background-color: var(--success);
+  color: white;
+}
+.edit_trivia_container table .btn-group .delete-btn {
+  background-color: rgba(var(--error), 0.1);
+  border-color: var(--error);
+  color: var(--error);
+}
+.edit_trivia_container table .btn-group .delete-btn:hover {
+  background-color: var(--error);
+  color: white;
+}
+@media (max-width: 768px) {
+  .edit_trivia_container {
+    padding: 1rem;
+  }
+  .edit_trivia_container .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .edit_trivia_container .header .btn-container {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .edit_trivia_container table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+.custom_trivia_container {
+  min-width: 400px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: "Titillium Web", sans-serif;
+}
+.custom_trivia_container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 50px;
+}
+.custom_trivia_container .header h1 {
+  color: var(--accent1);
+  font-size: 2.2em;
+  text-shadow: 0 0 10px var(--accent1light);
+}
+.custom_trivia_container .header .create-btn {
+  color: var(--success);
+  font-size: 1rem;
+  border: 1px solid var(--success);
+  border-radius: 12px;
+  padding: 6px 12px;
+  background-color: var(--successlight);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.custom_trivia_container .header .create-btn:hover {
+  background-color: var(--successdark);
+  color: var(--switch1);
+}
+.custom_trivia_container .table_container {
+  background-color: var(--darker);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+.custom_trivia_container .table_container table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card_bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.custom_trivia_container .table_container table td {
+  padding: 12px;
+  color: var(--text1);
+}
+.custom_trivia_container .table_container table td .title {
+  font-size: 1.1rem;
+}
+.custom_trivia_container .table_container table tr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid var(--border);
+}
+.custom_trivia_container .table_container table tr:last-child {
+  border-bottom: none;
+}
+.custom_trivia_container .table_container table tr:hover {
+  background-color: var(--dark);
+}
+.custom_trivia_container .table_container table .btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.custom_trivia_container .table_container table .btn-group .btn {
+  padding: 8px 15px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.custom_trivia_container .table_container table .btn-group .edit-btn {
+  background-color: var(--successlight);
+  border: 1px solid var(--success);
+  color: var(--success);
+}
+.custom_trivia_container .table_container table .btn-group .edit-btn:hover {
+  background-color: var(--successdark);
+  color: var(--switch1);
+}
+.custom_trivia_container .table_container table .btn-group .delete-btn {
+  background-color: var(--errorlight);
+  border: 1px solid var(--error);
+  color: var(--error);
+}
+.custom_trivia_container .table_container table .btn-group .delete-btn:hover {
+  background-color: var(--errordark);
+  color: var(--switch1);
+}
+.custom_trivia_container .table_container table .btn-group .start-btn {
+  background-color: var(--accent1light);
+  border: 1px solid var(--accent1);
+  color: var(--accent1);
+}
+.custom_trivia_container .table_container table .btn-group .start-btn:hover {
+  background-color: var(--accent1);
+  color: var(--switch1);
+}
+
+.createNewTriviaContainer {
+  position: fixed;
+  top: -20%;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.createNewTriviaContainer form {
+  background-color: var(--dark);
+  border-radius: 7px;
+  color: var(--text1);
+  padding: 12px;
+  font-family: "Titillium Web", sans-serif;
+  display: flex;
+  gap: 10px;
+  border: 1px solid var(--border);
+}
+.createNewTriviaContainer form label {
+  padding: 6px 12px;
+  font-weight: 600;
+}
+.createNewTriviaContainer form .submit {
+  border-radius: 7px;
+  background-color: var(--successlight);
+  border: 1px solid var(--success);
+  padding: 6px 12px;
+  color: var(--success);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.createNewTriviaContainer form .submit:hover {
+  background-color: var(--success);
+  color: var(--switch1);
+}
+.createNewTriviaContainer form .user_input {
+  background-color: var(--darker);
+  border-radius: 7px;
+  border: 1px solid var(--accent1);
+  color: var(--text1);
+  padding: 0 10px;
+  font-weight: 600;
+}
+.createNewTriviaContainer form .cancel {
+  border-radius: 7px;
+  background-color: var(--errorlight);
+  border: 1px solid var(--error);
+  padding: 6px 12px;
+  color: var(--error);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.createNewTriviaContainer form .cancel:hover {
+  background-color: var(--error);
+  color: var(--switch1);
+}
+
+:root {
+  --darker: #0A0A0A;
+  --dark: #121212;
+  --card_bg: #1E1E1E;
+  --accent1: #00B4D8;
+  --accent1light: #00B4D833;
+  --accent2: #FF5D8F;
+  --accent2light: #ff5d8f33;
+  --border: #333;
+  --successlight: #4CAF5033;
+  --success: #4CAF50;
+  --successdark: #4CAF50DD;
+  --warninglight: #FF980033;
+  --warning: #FF9800;
+  --errordark: #FF5252DD;
+  --error: #FF5252;
+  --errorlight: #FF525233;
+  --text1: #E0E0E0;
+  --text2: #AAAAAA;
+  --switch1: #F8F9FA;
+  --switch2: #0A0A0A;
+  --bg1: #121212;
+  --bg2: #0A0A0A;
+  --cardbg: #1E1E1E;
+  --p1: #00F5FF;
+  --p2: #FF00FF;
+  --p3: #b32EE8;
+  --t1: #E0E0E0;
+  --t2: #AAAAAA;
+  --sw1: #FAFAFA;
+  --sw2: #050505;
+  --pt2: #F8F9FA;
+  --hft: #666;
+  --rbg1: #E2E2E2;
+}
+
+[data-theme=light] {
+  --darker: #F8F9FA;
+  --dark: #FFFFFF;
+  --card_bg: #FFFFFF;
+  --accent1: #0077B6;
+  --accent1light: #0077B633;
+  --accent2: #E63946;
+  --accent2light: #e6394633;
+  --border: #E0E0E0;
+  --successlight: #2E7D3233;
+  --success: #2E7D32;
+  --successdark: #2E7D32DD;
+  --warninglight: #FF8F0033;
+  --warning: #FF8F00;
+  --errordark: #D32F2FDD;
+  --error: #D32F2F;
+  --errorlight: #D32F2F33;
+  --text1: #333333;
+  --text2: #666666;
+  --bg1: #FAFAFA;
+  --bg2: #F8F9FA;
+  --p1: #00A8FF;
+  --p2: #FF00AA;
+  --p3: #9C27FF;
+  --t1: #666;
+  --t2: #333;
+  --pt2: #E2E2E2;
+  --hft: "transparent";
+  --rbg1: #e2e2e2;
+}
+
+.add_question_container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.add_question_container .header {
+  margin-bottom: 20px;
+}
+.add_question_container .header h1 {
+  font-family: "Titillium Web", sans-serif;
+  color: var(--accent1);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+.add_question_container .form-container {
+  padding: 30px;
+  background-color: var(--card_bg);
+  border-radius: 12px;
+  color: var(--text1);
+  font-family: "Titillium Web", sans-serif;
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.1);
+}
+.add_question_container .form-container form {
+  display: flex;
+  gap: 25px;
+  flex-direction: column;
+}
+.add_question_container .form-container .form_group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.add_question_container .form-container .form_group label {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: var(--text1);
+}
+.add_question_container .form-container .form_group input[type=text] {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  background-color: var(--card_bg);
+  color: var(--text1);
+}
+.add_question_container .form-container .form_group input[type=text]:focus {
+  outline: none;
+  border-color: var(--accent1);
+  box-shadow: 0 0 0 2px var(--accent1light);
+}
+.add_question_container .form-container .form_group .difficulty-options {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-top: 5px;
+}
+.add_question_container .form-container .form_group .difficulty-options .difficulty-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.add_question_container .form-container .form_group .difficulty-options .difficulty-option label {
+  font-weight: 400;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.add_question_container .form-container .form_group .difficulty-options .difficulty-option input[type=radio] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent1);
+  cursor: pointer;
+}
+.add_question_container .form-container .form_group .options_container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.add_question_container .form-container .form_group .options_container .correct_answer, .add_question_container .form-container .form_group .options_container .incorrect_answer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.add_question_container .form-container .form_group .options_container .correct_answer .correct, .add_question_container .form-container .form_group .options_container .correct_answer .incorrect, .add_question_container .form-container .form_group .options_container .incorrect_answer .correct, .add_question_container .form-container .form_group .options_container .incorrect_answer .incorrect {
+  font-size: 0.9rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+.add_question_container .form-container .form_group .options_container .correct_answer .correct, .add_question_container .form-container .form_group .options_container .incorrect_answer .correct {
+  background-color: var(--successlight);
+  color: var(--success);
+}
+.add_question_container .form-container .form_group .options_container .correct_answer .incorrect, .add_question_container .form-container .form_group .options_container .incorrect_answer .incorrect {
+  background-color: var(--errorlight);
+  color: var(--error);
+}
+.add_question_container .form-container .form_group .options_container .correct_answer input, .add_question_container .form-container .form_group .options_container .incorrect_answer input {
+  width: 100%;
+}
+.add_question_container .form-container .form_actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+}
+.add_question_container .form-container .form_actions .form-btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.add_question_container .form-container .form_actions .cancel {
+  background-color: var(--error);
+  color: var(--switch1);
+}
+.add_question_container .form-container .form_actions .save {
+  background-color: var(--accent1);
+  color: var(--switch1);
+}
+
+:root {
+  --darker: #0A0A0A;
+  --dark: #121212;
+  --card_bg: #1E1E1E;
+  --accent1: #00B4D8;
+  --accent1light: #00B4D833;
+  --accent2: #FF5D8F;
+  --accent2light: #ff5d8f33;
+  --border: #333;
+  --successlight: #4CAF5033;
+  --success: #4CAF50;
+  --successdark: #4CAF50DD;
+  --warning: #FF9800;
+  --errordark: #FF5252DD;
   --error: #FF5252;
   --errorlight: #FF525233;
   --text1: #E0E0E0;
@@ -2687,6 +3656,7 @@ iframe {
   --success: #2E7D32;
   --successdark: #2E7D32DD;
   --warning: #FF8F00;
+  --errordark: #D32F2FDD;
   --error: #D32F2F;
   --errorlight: #D32F2F33;
   --text1: #333333;
@@ -2758,4 +3728,9 @@ iframe {
   stroke-linecap: round !important;
   stroke: color-mix(in hsl shorter hue, var(--accent1) calc(var(--k) * 100%), var(--accent2)) !important;
   stroke-dasharray: var(--k) 1 !important;
+}
+
+* {
+  transition: all 0.3s ease;
+  box-sizing: border-box;
 }/*# sourceMappingURL=styles.css.map */

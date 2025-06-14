@@ -11,7 +11,9 @@
     --successlight: #4CAF5033;
     --success: #4CAF50;
     --successdark: #4CAF50DD;
+    --warninglight: #FF980033;
     --warning: #FF9800;
+    --errordark: #FF5252DD;
     --error: #FF5252;
     --errorlight: #FF525233;
     --text1: #E0E0E0;
@@ -46,7 +48,9 @@
     --successlight: #2E7D3233;
     --success: #2E7D32;
     --successdark: #2E7D32DD;
+    --warninglight: #FF8F0033;
     --warning: #FF8F00;
+    --errordark: #D32F2FDD;
     --error: #D32F2F;
     --errorlight: #D32F2F33;
     --text1: #333333;
@@ -77,6 +81,8 @@ $successdark: var(--successdark);
 $success: var(--success);
 $sucesslight: var(--successlight);
 $warning: var(--warning);
+$warninglight: var(--warninglight);
+$errordark: var(--errordark);
 $error: var(--error);
 $errorlight: var(--errorlight);
 $text1: var(--text1);

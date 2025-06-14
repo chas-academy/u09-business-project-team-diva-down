@@ -7,4 +7,5 @@ export const RouterContainer = {
     Login: "/login",
     Register: "/register",
     Leaderboard: "/Leaderboard",
+    CustomTrivia: `/Custom-Trivia/:id`,
 }
