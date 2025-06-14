@@ -1,5 +1,113 @@
 @import '../variables/variables';
 
+.add_question_container {
+    min-width: 400px;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: $font1;
+
+    .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        
+        h1 {
+            color: $accent1;
+            text-shadow: 0 0 10px $accent1;
+        }
+    }
+
+    .form_container {
+        width: 100%;
+        height: 100%;
+        background-color: $darker;
+        padding: 20px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $text1;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .form_group {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    color: $accent1;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                    font-size: 1.2rem;
+                    position: relative;
+
+                    .radio-btn {
+                        position: absolute;
+                        opacity: 0;
+                        width: 0;
+                        height: 0;
+
+                        &::before {
+                            content: '';
+                            display: inline-block;
+                            width: 16px;
+                            height: 16px;
+                            border-radius: 50%;
+                            border: 2px solid $accent1;
+                        }
+                    }
+                }
+
+                .user_input {
+                    border-radius: 7px;
+                    background-color: $card_bg;
+                    border: 2px solid $border;
+                    color: $text2;
+                    padding: 5px;
+                    outline: none;
+                    margin-bottom: 5px;
+                    
+                    &:focus {
+                        border-color: $accent1;
+                    }
+                }
+
+                .radio_container {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+
+                    .difficulty {
+                        padding: 6px 12px;
+                        border: 1px solid;
+                        display: flex;
+                        gap: 10px;
+                        border-radius: 7px;
+                    }
+
+                    .easy {
+                        color: $success;
+                        background-color: $sucesslight;
+                    }
+
+                    .medium {
+                        color: $warning;
+                        background-color: $warninglight;
+                    }
+
+                    .hard {
+                        color: $error;
+                        background-color: $errorlight;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .edit_trivia_container {
   width: 100%;
   max-width: 1200px;
