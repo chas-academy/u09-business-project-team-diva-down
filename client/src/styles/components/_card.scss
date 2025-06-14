@@ -22,6 +22,7 @@
     p {
         font-family: $font1;
         color: $t1;
+        padding: 0 5px;
     }
 }
 
@@ -136,17 +137,33 @@
         box-shadow: 0 0px 5px 0px rgba(0, 0, 0, 0.2);
         animation: fadeIn 0.2s ease;
 
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background-color: $card_bg;
+            border-radius: 0 7px 7px 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $accent1;
+            border-radius: 4px;
+        }
+
         .option {
             padding: 10px 12px;
             transition: background 0.2s ease;
             color: $text1;
 
             &:hover {
-                background: lighten(#121212, 10%);
+                background: $accent1light;
+                color: $accent1;
             }
 
             &.selected {
-                background: lighten(#121212, 5%);
+                background: $accent1;
+                color: $switch1;
                 font-weight: bold;
             }
         }
@@ -253,6 +270,7 @@
     gap: 20px;
     font-family: $font1;
     border-radius: 7px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 
     @media (max-width: 1100px) {
         width: 90%;
@@ -273,6 +291,7 @@
         gap: 10px;
         border-radius: 12px;
         background-color: $card_bg;
+        border: 1px solid $border;
 
         .title {
             display: flex;
@@ -332,6 +351,7 @@
         font-size: 1.25rem;
         text-align: left;
         border-radius: 12px;
+        border: 1px solid $border;
 
         .grid-form {
             display: contents;
@@ -377,13 +397,18 @@
         height: 50px;
         width: 200px;
         font-size: 1.4rem;
-        color: $text1;
+        color: $switch1;
         background-color: $accent2;
         border-radius: 12px;
         display: flex;
         justify-content: center;
         align-items: center;
 
+        &:hover {
+            background-color: $accent2light;
+            border: 1px solid $accent2;
+            color: $accent2;
+        }
     }
 
     .account_title {
@@ -410,21 +435,9 @@
             flex-direction: column;
         }
 
-        .disable {
-            background-color: $error;
-            color: $text1;
-            width: 150px;
-            height: 50px; 
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.1rem;
-        }
-
         .delete {
             background-color: $errorlight;
-            color: $text1;
+            color: $error;
             width: 150px;
             height: 50px; 
             border-radius: 12px;
@@ -433,6 +446,11 @@
             justify-content: center;
             align-items: center;
             font-size: 1.1rem;
+
+            &:hover {
+                background-color: $error;
+                color: $switch1;
+            }
         }
     }
 }
@@ -447,6 +465,7 @@
     flex-direction: column;
     gap: 20px;
     font-family: $font1;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 
     @media (max-width: 1100px) {
         width: 90%;
@@ -466,6 +485,7 @@
         border-radius: 12px;
         overflow: hidden;
         background-color: $card_bg;
+        border: 1px solid $border;
 
         .submit_button {
             margin-right: 10px;
@@ -473,7 +493,7 @@
             height: 30px;
             width: 125px;
             background-color: $success;
-            color: $text1;
+            color: $switch1;
             border-radius: 7px;
             padding: 3px 6px;
             border: none;
@@ -483,6 +503,11 @@
 
             &:hover {
                 background-color: $successdark;
+                scale: (1.05);
+            }
+
+            &:active {
+                scale: (1);
             }
         }
 
@@ -547,6 +572,11 @@
                 color: $error;
                 border-radius: 7px;
                 padding: 3px 6px;
+
+                &:hover {
+                    background-color: $error;
+                    color: $switch1;
+                }
             }
 
             @media (max-width: 442px) {
@@ -589,6 +619,11 @@
                     border-radius: 12px;
                     border: 1px solid $success;
                     padding: 3px 6px;
+
+                    &:hover {
+                        background-color: $success;
+                        color: $switch1;
+                    }
                 }
                 
                 .decline {
@@ -597,6 +632,11 @@
                     border-radius: 12px;
                     border: 1px solid $error;
                     padding: 3px 6px;
+
+                    &:hover {
+                        background-color: $error;
+                        color: $switch1;
+                    }
                 }
             }
 

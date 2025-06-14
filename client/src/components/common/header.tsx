@@ -37,7 +37,7 @@ const Header = () => {
 
     const handleCombinedClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         handleClick();
-        ChangeTheme(e); // Passing the event to EChangeTheme where it's actually used
+        ChangeTheme(e);
     };
 
     return (
@@ -47,7 +47,6 @@ const Header = () => {
                 <ul className="navlinks">
                     <Link to={RouterContainer.Homepage}>Home</Link>
                     <Link to={RouterContainer.SinglePlayer}>Play</Link>
-                    {/* Temporary Link */}
                     <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
                     <Link to={RouterContainer.CustomTrivia.replace(':id', id)}>Custom</Link>
                     <Link to={RouterContainer.Leaderboard}>Leaderboard</Link>
@@ -83,7 +82,6 @@ const Header = () => {
                             <ul className="mobile_navlinks">
                                 <Link to={RouterContainer.Homepage}>Home</Link>
                                 <Link to={RouterContainer.SinglePlayer}>Play</Link>
-                                {/* Temporary Link */}
                                 <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
                                 <Link to={RouterContainer.Leaderboard}>Leaderboard</Link>
                             </ul>

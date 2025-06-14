@@ -55,7 +55,7 @@ const Login = () => {
 
                                 <footer className="login-footer">
                                     Don't have an account? 
-                                    <Link to={RouterContainer.Register}>Sign Up</Link>
+                                    <div className="link"><Link to={RouterContainer.Register}>Sign Up</Link></div>
                                 </footer>
                             </div>
                         </div>

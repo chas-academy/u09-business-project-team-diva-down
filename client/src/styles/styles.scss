@@ -25,6 +25,12 @@
 @use './components/leaderboard_card';
 @use './components/change_password_card';
 @use './components/custom_trivia_container';
+@use './components/custom_trivia_question_forms';
 
 // Special Components
 @use './special/timer.scss';
+
+* {
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}

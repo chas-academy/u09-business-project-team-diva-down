@@ -42,10 +42,6 @@ const UserInfo = () => {
         SetSelectValue(newValue);
     }
 
-    const TestConsole = () => {
-        console.log("Event Registerd!");
-    }
-
     const FetchInputData = (e: React.FormEvent) => {
         e.preventDefault();
         console.log(newEmailValue);
@@ -122,9 +118,8 @@ const UserInfo = () => {
                 )}
                 <button onClick={ToggleWindowFunction} className="change_button">Change Password</button>
                 <div className="account_title">Account Removal</div>
-                <div className="account_sub_title">Disabling your account means you can recover it at any time after taking this action.</div>
+                <div className="account_sub_title">If you delete your account, it can't be recovered</div>
                 <div className="button_container">
-                    <button className="disable">Disable Account</button>
                     <button className="delete">Delete Account</button>
                 </div>
             </div>

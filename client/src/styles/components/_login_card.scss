@@ -9,9 +9,12 @@
     width: fit-content;
     padding: 20px;
     border-radius: 12px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 
     .login-button {
-        color: $text1;
+        color: $accent1;
+        font-weight: 600s;
+        text-transform: uppercase;
         padding: 12px 24px;
         background-color: $accent1light;
         border: 1px solid $accent1;
@@ -73,6 +76,11 @@
                     color: $accent1;
                     text-decoration: none;
                     cursor: pointer;
+
+                    &:hover {
+                        color: $accent1light;
+                        font-weight: 600;
+                    }
                 }
                 
             }
@@ -85,10 +93,17 @@
             align-items: center;
             gap: 10px;
 
-            * {
-                color: $accent2;
-                text-decoration: none;
-                cursor: pointer;
+            .link {
+                * {
+                    color: $accent2;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+                *:hover {
+                    color: $accent2light;
+                    font-weight: 600;
+                }
             }
         }
     }

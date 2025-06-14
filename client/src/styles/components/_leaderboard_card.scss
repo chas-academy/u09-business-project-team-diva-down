@@ -5,6 +5,8 @@
     max-height: 600px;
     width: 600px;
     background-color: $darker;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
