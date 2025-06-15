@@ -19,6 +19,7 @@ const delete_route_1 = __importDefault(require("./routes/delete.route"));
 const friends_route_1 = __importDefault(require("./routes/friends.route"));
 const ws_1 = require("ws");
 const cors_1 = __importDefault(require("cors"));
+const user_route_1 = require("./routes/user.route");
 dotenv_1.default.config();
 (0, passport_config_1.default)();
 const app = (0, express_1.default)();
@@ -28,7 +29,10 @@ const URI = process.env.MONGODB_URI;
 const socket = new ws_1.WebSocketServer({ server });
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 app.use((0, express_session_1.default)({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -51,6 +55,7 @@ app.use('/', updateQuestion_route_1.default);
 app.use('/', delete_route_1.default);
 app.use('/auth', auth_route_1.default);
 app.use('/friends', friends_route_1.default);
+app.get('/me', user_route_1.getProfile);
 socket.on('connection', (ws) => {
     console.log('User Connected to Websocket');
     ws.on('message', (message) => {

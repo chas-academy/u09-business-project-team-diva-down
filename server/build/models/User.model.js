@@ -1,4 +1,5 @@
 "use strict";
+// import mongoose, { Schema, Document, Model, Types } from "mongoose";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -34,6 +35,36 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
+// export interface IUser extends Document {
+//     id: string;
+//     _id: any; 
+//     name: string;
+//     email: string;
+//     password?: string;
+//     oauthProvider?: string;
+//     oauthID?: string;
+//     createdAt: Date;
+//     updatedAt: Date;
+//     eloScore: number;
+// }
+// const userSchema = new Schema<IUser>(
+//     {
+//         name: { type: String, required: true },
+//         email: { type: String, required: true, unique: true },
+//         password: { type: String },
+//         oauthProvider: { type: String }, 
+//         oauthID: { type: String },
+//         eloScore: {type: Number}
+//     },
+//     { 
+//         collection: 'Users',
+//         timestamps: true
+//     }
+// );
+// userSchema.index({ oauthProvider: 1, oauthID: 1 });
+// const User: Model<IUser> = mongoose.model<IUser>('User', userSchema);
+// export { User };
+// models/User.model.ts
 const mongoose_1 = __importStar(require("mongoose"));
 const userSchema = new mongoose_1.Schema({
     name: { type: String, required: true },
@@ -41,10 +72,18 @@ const userSchema = new mongoose_1.Schema({
     password: { type: String },
     oauthProvider: { type: String },
     oauthID: { type: String },
-    eloScore: { type: Number }
+    eloScore: { type: Number, default: 1000 }
 }, {
     collection: 'Users',
-    timestamps: true
+    timestamps: true,
+    toJSON: {
+        virtuals: true,
+        transform: function (doc, ret) {
+            ret.id = ret._id.toString();
+            delete ret._id;
+            delete ret.__v;
+        }
+    }
 });
 userSchema.index({ oauthProvider: 1, oauthID: 1 });
 const User = mongoose_1.default.model('User', userSchema);
