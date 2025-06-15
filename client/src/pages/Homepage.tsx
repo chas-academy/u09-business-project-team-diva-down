@@ -18,7 +18,6 @@ const Homepage = () => {
                         <Homepage_title_info />
                     </section>
                     <section className="homepage-button-container">
-                        <Quickplay_button />
                         <SinglePlayer_button />
                         <MultiPlayer_button />
                     </section>
