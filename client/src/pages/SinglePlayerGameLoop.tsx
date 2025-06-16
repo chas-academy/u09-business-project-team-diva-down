@@ -80,7 +80,8 @@ const SingePlayerGameLoop: React.FC = () => {
             try {
                 const custom_apicall = `https://opentdb.com/api.php?amount=10&category=${selectedCategory.value}&difficulty=${difficulty}&type=multiple`;
                 // const response = await axios.get(custom_apicall);
-                const response = MockDataGameLoop;
+                // console.log(response);
+                const response = MockDataGameLoop[1];
                 const formattedQuestions = response.data.results.map((q: any) => ({
                     ...q,
                     all_answers: shuffleArray([...q.incorrect_answers, q.correct_answer])

@@ -29,6 +29,17 @@
             font-family: $font1;
             font-weight: 400;
         }
+
+        .trivia_title {
+            font-size: 1rem;
+            font-family: $font1;
+            color: $text1;
+            background-color: $dark;
+            padding: 7px 45px;
+            border: 1px solid $border;
+            border-radius: 7px;
+
+        }
     }
 
     .empty {

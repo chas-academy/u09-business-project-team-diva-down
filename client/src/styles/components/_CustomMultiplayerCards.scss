@@ -1,0 +1,113 @@
+@import '../variables/variables';
+
+.friendlist_container {
+    background-color: $darker;
+    color: $text1;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    width: 500px;
+    margin: 0 auto;
+    font-family: $font1;
+
+    .friends_table {
+        width: 100%;
+        background-color: $card_bg;
+        border-radius: 12px;
+        border: 1px solid $border;
+        border-collapse: separate;
+        border-spacing: 0;
+
+        tbody {
+
+            tr {
+
+                &:last-child td {
+                    border-bottom: none;
+                }
+
+                td {
+                    text-align: center;
+                    padding: 10px;
+                    color: $accent1;
+                    border-bottom: 1px solid $border;
+                    
+
+                    .invite {
+                        background-color: $accent2light;
+                        color: $accent2;
+                        padding: 6px 12px;
+                        border-radius: 7px;
+                        border: 1px solid $accent2;
+
+                        &:hover {
+                            background-color: $accent2;
+                            color: $switch1;
+                        }
+
+                        &:active {
+                            background-color: $accent2light;
+                            color: $accent2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.lobby_container {
+    background-color: $darker;
+    color: $text1;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    width: 500px;
+    margin: 0 auto;
+    font-family: $font1;
+
+    .lobby_table {
+        width: 100%;
+        background-color: $card_bg;
+        border-radius: 12px;
+        border: 1px solid $border;
+        border-collapse: separate;
+        border-spacing: 0;
+
+        tbody {
+
+            tr {
+
+                &:last-child td {
+                    border-bottom: none;
+                }
+
+                td {
+                    text-align: center;
+                    padding: 10px;
+                    color: $accent1;
+                    border-bottom: 1px solid $border;
+                    
+
+                    .kick {
+                        background-color: $errorlight;
+                        color: $error;
+                        padding: 6px 12px;
+                        border-radius: 7px;
+                        border: 1px solid $error;
+
+                        &:hover {
+                            background-color: $error;
+                            color: $switch1;
+                        }
+
+                        &:active {
+                            background-color: $errorlight;
+                            color: $error;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

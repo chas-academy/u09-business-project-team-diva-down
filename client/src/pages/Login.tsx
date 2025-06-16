@@ -6,10 +6,18 @@ import { RouterContainer } from "../routes/RouteContainer";
 import { useState } from "react";
 
 
+interface AuthUser {
+    id: string;
+    email: string;
+    name: string;
+    token: string;
+}
+
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [ActiveUser, setActiveUser] = useState<AuthUser>();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -32,8 +40,20 @@ const Login = () => {
                 throw new Error(data.message || "Login Failed");
             }
 
+            const authUser: AuthUser = {
+                id: data.user.id,
+                email: data.user.email,
+                name: data.user.name,
+                token: data.token
+            };
+
+            setActiveUser(authUser);
+
+            localStorage.setItem("authUser", JSON.stringify(authUser));
             localStorage.setItem("token", data.token);
+
             navigate(RouterContainer.Homepage);
+            
         } catch (err) {
             console.error("Login error", err);
         }

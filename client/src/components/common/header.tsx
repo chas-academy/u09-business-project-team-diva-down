@@ -44,6 +44,7 @@ const Header = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("authUser");
         window.location.reload();
     }
 

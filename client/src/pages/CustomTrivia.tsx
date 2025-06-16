@@ -3,6 +3,8 @@ import Footer from "../components/common/footer";
 import React, { useEffect, useState } from "react";
 import { MockDataCustomTrivaTitles } from '../MockData/MockDataGameLoop'; 
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate, useParams } from "react-router-dom";
+import { RouterContainer } from "../routes/RouteContainer";
 
 const CustomTrivia: React.FC = () => {
     const [toggleTriviaTable, setToggleTriviaTable] = useState(true);
@@ -13,6 +15,7 @@ const CustomTrivia: React.FC = () => {
     const [EditTriviaContent, setEditTriviaContent] = useState<EditTriviaTable>();
     const [toggleAddQuestion, setToggleAddQuestion] = useState(false);
     const [toggleEditQuestion, settoggleEditQuestion] = useState(false);
+    const navigate = useNavigate();
 
     // Consts regarding adding / Editing questions
     
@@ -291,6 +294,22 @@ const CustomTrivia: React.FC = () => {
     }, [EditTriviaContent?.data.results]);
 
 
+    // Host Lobby Functions, will be expanded on when entering the websocket
+
+    const HostLobby = (id: number) => {
+
+        const TriviaId = id;
+
+        const AuthId = localStorage.getItem("token");
+
+        if (!AuthId) {
+            throw new Error("No Auth token found");
+        }
+
+        navigate(RouterContainer.CustomMultiplayer.replace(':id', AuthId.slice(0, 15)), { state: { TriviaId }})
+    };
+
+
     return (
         <>
             <div className="CustomTrivia_Page">
@@ -331,7 +350,7 @@ const CustomTrivia: React.FC = () => {
                                                         <div className="btn-group">
                                                             <button className="btn edit-btn" value={data.id} onClick={() => ToggleEditTrivia(data.id)}>Edit</button>
                                                             <button className="btn delete-btn" value={data.id} onClick={() => deleteTriviaList(data.id)}>Delete</button>
-                                                            <button className="btn start-btn" value={data.id}>Start</button>
+                                                            <button className="btn start-btn" value={data.id} onClick={() => HostLobby(data.id)}>Start</button>
                                                         </div>
                                                     </td>
                                                 </tr>
