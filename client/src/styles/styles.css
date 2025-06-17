@@ -3812,17 +3812,17 @@ iframe {
   color: var(--accent2);
 }
 
-.lobby_container {
+.active_clientsWrapper {
   background-color: var(--darker);
   color: var(--text1);
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
   padding: 20px;
   border-radius: 12px;
   width: 500px;
-  margin: 0 auto;
+  margin: 20px auto;
   font-family: "Titillium Web", sans-serif;
 }
-.lobby_container .lobby_table {
+.active_clientsWrapper .lobby_table {
   width: 100%;
   background-color: var(--card_bg);
   border-radius: 12px;
@@ -3830,29 +3830,36 @@ iframe {
   border-collapse: separate;
   border-spacing: 0;
 }
-.lobby_container .lobby_table tbody tr:last-child td {
+.active_clientsWrapper .lobby_table tbody tr:last-child td {
   border-bottom: none;
 }
-.lobby_container .lobby_table tbody tr td {
+.active_clientsWrapper .lobby_table tbody tr td {
   text-align: center;
   padding: 10px;
   color: var(--accent1);
   border-bottom: 1px solid var(--border);
 }
-.lobby_container .lobby_table tbody tr td .kick {
+.active_clientsWrapper .lobby_table tbody tr td .kick {
   background-color: var(--errorlight);
   color: var(--error);
   padding: 6px 12px;
   border-radius: 7px;
   border: 1px solid var(--error);
 }
-.lobby_container .lobby_table tbody tr td .kick:hover {
+.active_clientsWrapper .lobby_table tbody tr td .kick:hover {
   background-color: var(--error);
   color: var(--switch1);
 }
-.lobby_container .lobby_table tbody tr td .kick:active {
+.active_clientsWrapper .lobby_table tbody tr td .kick:active {
   background-color: var(--errorlight);
   color: var(--error);
+}
+.active_clientsWrapper .lobby_table tbody tr td .ready {
+  background-color: var(--accent1light);
+  color: var(--accent1);
+  border: 1px solid var(--accent1);
+  border-radius: 7px;
+  padding: 6px 12px;
 }
 
 :root {

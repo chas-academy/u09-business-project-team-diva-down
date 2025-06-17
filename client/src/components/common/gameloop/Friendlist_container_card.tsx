@@ -13,14 +13,14 @@ interface Friendlist_containerProps {
 
 
 const Friendslist_Container: React.FC<Friendlist_containerProps> = ({
-    EachFriend,
+    // EachFriend,
 }) => {
     return (
         <>
             <div className="friendlist_container">
                 <table className="friends_table">
                     <tbody>
-                        {EachFriend.map((friend) => {
+                        {/* {EachFriend.map((friend) => {
                             return (
                                 <tr key={friend.id}>
                                     <td> {friend.name} </td>
@@ -28,7 +28,7 @@ const Friendslist_Container: React.FC<Friendlist_containerProps> = ({
                                     <td> <button className="invite">Invite</button> </td>
                                 </tr>
                             );
-                        })}
+                        })} */}
                     </tbody>
                 </table>
             </div>

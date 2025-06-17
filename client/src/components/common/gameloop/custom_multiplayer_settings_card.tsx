@@ -20,14 +20,18 @@ interface TriviaData {
 interface CustomMultiplayerSettingsProps {
     onRankedChange: (ranked: string) => void;
     ranked: string;
-    triviaData: TriviaData;
+    // triviaData: TriviaData;
+    lobbyStatus: string;
+    onLobbyStatusChange: (lobbyStatus: string) => void;
 }
 
 
 const CustomMultiplayerSettings: React.FC<CustomMultiplayerSettingsProps> = ({
     onRankedChange,
     ranked,
-    triviaData
+    // triviaData,
+    lobbyStatus,
+    onLobbyStatusChange
 }) => {
     
     return (
@@ -35,7 +39,8 @@ const CustomMultiplayerSettings: React.FC<CustomMultiplayerSettingsProps> = ({
         <div className="settings-bar">
             <h2>Custom Trivia</h2>
             <div className="trivia_title">
-                {triviaData.title}
+                {/* {triviaData.title} */}
+                Title
             </div>
         </div>
         <div className="settings-bar">
@@ -62,6 +67,33 @@ const CustomMultiplayerSettings: React.FC<CustomMultiplayerSettingsProps> = ({
                 onChange={(e) => onRankedChange(e.target.value)}
                 />
                 No
+                </label>
+            </div>
+        </div>
+        <div className="settings-bar">
+            <h2>Lobby Status</h2>
+            <div className="radio-options">
+                <label className={`input-styling ${lobbyStatus === "open" ? "checked" : ""}`}>
+                    <input
+                    className="hidden"
+                    type="radio"
+                    name="status"
+                    value="open"
+                    checked={lobbyStatus === "open"}
+                    onChange={(e) => onLobbyStatusChange(e.target.value)}
+                    />
+                    Open
+                </label>
+                <label className={`input-styling ${lobbyStatus === "close" ? "checked" : ""}`}>
+                    <input
+                    className="hidden"
+                    type="radio"
+                    name="status"
+                    value="close"
+                    checked={lobbyStatus === "close"}
+                    onChange={(e) => onLobbyStatusChange(e.target.value)}
+                    />
+                    Close
                 </label>
             </div>
         </div>

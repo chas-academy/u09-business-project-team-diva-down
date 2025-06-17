@@ -3,7 +3,7 @@ import Footer from "../components/common/footer";
 import React, { useEffect, useState } from "react";
 import { MockDataCustomTrivaTitles } from '../MockData/MockDataGameLoop'; 
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RouterContainer } from "../routes/RouteContainer";
 
 const CustomTrivia: React.FC = () => {
@@ -45,6 +45,7 @@ const CustomTrivia: React.FC = () => {
             results: Questions[];
         };
     }
+
 
     // Handler functions regarding the adding of question
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -182,7 +183,7 @@ const CustomTrivia: React.FC = () => {
         settoggleEditQuestion(false);
     };
 
-    const toggleFunctionAddQuestion = (id: number) => {
+    const toggleFunctionAddQuestion = () => {
         setToggleAddQuestion(!toggleAddQuestion);
     }
 
@@ -296,6 +297,7 @@ const CustomTrivia: React.FC = () => {
 
     // Host Lobby Functions, will be expanded on when entering the websocket
 
+
     const HostLobby = (id: number) => {
 
         const TriviaId = id;
@@ -306,7 +308,12 @@ const CustomTrivia: React.FC = () => {
             throw new Error("No Auth token found");
         }
 
-        navigate(RouterContainer.CustomMultiplayer.replace(':id', AuthId.slice(0, 15)), { state: { TriviaId }})
+        navigate(RouterContainer.CustomMultiplayer.replace(':id', AuthId.slice(0, 15)), 
+            { state: 
+                { 
+                    TriviaId,
+                }
+            })
     };
 
 
@@ -584,7 +591,7 @@ const CustomTrivia: React.FC = () => {
                                             value={EditTriviaContent?.id} 
                                             onClick={() => {
                                                 if (EditTriviaContent?.id) {
-                                                    toggleFunctionAddQuestion(EditTriviaContent.id)
+                                                    toggleFunctionAddQuestion()
                                                 }
                                             }}
                                             >
