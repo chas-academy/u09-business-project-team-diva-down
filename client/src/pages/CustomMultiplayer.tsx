@@ -183,6 +183,7 @@ const CustomMultiplayer: React.FC = () => {
                         <br />
                         {currentLobby?.name}
                         <AuthUserLobbyCard 
+                            // Need to filter thru the auth user for both comps
                             clients={clients}
                             authUser={authUser}
                         />
