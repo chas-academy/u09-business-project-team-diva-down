@@ -27,12 +27,17 @@ type Questions = {
   category: string;
 };
 
+type Difficulty = "easy" | "medium" | "hard";
+
 const SingePlayerGameLoop: React.FC = () => {
     const [gameState, setGameState] = useState<GameState>('prep');
     const [selectedCategory, setSelectedCategory] = useState<selectedOption>({
         value: '',
         label: 'Select Category'
     });
+    const [currentRating, setCurrentRating] = useState<number>(711); // Initial rating
+    const [ratingChange, setRatingChange] = useState<number>(0);
+    const [rankTitle, setRankTitle] = useState<string>("");
     const [difficulty, setDifficulty] = useState("");
     const [ranked, setRanked] = useState("");
     const [questions, setQuestions] = useState<Questions[]>([]);
@@ -68,6 +73,56 @@ const SingePlayerGameLoop: React.FC = () => {
     //     console.log(score);
     //     console.log();
     // };
+
+    const getPoints = (scorePercentage: number, difficulty: Difficulty): number => {
+    const pointsBracket: [number, number][] = [
+        [1.00, 800], [0.99, 677], [0.90, 366], [0.80, 240], [0.70, 149],
+        [0.60, 72], [0.50, 0], [0.40, -72], [0.30, -149], [0.20, -240],
+        [0.10, -366], [0.01, -677], [0.00, -800]
+    ];
+
+    const difficultyScale: Record<Difficulty, number> = {
+        easy: 0.50,
+        medium: 0.75,
+        hard: 1.0,
+    };
+
+        const scale = difficultyScale[difficulty];
+
+        for (const [threshold, points] of pointsBracket) {
+            if (scorePercentage >= threshold) {
+                return Math.round(points * scale);
+            }
+        }
+        return 0;
+    };
+
+    const checkUserBracket = (rating: number): string => {
+        const rankingSystem: [string, number][] = [
+            ['Senior Master', 2400], ['National Master', 2200], ['Expert Master', 2000], 
+            ['Class A', 1800], ['Class B', 1600], ['Class C', 1400], ['Class D', 1200], 
+            ['Class E', 1000], ['Class F', 800], ['Class G', 600], ['Class H', 400], 
+            ['Class I', 200], ['Class J', 100]
+        ];
+
+        for (const [title, minRating] of rankingSystem) {
+            if (rating >= minRating) {
+                return title;
+            }
+        };
+        return "Unrated";
+    };
+
+    const calculateRating = () => {
+        const scorePercentage = score / questions.length;
+        const pointsEarned = getPoints(scorePercentage, difficulty as Difficulty);
+        const newRating = currentRating + pointsEarned;
+        const title = checkUserBracket(newRating);
+        
+        setRatingChange(pointsEarned);
+        setCurrentRating(newRating);
+        setRankTitle(title);
+};
 
     const shuffleArray = (array: any[]): any[] => {
         return [...array].sort(() => Math.random() - 0.5);
@@ -114,6 +169,7 @@ const SingePlayerGameLoop: React.FC = () => {
             setSelectedAnswer(null);
             handleReset();
         } else {
+            if (ranked) calculateRating();
             setGameState('finished');
         }
     }
@@ -218,6 +274,19 @@ const SingePlayerGameLoop: React.FC = () => {
                     )}
                     {gameState === 'finished' && (
                         <>
+                            {ranked && (
+                                <div className="rating-section">
+                                    <div className="stats-bar"><span>Current Rating: </span><span>{currentRating - ratingChange}</span></div>
+                                    <div className="stats-bar">
+                                        <span>Rating Change: </span>
+                                        <span className={ratingChange >= 0 ? "positive" : "negative"}>
+                                            {ratingChange >= 0 ? `+${ratingChange}` : ratingChange}
+                                        </span>
+                                    </div>
+                                    <div className="stats-bar"><span>New Rating: </span><span>{currentRating}</span></div>
+                                    <div className="stats-bar"><span>Rank: </span><span>{rankTitle}</span></div>
+                                </div>
+                            )}
                             <div className="score_card">
                                 <h2 className="title">Quiz Completed!</h2>
                                 <div className="score">{score}/{questions.length} </div>
