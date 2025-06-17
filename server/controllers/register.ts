@@ -13,11 +13,14 @@ async function registerNewUser(req: Request, res: Response): Promise<any> {
         }
         
         const hashedPassword = await bcrypt.hash(password, saltRounds);
+        
+        const eloScore = 0;
 
         const newUser = new User({
             name: name,
             email: email,
             password: hashedPassword,
+            eloScore: eloScore
         });
 
         await newUser.save();
@@ -28,6 +31,7 @@ async function registerNewUser(req: Request, res: Response): Promise<any> {
                 id: newUser._id,
                 name: newUser.name,
                 email: newUser.email,
+                eloScore: newUser.eloScore
             }
         });
         

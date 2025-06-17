@@ -24,10 +24,12 @@ function registerNewUser(req, res) {
                 return res.status(400).json({ message: "Missing required fields" });
             }
             const hashedPassword = yield bcryptjs_1.default.hash(password, saltRounds);
+            const eloScore = 0;
             const newUser = new User_model_1.User({
                 name: name,
                 email: email,
                 password: hashedPassword,
+                eloScore: eloScore
             });
             yield newUser.save();
             return res.status(201).json({
@@ -36,6 +38,7 @@ function registerNewUser(req, res) {
                     id: newUser._id,
                     name: newUser.name,
                     email: newUser.email,
+                    eloScore: newUser.eloScore
                 }
             });
         }
