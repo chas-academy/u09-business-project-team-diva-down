@@ -1,129 +1,133 @@
-import { useState } from "react";
-import { MockDataAllUsers } from "../../MockData/MockData";
-import { MockDataUserOwnData } from "../../MockData/MockData";
+// REMOVE `userId` from props
+import { useEffect, useState } from "react";
+import type { FormEvent } from "react";
+import API from "../../services/api";
 
-const MockDataFriendsList = [
-    {
-        id: 0,
-        username: 'Stevensson',
-        elo: 251,
-    },
-    {
-        id: 1,
-        username: 'Karlsson',
-        elo: 215,
-    },
-    {
-        id: 2,
-        username: 'Andersson',
-        elo: 163,
-    }
-]
+interface User {
+    _id: string;
+    username: string;
+    eloScore: number;
+    email?: string;
+}
 
-const MockDataAcceptList = [
-    {
-        id: 3,
-        username: "Charleet",
-        elo: 214,
-    }
-]
+interface Relationship {
+    _id: string;
+    user: User;
+    friend: User;
+    status: "pending" | "accepted";
+}
 
-const Friendslist_card = () => {
+const Friendslist_card: React.FC = () => {
+    const userId = localStorage.getItem("userId") ?? "";
 
-    const [friendsList, setFriendList] = useState(MockDataFriendsList);
-    const [acceptList, setAcceptList] = useState(MockDataAcceptList);
-    const [allUsers, setAllUsers] = useState(MockDataAllUsers);
-    const [requestValue, setRequestValue] = useState('');
-    const [UserData, setUserData] = useState(MockDataUserOwnData); 
-    // Simulates the users data after they have logged into the application and started too use the website
+    const [friendsList, setFriendList] = useState<Relationship[]>([]);
+    const [acceptList, setAcceptList] = useState<Relationship[]>([]);
+    const [allUsers, setAllUsers] = useState<User[]>([]);
+    const [requestValue, setRequestValue] = useState("");
 
-    const RemoveFriend = (id: number) => {
-        console.log(id);
-        console.log(friendsList);
-        const updatedFriendsList = friendsList.filter(friend => friend.id !== id);
-        setFriendList(updatedFriendsList);
-        console.log(friendsList);
-    }
+    useEffect(() => {
+        if (!userId) return;
+        fetchFriends();
+        fetchPending();
+        fetchAllUsers();
+    }, [userId]);
 
-    const DeclineRequest = (id: number) => {
-        const updatedAcceptList = acceptList.filter(request => request.id !== id);
-        setAcceptList(updatedAcceptList);
-    }
+    const fetchFriends = async () => {
+        const res = await API.get<Relationship[]>(`/${userId}`);
+        setFriendList(res.data);
+    };
 
-    const AcceptRequest = (id: number) => {
-        const AcceptedUser = acceptList.find(request => request.id === id);
-        if (AcceptedUser) {
-            setFriendList([...friendsList, AcceptedUser]);
-            setAcceptList(acceptList.filter(request => request.id !== id));
-        }
-    }
+    const fetchPending = async () => {
+        const res = await API.get<Relationship[]>(`/pending/${userId}`);
+        setAcceptList(res.data);
+    };
 
-    const handleSendingFriendRequest = (e: React.FormEvent) => {
+    const fetchAllUsers = async () => {
+        const res = await API.get<User[]>("/auth/users");
+        setAllUsers(res.data);
+    };
+
+    const handleRemoveFriend = (id: string) => {
+        setFriendList(prev => prev.filter(rel => rel.friend._id !== id));
+    };
+
+    const handleDeclineRequest = async (relationshipId: string) => {
+        await API.delete(`/${relationshipId}`);
+        setAcceptList(prev => prev.filter(rel => rel._id !== relationshipId));
+    };
+
+    const handleAcceptRequest = async (relationshipId: string) => {
+        await API.post("/accept", { relationshipId });
+        await fetchFriends();
+        await fetchPending();
+    };
+
+    const handleSendFriendRequest = async (e: FormEvent) => {
         e.preventDefault();
-        const SpecificUser = allUsers.find(data => data.username === requestValue);
 
-        if (SpecificUser) {
-            const AlreadyFriends = friendsList.find(data => data.id === UserData.id);
-            const AlreadySentRequest = acceptList.some(data => data.id === UserData.id);
-
-            if(AlreadyFriends) {
-                console.log("You already have them as your friend!");
-                setRequestValue('');
-            } else if (AlreadySentRequest) {
-                console.log("You have already sent them a friend Request!");
-                setRequestValue('');
-            } else {
-                setAcceptList([...acceptList, UserData]);
-                setRequestValue('');
-            }
-        } else {
-            console.log("Cant Find the user");
-            setRequestValue('');
+        const targetUser = allUsers.find(user => user.username === requestValue);
+        if (!targetUser) {
+            console.log("User not found");
+            setRequestValue("");
+            return;
         }
-    }
+
+        try {
+            await API.post("/request", {
+                userId,
+                friendId: targetUser._id
+            });
+            console.log("Friend request sent");
+        } catch (err) {
+            console.error("Error sending friend request:", err);
+        } finally {
+            setRequestValue("");
+        }
+    };
 
     return (
-        <>
-            <div className="user_friendslist">
-                <div className="under_title">Friendslist</div>
-                <form className="search_container" onSubmit={handleSendingFriendRequest}>
-                    <input 
-                        className="input_field" 
-                        type="text" 
-                        id="input_data"
-                        value={requestValue}
-                        onChange={(e) => setRequestValue(e.target.value)}
-                    />
-                    <input className="submit_button" type="submit" value="Send Request"/>
-                </form>
-                <div className="friend_container">
-                    {friendsList.map((data) => {
-                        return (
-                            <div className="friend_bar" key={data.id}>
-                                <div className="username">{data.username}</div>
-                                <button onClick={() => RemoveFriend(data.id)} value={data.id} className="remove_friend">Remove Friend</button>
-                            </div>
-                        );
-                    })}
-                </div>
+        <div className="user_friendslist">
+            <div className="under_title">Friendslist</div>
 
-                <div className="under_title">Accept Pending Requests</div>
+            <form className="search_container" onSubmit={handleSendFriendRequest}>
+                <input
+                    className="input_field"
+                    type="text"
+                    value={requestValue}
+                    onChange={(e) => setRequestValue(e.target.value)}
+                />
+                <input className="submit_button" type="submit" value="Send Request" />
+            </form>
 
-                <div className="accept_container">
-                    {acceptList.map((data) => {
-                        return (
-                            <div className="accept_bar" key={data.id}>
-                                <div className="username">{data.username}</div>
-                                <div className="container">
-                                    <button onClick={() => AcceptRequest(data.id)} value={data.id} className="accept">Accept</button>
-                                    <button onClick={() => DeclineRequest(data.id)} value={data.id} className="decline">Decline</button>
-                                </div>
-                            </div>
-                        )
-                    })}
-                </div>
+            <div className="friend_container">
+                {friendsList.map((data) => (
+                    <div className="friend_bar" key={data._id}>
+                        <div className="username">{data.friend.username}</div>
+                        <button onClick={() => handleRemoveFriend(data.friend._id)} className="remove_friend">
+                            Remove Friend
+                        </button>
+                    </div>
+                ))}
             </div>
-        </>
+
+            <div className="under_title">Accept Pending Requests</div>
+
+            <div className="accept_container">
+                {acceptList.map((data) => (
+                    <div className="accept_bar" key={data._id}>
+                        <div className="username">{data.user.username}</div>
+                        <div className="container">
+                            <button onClick={() => handleAcceptRequest(data._id)} className="accept">
+                                Accept
+                            </button>
+                            <button onClick={() => handleDeclineRequest(data._id)} className="decline">
+                                Decline
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 };
 

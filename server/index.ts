@@ -14,6 +14,7 @@ import deleteQuestionRouter from "./routes/delete.route";
 import friendRouter from "./routes/friends.route";
 import { WebSocketServer, WebSocket } from "ws";
 import cors from 'cors';
+import { getProfile } from "./routes/user.route";
 
 dotenv.config();
 configurePassport();
@@ -26,7 +27,9 @@ const socket = new WebSocketServer({ server });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
 
 app.use(session({
     secret: process.env.SESSION_SECRET!,
@@ -54,6 +57,7 @@ app.use('/', updateQuestionRouter);
 app.use('/', deleteQuestionRouter);
 app.use('/auth', authRouter);
 app.use('/friends', friendRouter);
+app.get('/me', getProfile);
 
 socket.on('connection', (ws: WebSocket) => {
     console.log('User Connected to Websocket');
