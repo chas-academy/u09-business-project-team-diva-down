@@ -15,6 +15,7 @@ import friendRouter from "./routes/friends.route";
 import { WebSocketServer, WebSocket } from "ws";
 import cors from 'cors';
 import { getProfile } from "./routes/user.route";
+import { getProfile } from "./routes/user.route";
 
 dotenv.config();
 configurePassport();
@@ -57,6 +58,7 @@ app.use('/', updateQuestionRouter);
 app.use('/', deleteQuestionRouter);
 app.use('/auth', authRouter);
 app.use('/friends', friendRouter);
+app.get('/me', getProfile);
 app.get('/me', getProfile);
 
 socket.on('connection', (ws: WebSocket) => {

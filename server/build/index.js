@@ -20,6 +20,7 @@ const friends_route_1 = __importDefault(require("./routes/friends.route"));
 const ws_1 = require("ws");
 const cors_1 = __importDefault(require("cors"));
 const user_route_1 = require("./routes/user.route");
+const user_route_1 = require("./routes/user.route");
 dotenv_1.default.config();
 (0, passport_config_1.default)();
 const app = (0, express_1.default)();
@@ -54,6 +55,7 @@ app.use('/', updateQuestion_route_1.default);
 app.use('/', delete_route_1.default);
 app.use('/auth', auth_route_1.default);
 app.use('/friends', friends_route_1.default);
+app.get('/me', user_route_1.getProfile);
 app.get('/me', user_route_1.getProfile);
 socket.on('connection', (ws) => {
     console.log('User Connected to Websocket');
