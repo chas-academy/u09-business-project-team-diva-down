@@ -5,7 +5,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { RouterContainer } from "../routes/RouteContainer";
 import { useState } from "react";
 
+interface User {
+    id: string;
+    name: string;
+    email: string;
+}
 
+interface LoginResponse {
+    message: string;
+    user: User;
+    token: string;
+
+}
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,13 +37,15 @@ const Login = () => {
                 }),
             });
 
-            const data = await response.json();
+            const data: LoginResponse = await response.json();
 
             if (!response.ok) {
                 throw new Error(data.message || "Login Failed");
             }
 
             localStorage.setItem("token", data.token);
+            localStorage.setItem('userData', JSON.stringify(data.user));
+
             navigate(RouterContainer.Homepage);
         } catch (err) {
             console.error("Login error", err);
