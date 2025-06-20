@@ -14,58 +14,54 @@ interface AuthUser {
     token: string;
 }
 
-interface ActiveClientsLobbyProps {
+interface SendInviteCardProps {
     clients: Client[];
     authUser: AuthUser | null;
+    sendInvite: (id: string) => void;
     currentLobbyId?: string;
-    kickPlayer: (id: string) => void;
 }
 
-export const ActiveClientsLobby: React.FC<ActiveClientsLobbyProps> = ({
+
+const SendInviteCard: React.FC<SendInviteCardProps> = ({
     clients,
     authUser,
-    currentLobbyId,
-    kickPlayer
+    sendInvite,
+    currentLobbyId
 }) => {
 
     const RestOfClients = clients.filter(client => 
-        client.id !== authUser?.id && 
-        client.lobbyId === currentLobbyId
+        client.id != authUser?.id &&
+        client.lobbyId != currentLobbyId
     );
 
-    if (!RestOfClients){
-        return (
-        <tr>
-            <td>Empty</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        )
-    }
 
     return (
         <>
-            <div className="active_clientsWrapper">
+            <div className="invite_container">
                 <table className="lobby_table">
                     <tbody>
                         {RestOfClients && RestOfClients.length > 0 ? (
                             RestOfClients.map(client => 
                                 <tr key={client.id}>
                                     <td>{client.username}</td>
-                                    <td>{client.isHost ? 'Host' : 'Guest'}</td>
-                                    <td>{client.ready ? 'Ready' : 'Not Ready'}</td>
-                                    <td><button className="kick" onClick={() => kickPlayer(client.id)}>Kick Player</button></td>
+                                    <td>{client.lobbyId === undefined ? 'Free' : 'Occupied'}</td>
+                                    <td><button className="invite" onClick={() => sendInvite(client.id)}>Send Invite</button></td>
                                 </tr>
                             )
                         ) : (
-                            <tr>
-                                <td colSpan={4}>No other players in the lobby</td>
-                            </tr>
+                            <>
+                                <tr>
+                                    <td colSpan={2}>Currently no users online</td>
+                                    <td className="action_container"><button className="invite">Send Invite</button></td>
+                                </tr>
+                            </>
                         )}
+
                     </tbody>
                 </table>
             </div>
         </>
     );
 };
+
+export default SendInviteCard;

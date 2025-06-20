@@ -316,6 +316,22 @@ const CustomTrivia: React.FC = () => {
             })
     };
 
+    const JoinLobby = () => {
+
+        const AuthId = localStorage.getItem("token");
+
+        if (!AuthId) {
+            throw new Error("No Auth token found");
+        }
+
+        navigate(RouterContainer.CustomMultiplayer.replace(':id', AuthId.slice(0, 15)),
+        { state:
+            {
+                
+            }
+        })
+    };
+
 
     return (
         <>
@@ -345,6 +361,10 @@ const CustomTrivia: React.FC = () => {
                                 <div className="header">
                                     <h1>Create Custom Trivia</h1>
                                     <button className="create-btn" onClick={ToggleCreateNewTrivia}>+ Create </button>
+                                </div>
+                                <div className="subheader">
+                                    <h4>Wanna join other lobbies? </h4>
+                                    <button className="create-btn" onClick={() => JoinLobby()}>Connect</button>
                                 </div>
                                 <div className="table_container">
                                     <table>
