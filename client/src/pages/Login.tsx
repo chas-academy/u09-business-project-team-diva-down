@@ -140,7 +140,15 @@ const Login = () => {
 
             const data = await response.json();
 
-            if (!response.ok) {
+            if (response.ok) {
+                const authUser = {
+                    id: data.user.id,
+                    name: data.user.name,
+                    email: data.user.email,
+                    token: data.token
+                };
+                localStorage.setItem('authUser', JSON.stringify(authUser));
+            } else {
                 throw new Error(data.message || "Login Failed");
             }
 

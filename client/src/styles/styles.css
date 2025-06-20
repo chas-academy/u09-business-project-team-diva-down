@@ -2590,6 +2590,17 @@ iframe {
   padding: 0 10px;
   align-items: center;
 }
+.settings-container .settings-bar .play-button-ready * {
+  border-color: var(--accent1);
+}
+.settings-container .settings-bar .play-button-waiting * {
+  border-color: var(--border) !important;
+  color: var(--border) !important;
+}
+.settings-container .settings-bar .play-button-waiting *:hover {
+  background-color: transparent;
+  transform: none;
+}
 .settings-container .settings-bar h2 {
   font-size: 1.5rem;
   color: var(--accent1);

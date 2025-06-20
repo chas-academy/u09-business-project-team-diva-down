@@ -23,6 +23,24 @@
         padding: 0 10px;
         align-items: center;
 
+        .play-button-ready {
+            * {
+                border-color: $accent1;
+            }
+        }
+
+        .play-button-waiting {
+            * {
+                border-color: $border !important;
+                color: $border !important;
+
+                &:hover {
+                    background-color: transparent;
+                    transform: none;
+                }
+            }
+        }
+
         h2 {
             font-size: 1.5rem;
             color: $accent1;

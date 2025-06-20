@@ -104,7 +104,9 @@ const CustomMultiplayerSettings: React.FC<CustomMultiplayerSettingsProps> = ({
         </div>
         <div className="settings-bar empty">
             <Link style={{textDecoration: 'none', margin: '0'}} to={RouterContainer.Homepage}><Home /></Link>
-            <Play onClick={checkStatus} disabled={!allClientsReady}/>
+            <span className={allClientsReady ? "play-button-ready" : "play-button-waiting"}>
+                <Play onClick={checkStatus} disabled={!allClientsReady}/>
+            </span>
         </div>
     </div>
     );
