@@ -1,17 +1,12 @@
-import { Request, Response } from 'express';
+import { Router } from "express";
+import { loginUser } from "../controllers/login";
+import dotenv from 'dotenv';
+import { getUser } from "../controllers/userController";
 
-export const getProfile = async (req: Request, res: Response): Promise<any> => {
-  try {
-    if (!req.user) {
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
+dotenv.config();
 
-    return res.json({
-      user: req.user,
-      message: 'Profile data'
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Server error' });
-  }
-};
+const userRouter = Router();
+
+userRouter.get('/:userId', getUser);
+
+export default userRouter;

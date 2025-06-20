@@ -146,6 +146,7 @@ const Login = () => {
 
             login(data.token, data.user);
             navigate(RouterContainer.Homepage);
+            
         } catch (err) {
             console.error("Login error", err);
             setError(err instanceof Error ? err.message : "Login failed");

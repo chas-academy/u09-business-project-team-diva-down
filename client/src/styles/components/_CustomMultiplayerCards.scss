@@ -1,0 +1,639 @@
+@import '../variables/variables';
+
+.friendlist_container {
+    background-color: $darker;
+    color: $text1;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    width: 500px;
+    margin: 0 auto;
+    font-family: $font1;
+
+    .friends_table {
+        width: 100%;
+        background-color: $card_bg;
+        border-radius: 12px;
+        border: 1px solid $border;
+        border-collapse: separate;
+        border-spacing: 0;
+
+        tbody {
+
+            tr {
+
+                &:last-child td {
+                    border-bottom: none;
+                }
+
+                td {
+                    text-align: center;
+                    padding: 10px;
+                    color: $accent1;
+                    border-bottom: 1px solid $border;
+                    
+
+                    .invite {
+                        background-color: $accent2light;
+                        color: $accent2;
+                        padding: 6px 12px;
+                        border-radius: 7px;
+                        border: 1px solid $accent2;
+
+                        &:hover {
+                            background-color: $accent2;
+                            color: $switch1;
+                        }
+
+                        &:active {
+                            background-color: $accent2light;
+                            color: $accent2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.active_clientsWrapper {
+    background-color: $darker;
+    color: $text1;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto;
+    font-family: $font1;
+    box-sizing: border-box;
+
+    @media (max-width: 600px) {
+        padding: 15px;
+        margin: 10px auto;
+        border-radius: 8px;
+    }
+
+    .lobby_table {
+        width: 100%;
+        background-color: $card_bg;
+        border-radius: 12px;
+        border: 1px solid $border;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        table-layout: fixed;
+
+        @media (max-width: 600px) {
+            border-radius: 8px;
+        }
+
+        tbody {
+            tr {
+                &:last-child td {
+                    border-bottom: none;
+                }
+
+                td {
+                    text-align: center;
+                    padding: 10px;
+                    color: $accent1;
+                    border-bottom: 1px solid $border;
+                    word-wrap: break-word;
+
+                    @media (max-width: 600px) {
+                        padding: 8px 5px;
+                    }
+
+                    .kick {
+                        background-color: $errorlight;
+                        color: $error;
+                        padding: 6px 12px;
+                        border-radius: 7px;
+                        border: 1px solid $error;
+                        display: inline-block;
+                        width: auto;
+                        min-width: 60px;
+
+                        &:hover {
+                            background-color: $error;
+                            color: $switch1;
+                        }
+
+                        &:active {
+                            background-color: $errorlight;
+                            color: $error;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+
+                    .ready {
+                        background-color: $accent1light;
+                        color: $accent1;
+                        border: 1px solid $accent1;
+                        border-radius: 7px;
+                        padding: 6px 12px;
+                        display: inline-block;
+                        width: auto;
+                        min-width: 60px;
+
+                        &:hover {
+                            background-color: $accent1;
+                            color: $switch1;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.invite_container {
+    background-color: $darker;
+    color: $text1;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto;
+    font-family: $font1;
+    box-sizing: border-box;
+
+    @media (max-width: 600px) {
+        padding: 15px;
+        margin: 10px auto;
+        border-radius: 8px;
+    }
+
+    .lobby_table {
+        width: 100%;
+        background-color: $card_bg;
+        border-radius: 12px;
+        border: 1px solid $border;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        table-layout: fixed;
+
+        @media (max-width: 600px) {
+            border-radius: 8px;
+        }
+
+        tbody {
+            tr {
+                &:last-child td {
+                    border-bottom: none;
+                }
+
+                td {
+                    text-align: center;
+                    padding: 10px;
+                    color: $accent1;
+                    border-bottom: 1px solid $border;
+                    word-wrap: break-word;
+
+                    @media (max-width: 600px) {
+                        padding: 8px 5px;
+                    }
+
+                    &:first-child {
+                        text-align: left;
+                        padding: 0 40px;
+                    }
+
+                    &:last-child {
+                        width: 25%;
+                    }
+
+                    .kick {
+                        background-color: $errorlight;
+                        color: $error;
+                        padding: 6px 12px;
+                        border-radius: 7px;
+                        border: 1px solid $error;
+                        display: inline-block;
+                        width: auto;
+                        min-width: 60px;
+
+                        &:hover {
+                            background-color: $error;
+                            color: $switch1;
+                        }
+
+                        &:active {
+                            background-color: $errorlight;
+                            color: $error;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+
+                    .ready {
+                        background-color: $accent1light;
+                        color: $accent1;
+                        border: 1px solid $accent1;
+                        border-radius: 7px;
+                        padding: 6px 12px;
+                        display: inline-block;
+                        width: auto;
+                        min-width: 60px;
+
+                        &:hover {
+                            background-color: $accent1;
+                            color: $switch1;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+
+                    .invite {
+                        background-color: $sucesslight;
+                        color: $success;
+                        padding: 6px 12px;
+                        width: auto;
+                        min-width: 60px;
+                        display: inline-block;
+                        border: 1px solid $success;
+                        border-radius: 7px;
+
+                        &:hover {
+                            background-color: $success;
+                            color: $switch1;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.invitation_container {
+    background-color: $darker;
+    color: $text1;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto;
+    font-family: $font1;
+    box-sizing: border-box;
+
+    @media (max-width: 600px) {
+        padding: 15px;
+        margin: 10px auto;
+        border-radius: 8px;
+    }
+
+    .lobby_table {
+        width: 100%;
+        background-color: $card_bg;
+        border-radius: 12px;
+        border: 1px solid $border;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        table-layout: fixed;
+
+        @media (max-width: 600px) {
+            border-radius: 8px;
+        }
+
+        tbody {
+            tr {
+                &:last-child td {
+                    border-bottom: none;
+                }
+
+                .action_container {
+                    display: flex;
+                    gap: 20px;
+                }
+
+                td {
+                    text-align: center;
+                    padding: 10px;
+                    color: $accent1;
+                    border-bottom: 1px solid $border;
+                    word-wrap: break-word;
+
+                    @media (max-width: 600px) {
+                        padding: 8px 5px;
+                    }
+
+                    &:first-child {
+                        width: 25%;
+                    }
+
+                    &:last-child {
+                        width: 25%;
+                    }
+
+
+                    .kick {
+                        background-color: $errorlight;
+                        color: $error;
+                        padding: 6px 12px;
+                        border-radius: 7px;
+                        border: 1px solid $error;
+                        display: inline-block;
+                        width: auto;
+                        min-width: 60px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $error;
+                            color: $switch1;
+                        }
+
+                        &:active {
+                            background-color: $errorlight;
+                            color: $error;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+
+                    .ready {
+                        background-color: $accent1light;
+                        color: $accent1;
+                        border: 1px solid $accent1;
+                        border-radius: 7px;
+                        padding: 6px 12px;
+                        display: inline-block;
+                        width: auto;
+                        min-width: 60px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $accent1;
+                            color: $switch1;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+
+                    .invite {
+                        background-color: $sucesslight;
+                        color: $success;
+                        padding: 6px 12px;
+                        width: auto;
+                        min-width: 60px;
+                        display: inline-block;
+                        border: 1px solid $success;
+                        border-radius: 7px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $success;
+                            color: $switch1;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+
+                    .accept {
+                        background-color: $sucesslight;
+                        color: $success;
+                        border: 1px solid $success;
+                        border-radius: 7px;
+                        padding: 6px 12px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $success;
+                            color: $switch1;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+
+                    .decline {
+                        background-color: $errorlight;
+                        color: $error;
+                        border: 1px solid $error;
+                        border-radius: 7px;
+                        padding: 6px 12px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $error;
+                            color: $switch1;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.invited_to_lobby {
+    background-color: $darker;
+    color: $text1;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 700px;
+    margin: 20px auto;
+    font-family: $font1;
+    box-sizing: border-box;
+
+    @media (max-width: 600px) {
+        padding: 15px;
+        margin: 10px auto;
+        border-radius: 8px;
+    }
+
+    .lobby_table {
+        width: 100%;
+        background-color: $card_bg;
+        border-radius: 12px;
+        border: 1px solid $border;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        table-layout: fixed;
+
+        @media (max-width: 600px) {
+            border-radius: 8px;
+        }
+
+        tbody {
+            tr {
+                &:last-child td {
+                    border-bottom: none;
+                }
+
+                .action_container {
+                    display: flex;
+                    gap: 8px;
+                    justify-content: center;
+                    padding: 8px;
+
+                    @media (max-width: 600px) {
+                        flex-direction: column;
+                        gap: 4px;
+                    }
+                }
+
+                td {
+                    text-align: center;
+                    padding: 10px;
+                    color: $accent1;
+                    border-bottom: 1px solid $border;
+                    word-wrap: break-word;
+
+                    @media (max-width: 600px) {
+                        padding: 8px 5px;
+                    }
+
+                    &:last-child {
+                        width: 30%;
+                        min-width: 150px;
+                    }
+
+
+                    .leave {
+                        background-color: $errorlight;
+                        color: $error;
+                        padding: 6px 12px;
+                        border-radius: 7px;
+                        border: 1px solid $error;
+                        display: inline-block;
+                        width: auto;
+                        min-width: 60px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $error;
+                            color: $switch1;
+                        }
+
+                        &:active {
+                            background-color: $errorlight;
+                            color: $error;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+
+                    .ready {
+                        background-color: $accent1light;
+                        color: $accent1;
+                        border: 1px solid $accent1;
+                        border-radius: 7px;
+                        padding: 6px 12px;
+                        display: inline-block;
+                        width: auto;
+                        min-width: 60px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $accent1;
+                            color: $switch1;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+
+                    .invite {
+                        background-color: $sucesslight;
+                        color: $success;
+                        padding: 6px 12px;
+                        width: auto;
+                        min-width: 60px;
+                        display: inline-block;
+                        border: 1px solid $success;
+                        border-radius: 7px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $success;
+                            color: $switch1;
+                        }
+
+                        @media (max-width: 400px) {
+                            padding: 4px 8px;
+                        }
+                    }
+
+                    .btn {
+                        flex: 1;
+                        min-width: 70px;
+                        padding: 6px 8px;
+                        border-radius: 6px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        text-align: center;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+
+                        @media (max-width: 400px) {
+                            padding: 4px 6px;
+                            font-size: 12px;
+                            min-width: 60px;
+                        }
+                    }
+
+                    .leave {
+                        background-color: $errorlight;
+                        color: $error;
+                        border: 1px solid $error;
+                        
+                        &:hover {
+                            background-color: $error;
+                            color: $switch1;
+                        }
+                    }
+
+                    .ready {
+                        background-color: $accent1light;
+                        color: $accent1;
+                        border: 1px solid $accent1;
+                        
+                        &:hover {
+                            background-color: $accent1;
+                            color: $switch1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

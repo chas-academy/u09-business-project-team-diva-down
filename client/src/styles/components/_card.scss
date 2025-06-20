@@ -67,13 +67,15 @@
     &:hover {
       border-color: lighten(#333, 10%);
       background-color: rgba(0, 180, 216, 0.2);
+      border-color: $accent1;
+      color: $accent1;
     }
 
     &.checked {
       border: 1px solid rgba(0, 180, 216, 0.4);
       box-shadow: 0 0 0 1px $accent1;
       background-color: $dark;
-      color: $text1;
+      color: $accent1;
       position: relative;
     }
 
