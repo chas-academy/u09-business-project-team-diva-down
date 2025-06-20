@@ -1517,6 +1517,27 @@ iframe {
   }
 }
 
+.invitationDetails {
+  margin: 20px 0;
+}
+.invitationDetails .connect_button {
+  color: var(--accent1);
+  background-color: var(--accent1light);
+  border: 1px solid var(--accent1);
+  padding: 6px 12px;
+  border-radius: 7px;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1.1rem;
+}
+.invitationDetails .connect_button:hover {
+  background-color: var(--accent1);
+  color: var(--switch1);
+}
+.invitationDetails .connect_button:active {
+  color: var(--accent1);
+  background-color: var(--accent1light);
+}
+
 :root {
   --darker: #0A0A0A;
   --dark: #121212;

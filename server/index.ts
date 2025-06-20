@@ -31,7 +31,10 @@ const socket = new WebSocketServer({ server });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+    origin: /http:\/\/localhost:\d+/,
+    credentials: true
+}));
 
 app.use(session({
     secret: process.env.SESSION_SECRET!,

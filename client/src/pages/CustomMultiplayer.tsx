@@ -317,10 +317,6 @@ const CustomMultiplayer: React.FC = () => {
 
     };
 
-    const checkStatusClients = () => {
-        console.log(clients);
-    }
-
     const toggleReady = () => {
         console.log("Reg");
         if (!ws.current) return;
@@ -414,11 +410,6 @@ const CustomMultiplayer: React.FC = () => {
     };
 
 
-
-    const lobbyList = () => {
-        console.log(clients);
-    }
-
     const CheckAuthStatus = () => {
         const currentUser = clients.find(client => client.id === authUser?.id);
         console.log(currentUser?.lobbyId);
@@ -433,8 +424,6 @@ const CustomMultiplayer: React.FC = () => {
                 <Header />
                 <main className="main">
                     <MultiPlayer_title />
-                    <button style={{color: '#FFF'}} onClick={() => checkStatusClients()}>Get Status</button>
-                    <div style={{color: '#FFF'}}>{state.TriviaId}</div>
                     {state.TriviaId ? (
                         <>
                             <CustomMultiplayerSettings 
@@ -443,11 +432,9 @@ const CustomMultiplayer: React.FC = () => {
                                 lobbyStatus={lobbyStatus}
                                 onLobbyStatusChange={setLobbyStatus}
                             />
-                            <button style={{color: '#FFF'}} onClick={() => lobbyList()}>LobbList</button>
                             <div className="lobbyDetails">
                                 <Lobby_title />
                                 <AuthUserLobbyCard 
-                                    // Need to filter thru the auth user for both comps
                                     clients={clients}
                                     authUser={authUser}
                                     readyButton={toggleReady}
@@ -484,9 +471,8 @@ const CustomMultiplayer: React.FC = () => {
                             ) : (
                                 <>
                                     <div className="invitationDetails">
-                                        <button style={{color: '#FFF'}} onClick={() => ConnectToTheServer()}>{GuestConnect ? 'Disconnect' : 'Connect'}</button>
+                                        <button className="connect_button" onClick={() => ConnectToTheServer()}>{GuestConnect ? 'Disconnect' : 'Connect'}</button>
                                     </div>
-                                    <button style={{color: '#FFF'}} onClick={() => CheckAuthStatus()}>Status</button>
                                     <Invitation_title />
                                     <ReciveInvitationscard 
                                         ReciviedInvitations={invitations}

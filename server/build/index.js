@@ -32,7 +32,8 @@ const socket = new ws_1.WebSocketServer({ server });
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)({
-    origin: 'http://localhost:5173'
+    origin: /http:\/\/localhost:\d+/,
+    credentials: true
 }));
 app.use((0, express_session_1.default)({
     secret: process.env.SESSION_SECRET,
@@ -206,7 +207,7 @@ function leaveLobby(clientId) {
     // Clean up empty lobby
     if (lobby.clients.size === 0) {
         lobbies.delete(lobby.id);
-        // Notify all clients
+        // Notify all clients that lobby was disbanded
         const message = JSON.stringify({
             type: 'lobbyDisbanded',
             lobbyId: lobby.id
@@ -221,8 +222,23 @@ function leaveLobby(clientId) {
         // Update remaining members
         broadcastClientList(lobby.id);
     }
-    // Update all clients
+    // Update the global client list for everyone
     broadcastAllClients();
+    // Update the lobby list for everyone
+    const lobbyListMessage = JSON.stringify({
+        type: 'lobbyList',
+        data: Array.from(lobbies.values()).map(l => ({
+            id: l.id,
+            name: l.name,
+            hostId: l.hostId,
+            clientCount: l.clients.size
+        }))
+    });
+    clients.forEach(c => {
+        if (c.socket.readyState === ws_1.WebSocket.OPEN) {
+            c.socket.send(lobbyListMessage);
+        }
+    });
     return true;
 }
 // WebSocket Server Setup
