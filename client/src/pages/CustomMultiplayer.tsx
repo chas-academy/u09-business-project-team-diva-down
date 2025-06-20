@@ -81,6 +81,7 @@ const CustomMultiplayer: React.FC = () => {
     const [isReady, setIsReady] = useState<boolean>(false);
     const [isWsReady, setIsWsReady] = useState<boolean>(false);
     const [GuestConnect, setGuestConnect] = useState<boolean>(false);
+    const [allClientsReady, setAllClientsReady] = useState<boolean>(false);
     const [currentLobby, setCurrentLobby] = useState<{
         id: string;
         name: string;
@@ -127,6 +128,13 @@ const CustomMultiplayer: React.FC = () => {
         }
     }, [isWsReady, lobbyStatus, currentLobby]);
 
+    useEffect(() => {
+
+        const allReady = clients.length > 0 && clients.every(client => client.ready);
+        setAllClientsReady(allReady);
+
+    }, [clients])
+
     const connect = () => {
 
         ws.current = new WebSocket(`ws://localhost:3000`);
@@ -135,6 +143,7 @@ const CustomMultiplayer: React.FC = () => {
             console.log('connected to Webscoket Server!');
 
             const user = getAuthUser();
+            
             if (!user || !user.token) {
                 console.error('No Authentication token found');
                 disconnect();
@@ -409,13 +418,12 @@ const CustomMultiplayer: React.FC = () => {
         }));
     };
 
-
-    const CheckAuthStatus = () => {
-        const currentUser = clients.find(client => client.id === authUser?.id);
-        console.log(currentUser?.lobbyId);
-        console.log(clients);
-        console.log(authUser);
-        // Display the Auth
+    const StartGame = () => {
+        if (clients.every(client => client.ready === true)) {
+            console.log("Ready");
+        } else {
+            console.log("Waiting for some client to be ready!");
+        }
     }
 
     return (
@@ -431,6 +439,8 @@ const CustomMultiplayer: React.FC = () => {
                                 onRankedChange={setRanked}
                                 lobbyStatus={lobbyStatus}
                                 onLobbyStatusChange={setLobbyStatus}
+                                checkStatus={StartGame}
+                                allClientsReady={allClientsReady}
                             />
                             <div className="lobbyDetails">
                                 <Lobby_title />

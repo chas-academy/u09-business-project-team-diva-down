@@ -2,6 +2,7 @@ import Home from "../../hoc/loc/Home_button";
 import Play from "../../hoc/loc/Play.button";
 import { RouterContainer } from "../../../routes/RouteContainer";
 import { Link } from "react-router-dom";
+import { all } from "axios";
 
 interface TriviaData {
     id: number;
@@ -23,6 +24,8 @@ interface CustomMultiplayerSettingsProps {
     // triviaData: TriviaData;
     lobbyStatus: string;
     onLobbyStatusChange: (lobbyStatus: string) => void;
+    checkStatus: () => void;
+    allClientsReady: boolean;
 }
 
 
@@ -31,7 +34,9 @@ const CustomMultiplayerSettings: React.FC<CustomMultiplayerSettingsProps> = ({
     ranked,
     // triviaData,
     lobbyStatus,
-    onLobbyStatusChange
+    onLobbyStatusChange,
+    checkStatus,
+    allClientsReady
 }) => {
     
     return (
@@ -99,7 +104,7 @@ const CustomMultiplayerSettings: React.FC<CustomMultiplayerSettingsProps> = ({
         </div>
         <div className="settings-bar empty">
             <Link style={{textDecoration: 'none', margin: '0'}} to={RouterContainer.Homepage}><Home /></Link>
-            <Play/>
+            <Play onClick={checkStatus} disabled={!allClientsReady}/>
         </div>
     </div>
     );

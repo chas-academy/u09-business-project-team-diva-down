@@ -26,8 +26,9 @@ export async function loginUser(req: Request, res: Response): Promise<any> {
         const token = jwt.sign(
             { id: user.id.toString() }, 
             process.env.JWT_SECRET!,
-            { expiresIn: '1h' }
+            { expiresIn: '86400' }
         );
+        console.log("Generated Token: ", token);
 
         return res.status(200).json({
         message: 'Login successful',

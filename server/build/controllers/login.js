@@ -32,7 +32,8 @@ function loginUser(req, res) {
             if (!isPasswordValid) {
                 return res.status(401).json({ message: 'Invalid email or password.' });
             }
-            const token = jsonwebtoken_1.default.sign({ id: user.id.toString() }, process.env.JWT_SECRET, { expiresIn: '1h' });
+            const token = jsonwebtoken_1.default.sign({ id: user.id.toString() }, process.env.JWT_SECRET, { expiresIn: '86400' });
+            console.log("Generated Token: ", token);
             return res.status(200).json({
                 message: 'Login successful',
                 user: {

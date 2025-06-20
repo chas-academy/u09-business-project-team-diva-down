@@ -2615,6 +2615,10 @@ iframe {
 .settings-container .empty * {
   margin: 0 10px;
 }
+.settings-container .empty *:disabled {
+  border-color: var(--border);
+  color: var(--border);
+}
 
 :root {
   --darker: #0A0A0A;

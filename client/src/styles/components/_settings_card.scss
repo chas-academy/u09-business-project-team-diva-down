@@ -51,6 +51,11 @@
 
         * {
             margin: 0 10px;
+
+            &:disabled {
+                border-color: $border;
+                color: $border;
+            }
         }
     }
 }
