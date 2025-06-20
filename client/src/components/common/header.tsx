@@ -139,6 +139,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { RouterContainer } from "../../routes/RouteContainer";
 import { useAuth } from "../../context/AuthContext";
+import Login_button from "../hoc/loc/login_button";
+import Register_button from "../hoc/loc/register_button";
 
 const Header = () => {
     const [transition, setTransition] = useState<'spin-forward' | 'spin-backward'>('spin-forward');
@@ -218,8 +220,10 @@ const Header = () => {
                     </button>
                 ) : (
                     <>
-                        <Link to={RouterContainer.Login} className="auth-button">Login</Link>
-                        <Link to={RouterContainer.Register} className="auth-button">Register</Link>
+                        <span className="display_nav">
+                            <Link to={RouterContainer.Login} className="auth-button"><Login_button /></Link>
+                            <Link to={RouterContainer.Register} className="auth-button"><Register_button /></Link>
+                        </span>
                     </>
                 )}
 

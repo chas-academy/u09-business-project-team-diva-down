@@ -7,8 +7,8 @@ import UserDashboard from "../pages/UserDashboard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Leaderboard from "../pages/Leaderboard";
-import CustomTrivia from "../pages/CustomTrivia";
 import CustomMultiplayer from "../pages/CustomMultiplayer";
+import CustomTrivia from "../pages/CustomTrivia";
 
 const AppRoutes = () => {
     return (
