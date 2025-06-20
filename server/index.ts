@@ -18,6 +18,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Url } from "url";
 import { BlobOptions } from "buffer";
 import userRouter from "./routes/user.route";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 configurePassport();
@@ -140,7 +141,8 @@ function broadcastClientList(lobbyId?: string) {
         id: client.id,
         username: client.username,
         ready: client.ready,
-        isHost: client.isHost
+        isHost: client.isHost,
+        lobbyId: client.lobbyId
     }));
 
     const message = JSON.stringify({
@@ -210,51 +212,95 @@ function joinLobby(client: Client, lobbyId: string): boolean {
     if (!lobby) return false;
     
     lobby.clients.add(client.id);
-    updateClientLobbyState(client.id, lobbyId);
+
+    client.lobbyId = lobbyId;
+    client.isHost = false;
+    client.ready = false;
+    clients.set(client.id, client);
+
+    // updateClientLobbyState(client.id, lobbyId);
     return true;
 }
 
-function leaveLobby(clientId: string) {
+function leaveLobby(clientId: string): boolean {
     const client = clients.get(clientId);
-    if (!client || !client.lobbyId) return;
-    
+    if (!client || !client.lobbyId) return false;
+
     const lobby = lobbies.get(client.lobbyId);
-    if (!lobby) return;
-    
+    if (!lobby) return false;
+
     // Remove client from lobby
     lobby.clients.delete(clientId);
     client.lobbyId = undefined;
     client.isHost = false;
+    client.ready = false;
     clients.set(clientId, client);
-    
-    // If host leaves, assign new host or disband lobby
-    if (lobby.hostId === clientId) {
-        if (lobby.clients.size > 0) {
-            // Assign new host (first client in Set)
-            const newHostId = Array.from(lobby.clients)[0];
-            lobby.hostId = newHostId;
+
+    // Handle host transfer if needed
+    if (lobby.hostId === clientId && lobby.clients.size > 0) {
+        const newHostId = Array.from(lobby.clients)[0];
+        lobby.hostId = newHostId;
+        
+        const newHost = clients.get(newHostId);
+        if (newHost) {
+            newHost.isHost = true;
+            clients.set(newHostId, newHost);
             
-            const newHost = clients.get(newHostId);
-            if (newHost) {
-                newHost.isHost = true;
-                clients.set(newHostId, newHost);
-            }
+            // Notify new host
+            newHost.socket.send(JSON.stringify({
+                type: 'promotedToHost',
+                lobbyId: lobby.id
+            }));
             
-            // Notify lobby about new host
+            // Notify lobby
             broadcastToLobby(lobby.id, JSON.stringify({
                 type: 'newHost',
                 hostId: newHostId
             }));
-        } else {
-            // No clients left, disband lobby
-            lobbies.delete(lobby.id);
         }
     }
-    
-    // Update client list for remaining lobby members
-    if (lobby.clients.size > 0) {
+
+    // Clean up empty lobby
+    if (lobby.clients.size === 0) {
+        lobbies.delete(lobby.id);
+        
+        // Notify all clients that lobby was disbanded
+        const message = JSON.stringify({
+            type: 'lobbyDisbanded',
+            lobbyId: lobby.id
+        });
+        
+        clients.forEach(c => {
+            if (c.socket.readyState === WebSocket.OPEN) {
+                c.socket.send(message);
+            }
+        });
+    } else {
+        // Update remaining members
         broadcastClientList(lobby.id);
     }
+
+    // Update the global client list for everyone
+    broadcastAllClients();
+    
+    // Update the lobby list for everyone
+    const lobbyListMessage = JSON.stringify({
+        type: 'lobbyList',
+        data: Array.from(lobbies.values()).map(l => ({
+            id: l.id,
+            name: l.name,
+            hostId: l.hostId,
+            clientCount: l.clients.size
+        }))
+    });
+    
+    clients.forEach(c => {
+        if (c.socket.readyState === WebSocket.OPEN) {
+            c.socket.send(lobbyListMessage);
+        }
+    });
+    
+    return true;
 }
 
 
@@ -277,21 +323,89 @@ socket.on('connection', (connection, request) => {
         try {
             const data = JSON.parse(message.toString());
             if (data.type === 'auth') {
-                // verify token here if needed
-                tempClient.id = data.userId;
-                tempClient.username = data.username;
-                clients.set(data.userId, tempClient);
-                console.log(`Authenticated ${data.username}`);
+
+                try {
+
+                    const decoded = jwt.verify(data.token, process.env.JWT_SECRET!) as { id: string };
+
+                    tempClient.id = decoded.id;
+                    tempClient.username = data.username;
+                    clients.set(decoded.id, tempClient);
+
+                    console.log(`Authenticated ${data.username}`);
+
+                    connection.send(JSON.stringify({
+                        type: 'authSuccess',
+                        userId: decoded.id,
+                        username: data.username
+                    }));
+
+                    broadcastAllClients();
+                    broadcastClientList();
+
+                    const lobbyListMessage = JSON.stringify({
+                        type: 'lobbyList',
+                        data: Array.from(lobbies.values()).map(l => ({
+                            id: l.id,
+                            name: l.name,
+                            hostId: l.hostId,
+                            clientCount: l.clients.size
+                        }))
+                    });
+                    connection.send(lobbyListMessage);
+
+                } catch (error) {
+                    console.error('Authentication failed:', error);
+                    connection.send(JSON.stringify({
+                        type: 'authError',
+                        message: 'Authenticationfailed'
+                    }));
+                    connection.close(1008, 'Authentication Failed');
+                }
+
+            }
+            else if (data.type === 'getClientList') {
+                broadcastClientList();
+            }
+            else if (data.type === 'getLobbyList') {
+                const lobbyList = Array.from(lobbies.values()).map(lobby => ({
+                    id: lobby.id,
+                    name: lobby.name,
+                    hostId: lobby.hostId,
+                    clientCount: lobby.clients.size,
+                    createdAt: lobby.createdAt
+                }));
+                
+                connection.send(JSON.stringify({
+                    type: 'lobbyList',
+                    data: lobbyList
+                }));
             }
             else if (data.type === 'createLobby') {
+
+
+                if (!tempClient.id) {
+                    connection.send(JSON.stringify({
+                        type: 'error',
+                        message: 'Not Authenticated'
+                    }));
+                    return;
+                }
+
                 const lobbyName = data.name;
                 const lobby = createLobby(tempClient, lobbyName);
+
+                const AuthUserProfile = clients.get(tempClient.id);
+                if (AuthUserProfile) {
+                    AuthUserProfile.lobbyId = lobby.id;
+                    clients.set(tempClient.id, AuthUserProfile);
+                }
 
                 connection.send(JSON.stringify({
                     type: 'lobbyCreated',
                     lobbyId: lobby.id,
                     lobbyName: lobby.name
-                    
+
                 }));
 
                 console.log(`Lobby Created: ${lobbyName} (ID: ${lobby.id})`);
@@ -313,8 +427,223 @@ socket.on('connection', (connection, request) => {
                     }
                 });
             }
+            else if (data.type === 'ready') {
+                // Handle ready status toggle
+                if (!tempClient.id) {
+                    connection.send(JSON.stringify({
+                        type: 'error',
+                        message: 'Not Authenticated'
+                    }));
+                    return;
+                }
+
+                const client = clients.get(tempClient.id);
+                if (client) {
+                    client.ready = data.ready;
+                    clients.set(tempClient.id, client);
+                    
+                    console.log(`${client.username} is now ${client.ready ? 'ready' : 'not ready'}`);
+                    
+                    // Broadcast updated client list
+                    if (client.lobbyId) {
+                        broadcastClientList(client.lobbyId);
+                    } else {
+                        broadcastAllClients();
+                    }
+
+                    connection.send(JSON.stringify({
+                        type: 'readyUpdate',
+                        userId: client.id,
+                        ready: client.ready
+                    }));
+                }
+            }
+            else if (data.type === 'invite') {
+                console.log('Invite message detected');
+                const { id: targetClientId, lobbyId, lobbyName, senderId } = data;
+                const sender = clients.get(senderId);
+                const targetClient = clients.get(targetClientId);
+
+                if (!sender || !targetClient) {
+                    connection.send(JSON.stringify({
+                        type: 'error',
+                        message: 'Invalid client ID'
+                    }));
+                    return;
+                }
+
+                if (targetClient.socket.readyState === WebSocket.OPEN) {
+                    targetClient.socket.send(JSON.stringify({
+                        type: 'inviteReceived',
+                        from: sender.username,
+                        lobbyId,
+                        lobbyName,
+                        senderId: senderId
+                    }));
+                }
+
+                connection.send(JSON.stringify({
+                    type: 'inviteSent',
+                    to: targetClient.username,
+                    targetClientId: targetClientId
+                }));
+
+                console.log('Target Client State: ', {
+                    exists: !!targetClient,
+                    connected: targetClient?.socket.readyState === WebSocket.OPEN
+                });
+            }
+            else if (data.type === 'joinLobby') {
+                const lobbyId = data.lobbyId;
+                const success = joinLobby(tempClient, lobbyId);
+
+                if (success) {
+                    const lobby = lobbies.get(lobbyId);
+
+                    tempClient.lobbyId = lobbyId;
+                    clients.set(tempClient.id, tempClient);
+
+                    connection.send(JSON.stringify({
+                        type: 'lobbyJoined',
+                        lobbyId,
+                        lobbyName: lobby?.name,
+                        hostId: lobby?.hostId,
+                        isHost: false
+                    }));
+
+                    broadcastAllClients();
+                    broadcastClientList(lobbyId);
+                    
+
+                    const lobbyList = Array.from(lobbies.values()).map(lobby => ({
+                        id: lobby.id,
+                        name: lobby.name,
+                        hostId: lobby.hostId,
+                        clientCount: lobby.clients.size,
+                        createdAt: lobby.createdAt
+                    }));
+                    
+                    clients.forEach(client => {
+                        if (client.socket.readyState === WebSocket.OPEN) {
+                            client.socket.send(JSON.stringify({
+                                type: 'lobbyList',
+                                data: lobbyList
+                            }));
+                        }
+                    });
+                } else {
+                    connection.send(JSON.stringify({
+                        type: 'error',
+                        message: 'Failed to join lobby via Invite'
+                    }));
+                }                
+            }
+            else if (data.type === 'leaveLobby') {
+                const ClientId = data.clientId
+                leaveLobby(ClientId);
+                connection.send(JSON.stringify({
+                    type: 'lobbyLeft',
+                    lobbyId: tempClient.lobbyId
+                }));
+
+                if (tempClient.lobbyId) {
+                    broadcastClientList(tempClient.lobbyId);
+                }
+
+                tempClient.lobbyId = undefined;
+                clients.set(tempClient.id, tempClient);
+            }
+            else if (data.type === 'kickPlayer') {
+                const { clientId, lobbyId } = data;
+                const kicker = clients.get(tempClient.id);
+                const targetClient = clients.get(clientId);
+                
+                // Validate kicker is host
+                const lobby = lobbies.get(lobbyId);
+                if (!lobby || lobby.hostId !== tempClient.id) {
+                    connection.send(JSON.stringify({
+                        type: 'error',
+                        message: 'Only the host can kick players'
+                    }));
+                    return;
+                }
+                
+                // Validate target exists and is in lobby
+                if (!targetClient || targetClient.lobbyId !== lobbyId) {
+                    connection.send(JSON.stringify({
+                        type: 'error',
+                        message: 'Player not found in this lobby'
+                    }));
+                    return;
+                }
+                
+                // Perform the kick
+                const success = leaveLobby(clientId);
+                
+                if (success) {
+                    // Notify the kicked player
+                    if (targetClient.socket.readyState === WebSocket.OPEN) {
+                        targetClient.socket.send(JSON.stringify({
+                            type: 'kickedFromLobby',
+                            lobbyId,
+                            reason: 'You were kicked by the host'
+                        }));
+                    }
+                    
+                    // Notify remaining lobby members
+                    broadcastToLobby(lobbyId, JSON.stringify({
+                        type: 'playerKicked',
+                        clientId,
+                        kickedBy: tempClient.id
+                    }));
+                    
+                    // Send success confirmation
+                    connection.send(JSON.stringify({
+                        type: 'kickSuccess',
+                        clientId
+                    }));
+                } else {
+                    connection.send(JSON.stringify({
+                        type: 'error',
+                        message: 'Failed to kick player'
+                    }));
+                }
+            }
         } catch (error) {
             console.error(`Invalid message: ${error}`);
+        }
+    });
+
+    connection.on('close', () => {
+        if (tempClient.id) {
+            const client = clients.get(tempClient.id);
+            const lobbyId = client?.lobbyId;
+            
+            leaveLobby(tempClient.id);
+            clients.delete(tempClient.id);
+            
+            broadcastAllClients();
+            
+            if (lobbyId) {
+                broadcastClientList(lobbyId);
+                
+                const lobbyList = Array.from(lobbies.values()).map(lobby => ({
+                    id: lobby.id,
+                    name: lobby.name,
+                    hostId: lobby.hostId,
+                    clientCount: lobby.clients.size,
+                    createdAt: lobby.createdAt
+                }));
+                
+                clients.forEach(c => {
+                    if (c.socket.readyState === WebSocket.OPEN) {
+                        c.socket.send(JSON.stringify({
+                            type: 'lobbyList',
+                            data: lobbyList
+                        }));
+                    }
+                });
+            }
         }
     });
 
