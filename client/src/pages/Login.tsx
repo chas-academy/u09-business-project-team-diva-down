@@ -138,13 +138,15 @@ const Login = () => {
                 }),
             });
 
-            const data = await response.json();
+            const data: LoginResponse = await response.json();
 
             if (!response.ok) {
                 throw new Error(data.message || "Login Failed");
             }
 
             login(data.token, data.user);
+            localStorage.setItem('userData', JSON.stringify(data.user));
+
             navigate(RouterContainer.Homepage);
         } catch (err) {
             console.error("Login error", err);
