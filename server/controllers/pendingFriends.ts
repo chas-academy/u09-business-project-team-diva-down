@@ -20,6 +20,7 @@ const getPendingRequests = async (req: Request, res: Response): Promise<any> => 
 
         res.status(200).json(requests);
     } catch (error) {
+        console.error("GET PENDING REQUESTS ERROR", error);
         res.status(500).json({ message: "Error getting pending requests", error });
     }
 };

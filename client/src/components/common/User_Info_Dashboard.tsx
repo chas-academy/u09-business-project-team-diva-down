@@ -146,7 +146,7 @@ import { useAuth } from "../../context/AuthContext";
 import api from '../../services/loginapi';
 
 interface SelectValue {
-    value: number;
+  value: number;
 }
 
 interface UserData {

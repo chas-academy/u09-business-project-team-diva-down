@@ -28,6 +28,7 @@ const getPendingRequests = (req, res) => __awaiter(void 0, void 0, void 0, funct
         res.status(200).json(requests);
     }
     catch (error) {
+        console.error("GET PENDING REQUESTS ERROR", error);
         res.status(500).json({ message: "Error getting pending requests", error });
     }
 });
