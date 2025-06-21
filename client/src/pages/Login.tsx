@@ -140,7 +140,15 @@ const Login = () => {
 
             const data: LoginResponse = await response.json();
 
-            if (!response.ok) {
+            if (response.ok) {
+                const authUser = {
+                    id: data.user.id,
+                    name: data.user.name,
+                    email: data.user.email,
+                    token: data.token
+                };
+                localStorage.setItem('authUser', JSON.stringify(authUser));
+            } else {
                 throw new Error(data.message || "Login Failed");
             }
 
@@ -148,6 +156,7 @@ const Login = () => {
             localStorage.setItem('userData', JSON.stringify(data.user));
 
             navigate(RouterContainer.Homepage);
+            
         } catch (err) {
             console.error("Login error", err);
             setError(err instanceof Error ? err.message : "Login failed");

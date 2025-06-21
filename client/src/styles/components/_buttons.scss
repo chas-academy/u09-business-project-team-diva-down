@@ -95,3 +95,27 @@
         padding: 12px 24px;
     }
 }
+
+.invitationDetails {
+    margin: 20px 0;
+
+    .connect_button {
+        color: $accent1;
+        background-color: $accent1light;
+        border: 1px solid $accent1;
+        padding: 6px 12px;
+        border-radius: 7px;
+        font-family: $font1;
+        font-size: 1.1rem;
+
+        &:hover {
+            background-color: $accent1;
+            color: $switch1;
+        }
+
+        &:active {
+            color: $accent1;
+            background-color: $accent1light;
+        }
+    }
+}

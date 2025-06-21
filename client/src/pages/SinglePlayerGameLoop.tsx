@@ -134,8 +134,9 @@ const SingePlayerGameLoop: React.FC = () => {
         } else {
             try {
                 const custom_apicall = `https://opentdb.com/api.php?amount=10&category=${selectedCategory.value}&difficulty=${difficulty}&type=multiple`;
-                // const response = await axios.get(custom_apicall);
-                const response = MockDataGameLoop;
+                const response = await axios.get(custom_apicall);
+                // console.log(response);
+                // const response = MockDataGameLoop[1];
                 const formattedQuestions = response.data.results.map((q: any) => ({
                     ...q,
                     all_answers: shuffleArray([...q.incorrect_answers, q.correct_answer])
@@ -169,7 +170,8 @@ const SingePlayerGameLoop: React.FC = () => {
             setSelectedAnswer(null);
             handleReset();
         } else {
-            if (ranked) calculateRating();
+            
+
             setGameState('finished');
         }
     }
@@ -200,6 +202,7 @@ const SingePlayerGameLoop: React.FC = () => {
                     }
                     {gameState === 'playing' && currentQuestion && (
                         <>
+                        <div className="game_window">
                             <div className="game-screen">
                                 <div className="game-info">
                                     <div className="question">
@@ -270,6 +273,7 @@ const SingePlayerGameLoop: React.FC = () => {
                                     )}
                                 </div>
                             </div>
+                        </div>
                         </>
                     )}
                     {gameState === 'finished' && (

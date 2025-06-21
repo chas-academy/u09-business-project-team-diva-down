@@ -7,6 +7,7 @@ import UserDashboard from "../pages/UserDashboard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Leaderboard from "../pages/Leaderboard";
+import CustomMultiplayer from "../pages/CustomMultiplayer";
 import CustomTrivia from "../pages/CustomTrivia";
 
 const AppRoutes = () => {
@@ -20,6 +21,7 @@ const AppRoutes = () => {
             <Route path={RouterContainer.Register} element={<Register />} />
             <Route path={RouterContainer.Leaderboard} element={<Leaderboard />} />
             <Route path={RouterContainer.CustomTrivia} element={<CustomTrivia />} />
+            <Route path={RouterContainer.CustomMultiplayer} element={<CustomMultiplayer />} />
         </Routes>
     );
 };

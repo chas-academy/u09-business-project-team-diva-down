@@ -10,6 +10,7 @@
 @use './pages/Register';
 @use './pages/Leaderboard';
 @use './pages/CustomTrivia';
+@use './pages/CustomMultiplayerTrivia';
 
 // Components - styling
 @use './components/header.scss';
@@ -26,10 +27,12 @@
 @use './components/change_password_card';
 @use './components/custom_trivia_container';
 @use './components/custom_trivia_question_forms';
+@use './components/CustomMultiplayerCards';
 
 // Special Components
 @use './special/timer.scss';
 
+// Global Values
 * {
     transition: all 0.3s ease;
     box-sizing: border-box;

@@ -1,125 +1,171 @@
 @import '../variables/variables.scss';
 
-.game-screen {
-    margin-top: 20px;
-    height: auto;
-    width: 510px;
-    background-color: $darker;
-    border-radius: 7px;
+.game_window {
+    height: 100%;
+    width: 100%;
+    position: relative;
     display: flex;
-    flex-direction: column;
-    color: $text1;
-    font-family: $font1;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+    gap: 10px;
+    justify-content: center;
 
-    .game-info {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid $border;
-        font-size: 1.5rem;
-        padding: 20px;
-
-        .timer {
-            font-size: 0.75rem;
-        }
-    }
-
-    .game-settings {
-        display: flex;
-        justify-content: space-between;
-        font-size: 1rem;
-        padding: 20px;
-
-        .category {
-            padding: 6px 12px;
-            border-radius: 7px;
-            background-color: $accent2light;
-            color: $accent2;
-            font-weight: 600;
-        }
-
-        .difficulty {
-            color: $text2;
-            padding: 6px 0;
-
-            .capitalize {
-                text-transform: capitalize;
-            }
-        }
-    }
-
-    .question-text {
-        font-size: 1.25rem;
-        font-weight: 500;
-        display: flex;
-        justify-content: flex-start;
-        padding: 40px 20px;
-        text-wrap: wrap;
-    }
-
-    .answer-options {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        width: 100%;
-        padding: 20px;
-
-        .answer-button {
-            width: 100%;
-            min-height: 50px;
-            padding: 5px;
-            background-color: $card_bg;
+    .display-players {
+        position: sticky;
+        top: 0;
+        align-self: flex-start;
+        background-color: $darker;
+        padding: 15px;
+        border-radius: 7px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 7px;
-            border: 1px solid $border;
-            color: $text1;
-            transition: all 0.2s ease-in-out;
-
-            &:hover:not(:disabled) {
-                background-color: $accent1light;
-                border-color: $accent1;
-            }
-
-            &:disabled {
-                cursor: not-allowed;
-            }
+            flex-direction: column;
+            gap: 10px;
             
-            &.correct {
-                background-color: $warning;
-                border-color: $warning;
-            }
+            li {
+                color: $text1;
+                padding: 8px 12px;
+                background-color: $card_bg;
+                border-radius: 5px;
+                border: 1px solid $border;
+                font-family: $font1;
+                cursor: pointer;
 
-            &.incorrect {
-                background-color: $error;
-                border-color: $error;
-            }
-
-            &.correct-answer {
-                background-color: $success;
-                border-color: $success;
+                &:hover {
+                    color: $accent1;
+                    border-color: $accent1;
+                    background-color: $accent1light;
+                }
             }
         }
     }
 
-    .next-button-container {
+    .game-screen {
+        margin-top: 0;
+        height: auto;
+        width: 510px;
+        background-color: $darker;
+        border-radius: 7px;
         display: flex;
-        justify-content: flex-end;
-        padding: 20px;
-        border-top: 1px solid $border;
+        flex-direction: column;
+        color: $text1;
+        font-family: $font1;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 
-        .next-button {
-            color: $text1;
-            font-size: 1rem;
+        .game-info {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            text-transform: uppercase;
-            background-color: $accent1;
-            border-radius: 7px;
-            padding: 12px 24px;
-            font-weight: 600;
+            justify-content: space-between;
+            border-bottom: 1px solid $border;
+            font-size: 1.5rem;
+            padding: 20px;
+
+            .timer {
+                font-size: 0.75rem;
+            }
+        }
+
+        .game-settings {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            padding: 20px;
+
+            .category {
+                padding: 6px 12px;
+                border-radius: 7px;
+                background-color: $accent2light;
+                color: $accent2;
+                font-weight: 600;
+            }
+
+            .difficulty {
+                color: $text2;
+                padding: 6px 0;
+
+                .capitalize {
+                    text-transform: capitalize;
+                }
+            }
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: flex-start;
+            padding: 40px 20px;
+            text-wrap: wrap;
+        }
+
+        .answer-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+            padding: 20px;
+
+            .answer-button {
+                width: 100%;
+                min-height: 50px;
+                padding: 5px;
+                background-color: $card_bg;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 7px;
+                border: 1px solid $border;
+                color: $text1;
+                transition: all 0.2s ease-in-out;
+
+                &:hover:not(:disabled) {
+                    background-color: $accent1light;
+                    border-color: $accent1;
+                }
+
+                &:disabled {
+                    cursor: not-allowed;
+                }
+                
+                &.correct {
+                    background-color: $warning;
+                    border-color: $warning;
+                }
+
+                &.incorrect {
+                    background-color: $error;
+                    border-color: $error;
+                }
+
+                &.correct-answer {
+                    background-color: $success;
+                    border-color: $success;
+                }
+            }
+        }
+
+        .next-button-container {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+            border-top: 1px solid $border;
+
+            .next-button {
+                color: $text1;
+                font-size: 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-transform: uppercase;
+                background-color: $accent1;
+                border-radius: 7px;
+                padding: 12px 24px;
+                font-weight: 600;
+            }
         }
     }
 }

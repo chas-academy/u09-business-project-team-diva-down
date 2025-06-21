@@ -29,3 +29,30 @@
         margin-top: 10px;
     }
 }
+
+.under_title_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+    width: 100%;
+
+    h2 {
+        color: $accent1;
+        display: inline-block;
+        text-transform: uppercase;
+        font-family: $font2;
+        font-weight: 400;
+        font-size: 2rem;
+    }
+
+    p {
+        color: $text1;
+        font-family: $font1;
+        font-weight: 500;
+        width: 60%;
+        text-align: center;
+        margin-top: 10px;
+    }
+}
