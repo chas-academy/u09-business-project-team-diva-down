@@ -42,7 +42,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUser = void 0;
+exports.getAllusers = exports.getUser = void 0;
 const User_model_1 = require("../models/User.model");
 const mongoose_1 = __importStar(require("mongoose"));
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -67,3 +67,17 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getUser = getUser;
+const getAllusers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const allUsers = yield User_model_1.User.find({}).select('-password');
+        if (!allUsers || allUsers.length === 0) {
+            return res.status(404).json({ message: 'No users found!' });
+        }
+        res.status(200).json(allUsers);
+    }
+    catch (err) {
+        res.status(500).json({ message: "Error fetch All users", error: err });
+        return;
+    }
+});
+exports.getAllusers = getAllusers;

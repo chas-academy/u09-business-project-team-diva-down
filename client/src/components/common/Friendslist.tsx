@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import API from "../../services/api";
+import axios from "axios";
 
 interface User {
     _id: string;
@@ -43,9 +44,19 @@ const Friendslist_card: React.FC = () => {
     };
 
     const fetchAllUsers = async () => {
-        const res = await API.get<User[]>("/auth/users");
-        setAllUsers(res.data);
+        try {
+            axios.get('http://localhost:3000/user')
+                .then(response => {
+                    console.log(response.data)
+                    const data = response.data;
+                    setAllUsers(data);
+                })
+                .catch(error => {console.error(error)});
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        }
     };
+
 
     const handleRemoveFriend = (id: string) => {
         setFriendList(prev => prev.filter(rel => rel.friend._id !== id));
@@ -85,9 +96,16 @@ const Friendslist_card: React.FC = () => {
         }
     };
 
+    const CheckStatus = () => {
+        console.log(allUsers);
+    }
+
     return (
         <div className="user_friendslist">
             <div className="under_title">Friendslist</div>
+
+            <button style={{color: '#FFF'}} onClick={() => CheckStatus()}>Check Status</button>
+            <button style={{color: '#FFF'}} onClick={() => fetchAllUsers()}>Check Fetching Users</button>
 
             <form className="search_container" onSubmit={handleSendFriendRequest}>
                 <input

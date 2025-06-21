@@ -3,6 +3,8 @@ import Edit from "../hoc/loc/Edit_button_dashboard";
 import Save from "../hoc/loc/Save_button_dashboard";
 import Back from "../hoc/loc/Back_button_dashboard";
 import ChangePassword from "./user_dashboard/Change_password";
+import axios from "axios";
+import { PassThrough } from "stream";
 
 interface SelectValue {
   value: number;
@@ -12,12 +14,13 @@ interface UserData {
   id: string;
   name: string;
   email: string;
-  elo?: number;
+  eloScore?: number;
   wins?: number;
   total_matches?: number;
 }
 
 const UserInfo = () => {
+  const [AuthUserId, setAuthUserId] = useState<string>();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [toggleWindow, setToggleWindow] = useState(false);
   const [editUsername, setEditUsername] = useState(false);
@@ -42,9 +45,18 @@ const UserInfo = () => {
       }
 
       const parsedData = JSON.parse(storedData);
-      setUserData(parsedData);
-      setNewEmailValue(parsedData.email);
-      setNewUsernameValue(parsedData.name);
+
+      setAuthUserId(parsedData.id);
+      fetchAuthUser(parsedData.id);
+      // if (AuthUserId) {
+      //   fetchAuthUser(AuthUserId);
+      // } else {
+      //   console.log("No Id Found!");
+      // }
+      
+      // setUserData(parsedData);
+      // setNewEmailValue(parsedData.email);
+      // setNewUsernameValue(parsedData.name);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load user data");
     } finally {
@@ -54,6 +66,18 @@ const UserInfo = () => {
         loadUserData();
     }, []);
 
+
+  const fetchAuthUser = (id: string) => {
+    try {
+      axios.get(`http://localhost/user/${id}`)
+        .then(response => {
+          const UserData = response.data;
+          setUserData(UserData);
+        })
+    } catch (error) {
+      console.error("Failed fetch Auth User", error);
+    }
+  }
 
   const ToggleWindowFunction = () => {
     setToggleWindow(!toggleWindow);
@@ -144,10 +168,23 @@ const UserInfo = () => {
     return <div className="user_info">No user data available</div>;
   }
 
+  const CheckStatus = () => {
+
+    const storedData = localStorage.getItem('userData');
+      if (!storedData) {
+        throw new Error("No user data found in session storage.");
+      }
+
+    console.log(AuthUserId);
+    console.log(userData);
+    console.log(storedData);
+  }
+
   return (
     <>
       <div className="user_info">
         <div className="game_title">Game Stats</div>
+        <button style={{color: '#FFF'}} onClick={() => CheckStatus()}>Check Status</button>
         <div className="game_stats">
           <div className="title">Current Rating:</div>
           <div className="data">{userData.elo || "N/A"}</div>

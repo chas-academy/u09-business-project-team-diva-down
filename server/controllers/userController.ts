@@ -27,3 +27,20 @@ export const getUser = async (req: Request, res: Response): Promise<any> => {
         return;
     }
 }
+
+export const getAllusers = async (req: Request, res: Response): Promise<any> => {
+    try {
+
+        const allUsers = await User.find({}).select('-password');
+
+        if (!allUsers || allUsers.length === 0) {
+            return res.status(404).json({ message: 'No users found!' });
+        }
+
+        res.status(200).json(allUsers);
+
+    } catch (err) {
+        res.status(500).json({ message: "Error fetch All users", error: err});
+        return;
+    }
+}
