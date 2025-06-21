@@ -18,13 +18,15 @@ interface AuthUserLobbyCardProps {
     clients: Client[];
     authUser: AuthUser | null;
     readyButton: () => void;
+    isReady: boolean;
 }
 
 
 export const AuthUserLobbyCard: React.FC<AuthUserLobbyCardProps> = ({
     clients,
     authUser,
-    readyButton
+    readyButton,
+    isReady
 }) => {
 
 
@@ -39,7 +41,7 @@ export const AuthUserLobbyCard: React.FC<AuthUserLobbyCardProps> = ({
                             <td>{currentUser?.username}</td>
                             <td>{currentUser?.isHost ? 'Host' : 'Guest'}</td>
                             <td>{currentUser?.ready ? 'Ready' : 'Not Ready'}</td>
-                            <td><button onClick={readyButton} className="ready">{currentUser?.ready ? '✖' : '✓'}</button></td>
+                            <td><button onClick={readyButton} className="ready">{isReady ? '✖' : '✓'}</button></td>
                         </tr>
                     </tbody>
                 </table>

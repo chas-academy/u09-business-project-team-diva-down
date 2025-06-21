@@ -1,12 +1,4 @@
 
-interface Client {
-  id: string;
-  username: string;
-  ready: boolean;
-  isHost?: boolean;
-  lobbyId?: string;
-}
-
 interface Invitation {
     id: string;
     from: string;
@@ -16,7 +8,6 @@ interface Invitation {
 }
 
 interface ReciveInvitationscardProps {
-    // clients: Client[];
     ReciviedInvitations?: Invitation[];
     DeclineInvitation: (id: string) => void;
     AcceptInvitation: (id: string) => void;

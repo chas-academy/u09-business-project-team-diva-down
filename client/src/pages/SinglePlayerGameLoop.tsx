@@ -115,6 +115,8 @@ const SingePlayerGameLoop: React.FC = () => {
             setSelectedAnswer(null);
             handleReset();
         } else {
+            
+
             setGameState('finished');
         }
     }
@@ -145,6 +147,7 @@ const SingePlayerGameLoop: React.FC = () => {
                     }
                     {gameState === 'playing' && currentQuestion && (
                         <>
+                        <div className="game_window">
                             <div className="game-screen">
                                 <div className="game-info">
                                     <div className="question">
@@ -215,6 +218,7 @@ const SingePlayerGameLoop: React.FC = () => {
                                     )}
                                 </div>
                             </div>
+                        </div>
                         </>
                     )}
                     {gameState === 'finished' && (

@@ -29,8 +29,13 @@ const FullClientLobbyDisplay: React.FC<FullClientLobbyDisplayProps> = ({
     leaveLobby
 }) => {
 
+    const AuthUserClient = clients.find(client => client.id === authUser?.id);
     const HostClient = clients.find(client => client.isHost === true);
-    const RestOfTheClients = clients.filter(client => client.id != HostClient?.id);
+    const RestOfTheClients = clients.filter(
+        client => client.id != HostClient?.id &&
+        client.id != AuthUserClient?.id
+    );
+    const AuthUserClientID = AuthUserClient?.id
 
 
     return (
@@ -43,15 +48,27 @@ const FullClientLobbyDisplay: React.FC<FullClientLobbyDisplayProps> = ({
                         <td>{HostClient?.ready ? 'Ready' : 'Not Ready'}</td>
                         <td></td>
                     </tr>
+                    <tr>
+                        <td>{AuthUserClient?.username}</td>
+                        <td>{AuthUserClient?.isHost ? 'Host' : 'Guest'}</td>
+                        <td>{AuthUserClient?.ready ? 'Ready' : 'Not Ready'}</td>
+                        <td className="action_container">
+                            <button className="btn ready" onClick={readyButton}>Ready</button>
+                            <button className="btn leave" onClick={() => {
+                                if (AuthUserClientID) {
+                                    leaveLobby(AuthUserClientID);
+                                } else {
+                                    console.error("No Auth user ID found!");
+                                }
+                            }}>Leave</button>
+                        </td>
+                    </tr>
                     {RestOfTheClients.map(client => 
                         <tr key={client.id}>
                             <td>{client.username}</td>
                             <td>{client.isHost ? 'Host' : 'Guest'}</td>
                             <td>{client.ready ? 'Ready' : 'Not Ready'}</td>
-                            <td className="action_container">
-                                <button className="btn ready" onClick={readyButton}>Ready</button>
-                                <button className="btn leave" onClick={() => leaveLobby(client.id)}>Leave</button>
-                            </td>
+                            <td className="action_container"></td>
                         </tr>
                     )}
                 </tbody>

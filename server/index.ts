@@ -104,6 +104,12 @@ interface Message {
     lobbyId?: string;
 }
 
+interface FinalScore {
+    skippedQuestions: number;
+    correctAnswered: number;
+    InCorrectAnswered: number;
+}
+
 // Websocket Consts
 
 const clients = new Map<string, Client>();
@@ -124,11 +130,27 @@ function broadcastToLobby(lobbyId: string, message: string) {
     });
 }
 
+function broadcastQuestionToLobby(lobbyId: string, formattedQuestions: any[]) {
+    const lobby = lobbies.get(lobbyId);
+    if (!lobby) return;
+
+    const message = JSON.stringify({
+        type: 'gameStarted',
+        questions: formattedQuestions
+    });
+
+    lobby.clients.forEach(clientId => {
+        const client = clients.get(clientId);
+        if (client && client.socket.readyState === WebSocket.OPEN) {
+            client.socket.send(message);
+        }
+    });
+}
+
 function broadcastClientList(lobbyId?: string) {
     let targetClients: Client[];
     
     if (lobbyId) {
-        // Broadcast to specific lobby
         const lobby = lobbies.get(lobbyId);
         if (!lobby) return;
         
@@ -136,7 +158,6 @@ function broadcastClientList(lobbyId?: string) {
             .map(clientId => clients.get(clientId))
             .filter(client => client !== undefined) as Client[];
     } else {
-        // Broadcast to all clients (for global messages)
         targetClients = Array.from(clients.values());
     }
 
@@ -221,7 +242,6 @@ function joinLobby(client: Client, lobbyId: string): boolean {
     client.ready = false;
     clients.set(client.id, client);
 
-    // updateClientLobbyState(client.id, lobbyId);
     return true;
 }
 
@@ -232,14 +252,12 @@ function leaveLobby(clientId: string): boolean {
     const lobby = lobbies.get(client.lobbyId);
     if (!lobby) return false;
 
-    // Remove client from lobby
     lobby.clients.delete(clientId);
     client.lobbyId = undefined;
     client.isHost = false;
     client.ready = false;
     clients.set(clientId, client);
 
-    // Handle host transfer if needed
     if (lobby.hostId === clientId && lobby.clients.size > 0) {
         const newHostId = Array.from(lobby.clients)[0];
         lobby.hostId = newHostId;
@@ -249,13 +267,11 @@ function leaveLobby(clientId: string): boolean {
             newHost.isHost = true;
             clients.set(newHostId, newHost);
             
-            // Notify new host
             newHost.socket.send(JSON.stringify({
                 type: 'promotedToHost',
                 lobbyId: lobby.id
             }));
             
-            // Notify lobby
             broadcastToLobby(lobby.id, JSON.stringify({
                 type: 'newHost',
                 hostId: newHostId
@@ -263,11 +279,9 @@ function leaveLobby(clientId: string): boolean {
         }
     }
 
-    // Clean up empty lobby
     if (lobby.clients.size === 0) {
         lobbies.delete(lobby.id);
         
-        // Notify all clients that lobby was disbanded
         const message = JSON.stringify({
             type: 'lobbyDisbanded',
             lobbyId: lobby.id
@@ -279,14 +293,11 @@ function leaveLobby(clientId: string): boolean {
             }
         });
     } else {
-        // Update remaining members
         broadcastClientList(lobby.id);
     }
 
-    // Update the global client list for everyone
     broadcastAllClients();
     
-    // Update the lobby list for everyone
     const lobbyListMessage = JSON.stringify({
         type: 'lobbyList',
         data: Array.from(lobbies.values()).map(l => ({
@@ -370,6 +381,19 @@ socket.on('connection', (connection, request) => {
             else if (data.type === 'getClientList') {
                 broadcastClientList();
             }
+            else if (data.type === 'FinalScores') {
+                const clientId = tempClient.id;
+                const client = clients.get(clientId);
+                if (client && client.lobbyId) {
+                    broadcastToLobby(client?.lobbyId, JSON.stringify({
+                        type: 'LobbiesFinalScores',
+                        clientId: clientId,
+                        username: client.username,
+                        ScoreData: data.ScoreData
+                    }));
+                }
+                
+            }
             else if (data.type === 'getLobbyList') {
                 const lobbyList = Array.from(lobbies.values()).map(lobby => ({
                     id: lobby.id,
@@ -431,7 +455,6 @@ socket.on('connection', (connection, request) => {
                 });
             }
             else if (data.type === 'ready') {
-                // Handle ready status toggle
                 if (!tempClient.id) {
                     connection.send(JSON.stringify({
                         type: 'error',
@@ -447,7 +470,6 @@ socket.on('connection', (connection, request) => {
                     
                     console.log(`${client.username} is now ${client.ready ? 'ready' : 'not ready'}`);
                     
-                    // Broadcast updated client list
                     if (client.lobbyId) {
                         broadcastClientList(client.lobbyId);
                     } else {
@@ -609,6 +631,19 @@ socket.on('connection', (connection, request) => {
                     connection.send(JSON.stringify({
                         type: 'error',
                         message: 'Failed to kick player'
+                    }));
+                }
+            }
+            else if (data.type === 'StartGame') {
+                const formattedQuestions = data.formattedQuestions;
+                const client = clients.get(tempClient.id);
+
+                if (client && client.lobbyId) {
+                    broadcastQuestionToLobby(client.lobbyId, formattedQuestions);
+                } else {
+                    connection.send(JSON.stringify({
+                        type: 'error',
+                        message: 'You must be in a lobby to start a game!'
                     }));
                 }
             }

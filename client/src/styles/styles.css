@@ -1768,6 +1768,76 @@ iframe {
     transform: translateY(0);
   }
 }
+.scoreboard {
+  margin-top: 20px;
+  height: auto;
+  min-width: 400px;
+  background-color: var(--darker);
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+.scoreboard h2 {
+  font-family: "Tilt Warp", sans-serif;
+  color: var(--accent2);
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+.scoreboard p {
+  color: var(--text1);
+  font-family: "Titillium Web", sans-serif;
+}
+.scoreboard table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text1);
+  font-family: "Titillium Web", sans-serif;
+}
+.scoreboard table thead tr {
+  background-color: var(--card_bg);
+  border-bottom: 1px solid var(--border);
+}
+.scoreboard table thead tr th {
+  padding: 10px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--accent2);
+}
+.scoreboard table thead tr th:first-child {
+  border-radius: 7px 0 0 0;
+}
+.scoreboard table thead tr th:last-child {
+  border-radius: 0 7px 0 0;
+}
+.scoreboard table tbody tr {
+  border-bottom: 1px solid var(--border);
+}
+.scoreboard table tbody tr:last-child {
+  border-bottom: none;
+}
+.scoreboard table tbody tr td {
+  padding: 10px;
+  text-align: center;
+}
+.scoreboard table tbody tr:nth-child(even) {
+  background-color: rgba(var(--card_bg), 0.3);
+}
+.scoreboard tbody tr:nth-child(1) td:last-child {
+  color: gold;
+  font-weight: bold;
+}
+.scoreboard tbody tr:nth-child(2) td:last-child {
+  color: silver;
+  font-weight: bold;
+}
+.scoreboard tbody tr:nth-child(3) td:last-child {
+  color: #cd7f32;
+  font-weight: bold;
+}
+
 .score_card {
   margin-top: 20px;
   height: auto;
@@ -2392,8 +2462,49 @@ iframe {
   --rbg1: #e2e2e2;
 }
 
-.game-screen {
-  margin-top: 20px;
+.game_window {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.game_window .display-players {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  background-color: var(--darker);
+  padding: 15px;
+  border-radius: 7px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+.game_window .display-players ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.game_window .display-players ul li {
+  color: var(--text1);
+  padding: 8px 12px;
+  background-color: var(--card_bg);
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  font-family: "Titillium Web", sans-serif;
+  cursor: pointer;
+}
+.game_window .display-players ul li:hover {
+  color: var(--accent1);
+  border-color: var(--accent1);
+  background-color: var(--accent1light);
+}
+.game_window .game-screen {
+  margin-top: 0;
   height: auto;
   width: 510px;
   background-color: var(--darker);
@@ -2404,37 +2515,37 @@ iframe {
   font-family: "Titillium Web", sans-serif;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 }
-.game-screen .game-info {
+.game_window .game-screen .game-info {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid var(--border);
   font-size: 1.5rem;
   padding: 20px;
 }
-.game-screen .game-info .timer {
+.game_window .game-screen .game-info .timer {
   font-size: 0.75rem;
 }
-.game-screen .game-settings {
+.game_window .game-screen .game-settings {
   display: flex;
   justify-content: space-between;
   font-size: 1rem;
   padding: 20px;
 }
-.game-screen .game-settings .category {
+.game_window .game-screen .game-settings .category {
   padding: 6px 12px;
   border-radius: 7px;
   background-color: var(--accent2light);
   color: var(--accent2);
   font-weight: 600;
 }
-.game-screen .game-settings .difficulty {
+.game_window .game-screen .game-settings .difficulty {
   color: var(--text2);
   padding: 6px 0;
 }
-.game-screen .game-settings .difficulty .capitalize {
+.game_window .game-screen .game-settings .difficulty .capitalize {
   text-transform: capitalize;
 }
-.game-screen .question-text {
+.game_window .game-screen .question-text {
   font-size: 1.25rem;
   font-weight: 500;
   display: flex;
@@ -2442,14 +2553,14 @@ iframe {
   padding: 40px 20px;
   text-wrap: wrap;
 }
-.game-screen .answer-options {
+.game_window .game-screen .answer-options {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   width: 100%;
   padding: 20px;
 }
-.game-screen .answer-options .answer-button {
+.game_window .game-screen .answer-options .answer-button {
   width: 100%;
   min-height: 50px;
   padding: 5px;
@@ -2462,32 +2573,32 @@ iframe {
   color: var(--text1);
   transition: all 0.2s ease-in-out;
 }
-.game-screen .answer-options .answer-button:hover:not(:disabled) {
+.game_window .game-screen .answer-options .answer-button:hover:not(:disabled) {
   background-color: var(--accent1light);
   border-color: var(--accent1);
 }
-.game-screen .answer-options .answer-button:disabled {
+.game_window .game-screen .answer-options .answer-button:disabled {
   cursor: not-allowed;
 }
-.game-screen .answer-options .answer-button.correct {
+.game_window .game-screen .answer-options .answer-button.correct {
   background-color: var(--warning);
   border-color: var(--warning);
 }
-.game-screen .answer-options .answer-button.incorrect {
+.game_window .game-screen .answer-options .answer-button.incorrect {
   background-color: var(--error);
   border-color: var(--error);
 }
-.game-screen .answer-options .answer-button.correct-answer {
+.game_window .game-screen .answer-options .answer-button.correct-answer {
   background-color: var(--success);
   border-color: var(--success);
 }
-.game-screen .next-button-container {
+.game_window .game-screen .next-button-container {
   display: flex;
   justify-content: flex-end;
   padding: 20px;
   border-top: 1px solid var(--border);
 }
-.game-screen .next-button-container .next-button {
+.game_window .game-screen .next-button-container .next-button {
   color: var(--text1);
   font-size: 1rem;
   display: flex;
@@ -2592,10 +2703,12 @@ iframe {
 }
 .settings-container .settings-bar .play-button-ready * {
   border-color: var(--accent1);
+  margin: 0 5px;
 }
 .settings-container .settings-bar .play-button-waiting * {
   border-color: var(--border) !important;
   color: var(--border) !important;
+  margin: 0 5px;
 }
 .settings-container .settings-bar .play-button-waiting *:hover {
   background-color: transparent;
@@ -4327,7 +4440,6 @@ iframe {
   }
 }
 .invited_to_lobby .lobby_table tbody tr td:last-child {
-  width: 30%;
   min-width: 150px;
 }
 .invited_to_lobby .lobby_table tbody tr td .leave {

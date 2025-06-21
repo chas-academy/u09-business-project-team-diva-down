@@ -26,6 +26,7 @@
         .play-button-ready {
             * {
                 border-color: $accent1;
+                margin: 0 5px;
             }
         }
 
@@ -33,6 +34,7 @@
             * {
                 border-color: $border !important;
                 color: $border !important;
+                margin: 0 5px;
 
                 &:hover {
                     background-color: transparent;

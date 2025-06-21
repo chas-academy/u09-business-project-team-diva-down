@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Header from "../components/common/header";
 import Footer from "../components/common/footer";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import CustomMultiplayerSettings from "../components/common/gameloop/custom_multiplayer_settings_card";
 import MultiPlayer_title from "../components/hoc/loc/MultiPlayer_title";
 import { ActiveClientsLobby } from "../components/common/mutliplayer-Custom-Comp/Lobby_Active_Clients_card";
@@ -12,13 +12,18 @@ import Lobby_title from "../components/hoc/loc/Lobby_title";
 import ReciveInvitationscard from "../components/common/mutliplayer-Custom-Comp/ReciveInvitations_card";
 import { v4 as uuidv4 } from "uuid";
 import FullClientLobbyDisplay from "../components/common/mutliplayer-Custom-Comp/Full_Client_Lobby_Display_card";
+import { MockDataGameLoop } from "../MockData/MockDataGameLoop";
+import Countdown from "../components/common/CountDownTimer";
+import Home_button from "../components/hoc/loc/Home_button";
+import PlayAgain from "../components/hoc/loc/PlayAgain";
+import { RouterContainer } from "../routes/RouteContainer";
+import LobbyScoreBoardCard from "../components/common/gameloop/Lobby_ScoreBoard";
 
 // Fetching Trivia ID from the redirect to this page
 
 interface LocationState {
     TriviaId: number;
 }
-
 
 // Interfaces, Const and UseEffect for fetching the Auth Users data -----------------
 
@@ -65,13 +70,57 @@ interface Invitation {
     timestamp: Date;
 }
 
+// Gameloop interfaces and types
+
+type GameState = 'prep' | 'playing' | 'finished';
+
+interface selectedOption {
+    value: string;
+    label: string;
+}
+
+type Questions = {
+  question: string;
+  correct_answer: string;
+  incorrect_answers: string[];
+  all_answers: string[];
+  difficulty: string;
+  category: string;
+};
+
+interface FinalScore {
+    skippedQuestions: number;
+    correctAnswered: number;
+    InCorrectAnswered: number;
+}
+
+interface LobbyScoreBoard {
+    UserId: string;
+    name: string;
+    skippedQuestions: number;
+    correctAnswered: number;
+    InCorrectAnswered: number;
+}
+
 const CustomMultiplayer: React.FC = () => {
+    const [LobbyScoreBoard, setLobbyScoreBoard] = useState<LobbyScoreBoard[]>([]);
+    const [gameState, setGameState] = useState<GameState>('prep');
+    const [questions, setQuestions] = useState<Questions[]>([]);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+    const [score, setScore] = useState<number>(0);
+    const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+    const [resetKey, setResetKey] = useState(0);
+    const [remainingTime, setRemainingTime] = useState<number>(30);
+    const hasTimeExpired = useRef(false);
+    const [skippedQuestions, setSkippedQuestions] =  useState<number>(0);
+    const [ranked, setRanked] = useState<string>('');
+    const [finalScore, setFinalScore] = useState<FinalScore>();
+    //------ GameState const above --------//
     const [invitations, setInvitations] = useState<Invitation[]>([]);
     const [authUser, setAuthUser] = useState<AuthUser | null>(null);
     const AuthUserName = authUser?.name;
     const location = useLocation();
     const state = location.state as LocationState; // TrivaID regarding the mockData questions
-    const [ranked, setRanked] = useState<string>('');
     const [lobbyStatus, setLobbyStatus] = useState<string>('');
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const ws = useRef<WebSocket | null>(null);
@@ -94,6 +143,16 @@ const CustomMultiplayer: React.FC = () => {
         setAuthUser(user);
     }, []);
 
+    useEffect(() => {
+        if (ws.current && isConnected) {
+            ws.current.send(JSON.stringify({
+                type: 'ready',
+                ready: false,
+                clientId: authUser?.id
+            }));
+        }
+    }, [isConnected]);
+
     // Connect to the Websocket Server
     
 
@@ -115,11 +174,7 @@ const CustomMultiplayer: React.FC = () => {
             console.log("Closed");
             disconnect();
         }
-        // return () => {
-        //     if (ws.current & isConnected) {
-        //         disconnect();
-        //     }
-        // }
+
     }, [lobbyStatus, isConnected])
 
     useEffect(() => {
@@ -294,6 +349,28 @@ const CustomMultiplayer: React.FC = () => {
                     setCurrentLobby(prev => prev ? { ...prev, isHost: true } : null);
                 }
             }
+            else if (data.type === 'gameStarted') {
+                const FormatQuestions = data.questions;
+                if (FormatQuestions) {
+                    setQuestions(FormatQuestions);
+                    setGameState('playing');
+                }
+            }
+            else if (data.type === 'LobbiesFinalScores') {
+
+                console.log(data);
+                console.log(data.ScoreData);
+
+                const LobbyScoreBoardData: LobbyScoreBoard = {
+                    UserId: data.clientId ||'unknown',
+                    name: data.username || 'Anonymous',
+                    skippedQuestions: data.ScoreData?.skippedQuestions || 0,
+                    correctAnswered: data.ScoreData?.correctAnswered || 0,
+                    InCorrectAnswered: data.ScoreData?.InCorrectAnswered || 0,
+                };
+
+                setLobbyScoreBoard(prev => [...prev, LobbyScoreBoardData]);
+            }
         }
 
         ws.current.onclose = () => {
@@ -327,7 +404,6 @@ const CustomMultiplayer: React.FC = () => {
     };
 
     const toggleReady = () => {
-        console.log("Reg");
         if (!ws.current) return;
 
         const newReadyStatus = !isReady
@@ -335,7 +411,8 @@ const CustomMultiplayer: React.FC = () => {
 
         ws.current.send(JSON.stringify({
             type: 'ready',
-            ready: newReadyStatus
+            ready: newReadyStatus,
+            clientId: authUser?.id
         }));
     };
 
@@ -418,13 +495,92 @@ const CustomMultiplayer: React.FC = () => {
         }));
     };
 
+    const shuffleArray = (array: any[]): any[] => {
+        return [...array].sort(() => Math.random() - 0.5);
+    }
+
     const StartGame = () => {
+        if (!ws.current) return;
+
         if (clients.every(client => client.ready === true)) {
             console.log("Ready");
+
+            try {
+                const response = MockDataGameLoop[1];
+
+                const formattedQuestions = response.data.results.map((q: any) => ({
+                    question: q.question,
+                    correct_answer: q.correct_answer,
+                    incorrect_answers: q.incorrect_answers,
+                    all_answers: shuffleArray([...q.incorrect_answers, q.correct_answer]),
+                    difficulty: q.difficulty,
+                    category: q.category
+                }));
+
+                ws.current.send(JSON.stringify({
+                    type: 'getClientList'
+                }));
+
+                ws.current.send(JSON.stringify({
+                    type: 'StartGame',
+                    formattedQuestions: formattedQuestions,
+                    lobbyId: currentLobby?.id
+                }));
+
+                setQuestions(formattedQuestions);
+                setGameState('playing');
+
+            } catch (error) {
+                console.error('Couldnt fetch the questions, please try again!', error);
+            }
+
         } else {
             console.log("Waiting for some client to be ready!");
         }
     }
+
+    const handleReset = () => {
+        setResetKey(prev => prev + 1);
+    };
+
+    const handleAnswerSelect = (answer: string): void => {
+        if (selectedAnswer) return;
+        setSelectedAnswer(answer);
+
+        if (answer === questions[currentQuestionIndex].correct_answer) {
+            setScore((prev) => prev + 1);
+        }
+    }
+
+    const handleNextQuestion = (): void => {
+        if (!ws.current) return; 
+
+        if (currentQuestionIndex < questions.length - 1) {
+            setCurrentQuestionIndex((prev) => prev + 1);
+            setSelectedAnswer(null);
+            handleReset();
+        } else {
+
+            const finalScoreData: FinalScore = {
+                correctAnswered: score,
+                InCorrectAnswered: questions.length - score - skippedQuestions,
+                skippedQuestions: skippedQuestions,
+            };
+
+            setFinalScore(finalScoreData);
+
+            ws.current.send(JSON.stringify({
+                type: 'FinalScores',
+                ScoreData: finalScoreData,
+            }));
+
+            console.log(finalScoreData);
+
+            setGameState('finished');
+        }
+    }
+
+    const currentQuestion = questions[currentQuestionIndex];
 
     return (
         <>
@@ -434,49 +590,277 @@ const CustomMultiplayer: React.FC = () => {
                     <MultiPlayer_title />
                     {state.TriviaId ? (
                         <>
-                            <CustomMultiplayerSettings 
-                                ranked={ranked}
-                                onRankedChange={setRanked}
-                                lobbyStatus={lobbyStatus}
-                                onLobbyStatusChange={setLobbyStatus}
-                                checkStatus={StartGame}
-                                allClientsReady={allClientsReady}
-                            />
-                            <div className="lobbyDetails">
-                                <Lobby_title />
-                                <AuthUserLobbyCard 
-                                    clients={clients}
-                                    authUser={authUser}
-                                    readyButton={toggleReady}
+                        {gameState === 'prep' && (
+                            <>
+                                <CustomMultiplayerSettings 
+                                    ranked={ranked}
+                                    onRankedChange={setRanked}
+                                    lobbyStatus={lobbyStatus}
+                                    onLobbyStatusChange={setLobbyStatus}
+                                    checkStatus={StartGame}
+                                    allClientsReady={allClientsReady}
                                 />
-                                <ActiveClientsLobby 
-                                    clients={clients}
-                                    authUser={authUser}
-                                    currentLobbyId={currentLobby?.id}
-                                    kickPlayer={RemoveClientFromLobby}
-                                />
+                                <div className="lobbyDetails">
+                                    <Lobby_title />
+                                    <AuthUserLobbyCard 
+                                        clients={clients}
+                                        authUser={authUser}
+                                        readyButton={toggleReady}
+                                        isReady={isReady}
+                                    />
+                                    <ActiveClientsLobby 
+                                        clients={clients}
+                                        authUser={authUser}
+                                        currentLobbyId={currentLobby?.id}
+                                        kickPlayer={RemoveClientFromLobby}
+                                    />
+                                </div>
+                                <div className="sendInvite">
+                                    <Invitation_title />
+                                    <SendInviteCard 
+                                        clients={allClients}
+                                        authUser={authUser}
+                                        sendInvite={SendInvitation}
+                                        currentLobbyId={currentLobby?.id}
+                                    />
+                                </div>
+                            </>
+                        )}
+                        {gameState === 'playing' && (
+                            <>
+                            <div className="game_window">
+                                <div className="game-screen">
+                                    <div className="game-info">
+                                        <div className="question">
+                                            Question {currentQuestionIndex + 1}/{questions.length}
+                                        </div>
+                                        <div className="timer">
+                                            <Countdown 
+                                                key={resetKey}
+                                                onTimeUpdate={(time) => {
+                                                    setRemainingTime(time);
+                                                    if (time <= 0 && !hasTimeExpired.current) {
+                                                        console.log("Missed Question!");
+                                                        setSkippedQuestions((prev) => prev + 1);
+                                                        handleNextQuestion();
+                                                        hasTimeExpired.current = true;
+                                                    }
+                                                    if (time > 0) {
+                                                        hasTimeExpired.current = false;
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="game-settings">
+                                        <div className="category">
+                                            {decodeURIComponent(currentQuestion.category)}
+                                        </div>
+                                        <div className="difficulty">
+                                            Difficulty <span className="capitalize">{decodeURIComponent(currentQuestion.difficulty)}</span>
+                                        </div>
+                                    </div>
+                                    <div className="question-text">
+                                        {decodeURIComponent(currentQuestion.question)}
+                                    </div>
+                                    <div className="answer-options">
+                                        {currentQuestion.all_answers.map((answer, index) => (
+                                            <button
+                                                key={index}
+                                                onClick={() => handleAnswerSelect(answer)}
+                                                className={`answer-button ${
+                                                    selectedAnswer === answer
+                                                    ? answer === currentQuestion.correct_answer
+                                                        ? 'correct'
+                                                        : 'incorrect'
+                                                    : ''
+                                                } ${
+                                                    selectedAnswer && answer === currentQuestion.correct_answer
+                                                    ? 'correct-answer'
+                                                    : ''
+                                                }`}
+                                                disabled={!!selectedAnswer}
+                                            >
+                                                {decodeURIComponent(answer)}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <div className="next-button-container">
+                                        {selectedAnswer && (
+                                            <button onClick={handleNextQuestion} className="next-button">
+                                                {currentQuestionIndex < questions.length - 1
+                                                    ? 'Next'
+                                                    : 'See Result'
+                                                }
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="display-players">
+                                    <ul>
+                                        {clients.map(client => 
+                                            <li>{client.username}</li>
+                                        )}
+                                    </ul>
+                                </div>
                             </div>
-                            <div className="sendInvite">
-                                <Invitation_title />
-                                <SendInviteCard 
-                                    clients={allClients}
-                                    authUser={authUser}
-                                    sendInvite={SendInvitation}
-                                    currentLobbyId={currentLobby?.id}
+                            </>
+                        )}
+                        {gameState === 'finished' && (
+                            <>
+                                <div className="score_card">
+                                    <h2 className="title">Quiz Completed!</h2>
+                                    <div className="score">{score}/{questions.length} </div>
+                                    {10 + (score - questions.length) >= 9 && (
+                                        <div className="congrats-text">Excellent Work! You're a trivia master!</div>
+                                    )}
+                                    {10 + (score - questions.length) >= 4 && questions.length - score < 10 && (
+                                        <div className="congrats-text">Great Work! You did good!</div>
+                                    )}
+                                    {10 + (score - questions.length) < 4 && (
+                                        <div className="congrats-text">You tried your best! And that's what counts!</div>
+                                    )}
+                                    <div className="stats">
+                                        <div className="stats-bar"><span>Correct Answers: </span><span>{score}</span></div>
+                                        <div className="stats-bar"><span>Incorrect Answers: </span><span>{questions.length - score - skippedQuestions}</span></div>
+                                        <div className="stats-bar none"><span>Skipped Answers: </span><span>{skippedQuestions}</span></div>
+                                    </div>
+                                    <div className="button-container">
+                                        <Link to={RouterContainer.Homepage}><Home_button /></Link>
+                                        {/* <PlayAgain onClick={changeGameState}/> */}
+                                    </div>
+                                </div>
+                                <LobbyScoreBoardCard 
+                                    lobbyScoreBoardData={LobbyScoreBoard}
                                 />
-                            </div>
+                            </>
+                        )}
                         </>
                     ) : (
                         <>
                             {currentLobby ? (
                                 <>
-                                    <FullClientLobbyDisplay 
-                                        clients={clients}
-                                        authUser={authUser}
-                                        readyButton={toggleReady}
-                                        leaveLobby={leaveLobby}
-                                    />
+                                {gameState === 'prep' && (
+                                    <>
+                                        <FullClientLobbyDisplay 
+                                            clients={clients}
+                                            authUser={authUser}
+                                            readyButton={toggleReady}
+                                            leaveLobby={leaveLobby}
+                                        />
+                                    </>
+                                )}
+                                {gameState === 'playing' && (
+                                <>
+                                <div className="game_window">
+                                    <div className="game-screen">
+                                        <div className="game-info">
+                                            <div className="question">
+                                                Question {currentQuestionIndex + 1}/{questions.length}
+                                            </div>
+                                            <div className="timer">
+                                                <Countdown 
+                                                    key={resetKey}
+                                                    onTimeUpdate={(time) => {
+                                                        setRemainingTime(time);
+                                                        if (time <= 0 && !hasTimeExpired.current) {
+                                                            console.log("Missed Question!");
+                                                            setSkippedQuestions((prev) => prev + 1);
+                                                            handleNextQuestion();
+                                                            hasTimeExpired.current = true;
+                                                        }
+                                                        if (time > 0) {
+                                                            hasTimeExpired.current = false;
+                                                        }
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
 
+                                        <div className="game-settings">
+                                            <div className="category">
+                                                {decodeURIComponent(currentQuestion.category)}
+                                            </div>
+                                            <div className="difficulty">
+                                                Difficulty <span className="capitalize">{decodeURIComponent(currentQuestion.difficulty)}</span>
+                                            </div>
+                                        </div>
+                                        <div className="question-text">
+                                            {decodeURIComponent(currentQuestion.question)}
+                                        </div>
+                                        <div className="answer-options">
+                                            {currentQuestion.all_answers.map((answer, index) => (
+                                                <button
+                                                    key={index}
+                                                    onClick={() => handleAnswerSelect(answer)}
+                                                    className={`answer-button ${
+                                                        selectedAnswer === answer
+                                                        ? answer === currentQuestion.correct_answer
+                                                            ? 'correct'
+                                                            : 'incorrect'
+                                                        : ''
+                                                    } ${
+                                                        selectedAnswer && answer === currentQuestion.correct_answer
+                                                        ? 'correct-answer'
+                                                        : ''
+                                                    }`}
+                                                    disabled={!!selectedAnswer}
+                                                >
+                                                    {decodeURIComponent(answer)}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        <div className="next-button-container">
+                                            {selectedAnswer && (
+                                                <button onClick={handleNextQuestion} className="next-button">
+                                                    {currentQuestionIndex < questions.length - 1
+                                                        ? 'Next'
+                                                        : 'See Result'
+                                                    }
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="display-players">
+                                        <ul>
+                                            {clients.map(client => 
+                                                <li>{client.username}</li>
+                                            )}
+                                        </ul>
+                                    </div>
+                                </div>
+                                </>
+                                )}
+                                {gameState === 'finished' && (
+                                    <>
+                                        <div className="score_card">
+                                            <h2 className="title">Quiz Completed!</h2>
+                                            <div className="score">{score}/{questions.length} </div>
+                                            {10 + (score - questions.length) >= 9 && (
+                                                <div className="congrats-text">Excellent Work! You're a trivia master!</div>
+                                            )}
+                                            {10 + (score - questions.length) >= 4 && questions.length - score < 10 && (
+                                                <div className="congrats-text">Great Work! You did good!</div>
+                                            )}
+                                            {10 + (score - questions.length) < 4 && (
+                                                <div className="congrats-text">You tried your best! And that's what counts!</div>
+                                            )}
+                                            <div className="stats">
+                                                <div className="stats-bar"><span>Correct Answers: </span><span>{score}</span></div>
+                                                <div className="stats-bar"><span>Incorrect Answers: </span><span>{questions.length - score - skippedQuestions}</span></div>
+                                                <div className="stats-bar none"><span>Skipped Answers: </span><span>{skippedQuestions}</span></div>
+                                            </div>
+                                            <div className="button-container">
+                                                <Link to={RouterContainer.Homepage}><Home_button /></Link>
+                                                {/* <PlayAgain onClick={changeGameState}/> */}
+                                            </div>
+                                        </div>
+                                        <LobbyScoreBoardCard 
+                                            lobbyScoreBoardData={LobbyScoreBoard}
+                                        />
+                                    </>
+                                )}
                                 </>
                             ) : (
                                 <>
