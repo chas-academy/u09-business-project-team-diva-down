@@ -1,12 +1,12 @@
-import { Router } from "express";
-import { authenticate } from "../middleware/authMiddleware";
-import { deleteQuestion } from "../controllers/deleteBook";
-import dotenv from 'dotenv';
+// import { Router } from "express";
+// import { authenticate } from "../middleware/authMiddleware";
+// import { deleteQuestion } from "../controllers/deleteBook";
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
-const deleteQuestionRouter = Router();
+// const deleteQuestionRouter = Router();
 
-deleteQuestionRouter.delete('/delete/:_id', authenticate, deleteQuestion);
+// deleteQuestionRouter.delete('/delete/:_id', authenticate, deleteQuestion);
 
-export default deleteQuestionRouter;
+// export default deleteQuestionRouter;

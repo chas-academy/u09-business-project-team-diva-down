@@ -8,10 +8,8 @@ import routerRegister from "./routes/registerUser.route";
 import authRouter from "./routes/auth.route";
 import configurePassport from "./config/passport.config";
 import loginRouter from "./routes/login.route";
-import createQuestionRouter from "./routes/createQuestion.route";
-import updateQuestionRouter from "./routes/updateQuestion.route";
-import deleteQuestionRouter from "./routes/delete.route";
 import friendRouter from "./routes/friends.route";
+import TriviaRouter from "./routes/trivia.route";
 import { WebSocketServer, WebSocket } from "ws";
 import cors from 'cors';
 import { v4 as uuidv4 } from "uuid";
@@ -57,12 +55,10 @@ app.get('/live', (req, res) => {
 
 app.use('/', routerRegister);
 app.use('/', loginRouter);
-app.use('/', createQuestionRouter);
-app.use('/', updateQuestionRouter);
-app.use('/', deleteQuestionRouter);
 app.use('/auth', authRouter);
 app.use('/friends', friendRouter);
 app.use('/user', userRouter);
+app.use('/trivia', TriviaRouter);
 
 mongoose.connect(URI!)
     .then(() => {

@@ -1,6 +1,6 @@
 import Header from "../components/common/header";
 import Footer from "../components/common/footer";
-import Friendslist_card from "../components/common/Friendslist";
+// import Friendslist_card from "../components/common/Friendslist";
 import UserInfo from "../components/common/User_Info_Dashboard";
 
 const UserDashboard = () => {
@@ -14,7 +14,7 @@ const UserDashboard = () => {
                             
                             <UserInfo />
 
-                            <Friendslist_card />
+                            {/* <Friendslist_card /> */}
 
                         </section>
                     </main>

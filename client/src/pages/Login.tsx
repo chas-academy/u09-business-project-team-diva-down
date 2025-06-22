@@ -45,6 +45,7 @@ const Login = () => {
 
             localStorage.setItem("token", data.token);
             localStorage.setItem('userData', JSON.stringify(data.user));
+            localStorage.setItem('userDataWithToken', JSON.stringify(data));
 
             navigate(RouterContainer.Homepage);
         } catch (err) {

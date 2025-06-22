@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Header from "../components/common/header";
 import Footer from "../components/common/footer";
 import { useLocation, Link } from "react-router-dom";
@@ -18,11 +18,12 @@ import Home_button from "../components/hoc/loc/Home_button";
 import PlayAgain from "../components/hoc/loc/PlayAgain";
 import { RouterContainer } from "../routes/RouteContainer";
 import LobbyScoreBoardCard from "../components/common/gameloop/Lobby_ScoreBoard";
+import axios from "axios";
 
 // Fetching Trivia ID from the redirect to this page
 
 interface LocationState {
-    TriviaId: number;
+    TriviaId: string;
 }
 
 // Interfaces, Const and UseEffect for fetching the Auth Users data -----------------
@@ -33,16 +34,6 @@ interface AuthUser {
     name: string;
     token: string;
 }
-
-const getAuthUser = (): AuthUser | null => {
-    try {
-        const user = localStorage.getItem("authUser");
-        return user ? JSON.parse(user) : null;
-    } catch (error) {
-        console.error("Error parsing auth user", error);
-        return null; 
-    }
-};
 
 // -------------------------------------------------------------------------------
 
@@ -86,7 +77,7 @@ type Questions = {
   all_answers: string[];
   difficulty: string;
   category: string;
-};
+}
 
 interface FinalScore {
     skippedQuestions: number;
@@ -100,9 +91,22 @@ interface LobbyScoreBoard {
     skippedQuestions: number;
     correctAnswered: number;
     InCorrectAnswered: number;
+    placement?: number;
+}
+
+interface TriviaData {
+  _id: string;
+  userId: string;
+  title: string;
+  data: {
+    results: Questions[];
+  };
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 const CustomMultiplayer: React.FC = () => {
+    const [LobbyTriviaData, setLobbyTriviaData] = useState<TriviaData | null>(null);
     const [LobbyScoreBoard, setLobbyScoreBoard] = useState<LobbyScoreBoard[]>([]);
     const [gameState, setGameState] = useState<GameState>('prep');
     const [questions, setQuestions] = useState<Questions[]>([]);
@@ -115,12 +119,19 @@ const CustomMultiplayer: React.FC = () => {
     const [skippedQuestions, setSkippedQuestions] =  useState<number>(0);
     const [ranked, setRanked] = useState<string>('');
     const [finalScore, setFinalScore] = useState<FinalScore>();
+    const [placements, setPlacements] = useState<{
+        sortedData: LobbyScoreBoard[];
+        placementsMap: Record<string, number>;
+        authUserPlacement?: number;
+    } | null>(null);;
+    const placementsRef = useRef(placements);
     //------ GameState const above --------//
     const [invitations, setInvitations] = useState<Invitation[]>([]);
     const [authUser, setAuthUser] = useState<AuthUser | null>(null);
     const AuthUserName = authUser?.name;
     const location = useLocation();
-    const state = location.state as LocationState; // TrivaID regarding the mockData questions
+    const { TriviaId } = location.state as LocationState | null || {};
+    // const state = location.state as LocationState; // TrivaID regarding the mockData questions
     const [lobbyStatus, setLobbyStatus] = useState<string>('');
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const ws = useRef<WebSocket | null>(null);
@@ -139,9 +150,33 @@ const CustomMultiplayer: React.FC = () => {
 
     // UseEffects
     useEffect(() => {
-        const user = getAuthUser();
-        setAuthUser(user);
+
+        const user = JSON.parse(localStorage.getItem("userDataWithToken") ||'[]');
+
+        if (!user) {
+            return;
+        }
+
+        const NewAuthUser: AuthUser = {
+            id: user.user.id,
+            name: user.user.name,
+            email: user.user.email,
+            token: user.token
+        }
+
+        setAuthUser(NewAuthUser);
+
     }, []);
+
+    useEffect(() => {
+
+        if (!TriviaId) {
+            return;
+        }
+
+        FetchSpecificTriviaTable(TriviaId);
+
+    }, [TriviaId]);
 
     useEffect(() => {
         if (ws.current && isConnected) {
@@ -155,7 +190,6 @@ const CustomMultiplayer: React.FC = () => {
 
     // Connect to the Websocket Server
     
-
     useEffect(() => {
         if (GuestConnect === true && !isConnected) {
             connect();
@@ -190,6 +224,55 @@ const CustomMultiplayer: React.FC = () => {
 
     }, [clients])
 
+    useEffect(() => {
+        
+        if (gameState === 'finished') {
+            if (authUser) {
+                const timer = setTimeout(() => {
+                    UpdateTotalMatches(authUser.id);
+                }, 1000);
+
+                return () => clearTimeout(timer);
+            }
+        }
+        
+    }, [gameState, placements, authUser]);
+
+    const UpdateTotalMatches = async(currentUserId: string) => {
+        try {
+            if (!currentUserId) {
+                return;
+            }
+
+            const AuthUserPlacementData = placements?.sortedData.find((client) => client.UserId === authUser?.id);
+
+            const response = await axios.get(`http://localhost:3000/user/${currentUserId}`);
+            const userData = response.data;
+
+            let updatedData = {
+                wins: (userData.wins || 0),
+                total_matches: (userData.total_matches || 0) + 1
+            };
+
+            if (AuthUserPlacementData?.placement === 1) {
+                updatedData = {
+                    wins: (userData.wins || 0) + 1,
+                    total_matches: (userData.total_matches || 0) + 1
+                };
+            }
+
+            const updateResponse = await axios.put(
+                `http://localhost:3000/user/${currentUserId}`,
+                updatedData
+            );
+
+            console.log(updateResponse);
+
+        } catch (error) {
+            console.error("Failed to update total matches", error);
+        }
+    }
+
     const connect = () => {
 
         ws.current = new WebSocket(`ws://localhost:3000`);
@@ -197,7 +280,7 @@ const CustomMultiplayer: React.FC = () => {
         ws.current.onopen = () => {
             console.log('connected to Webscoket Server!');
 
-            const user = getAuthUser();
+            const user = authUser;
             
             if (!user || !user.token) {
                 console.error('No Authentication token found');
@@ -506,9 +589,13 @@ const CustomMultiplayer: React.FC = () => {
             console.log("Ready");
 
             try {
-                const response = MockDataGameLoop[1];
+                // const response = MockDataGameLoop[1];
 
-                const formattedQuestions = response.data.results.map((q: any) => ({
+                const response = LobbyTriviaData;
+
+                // Add Fetch TriviaTable here depending on the TriviaID in State
+
+                const formattedQuestions = response?.data.results.map((q: any) => ({
                     question: q.question,
                     correct_answer: q.correct_answer,
                     incorrect_answers: q.incorrect_answers,
@@ -527,7 +614,9 @@ const CustomMultiplayer: React.FC = () => {
                     lobbyId: currentLobby?.id
                 }));
 
-                setQuestions(formattedQuestions);
+                if (formattedQuestions) {
+                    setQuestions(formattedQuestions);
+                }
                 setGameState('playing');
 
             } catch (error) {
@@ -582,17 +671,60 @@ const CustomMultiplayer: React.FC = () => {
 
     const currentQuestion = questions[currentQuestionIndex];
 
+
+    const FetchSpecificTriviaTable = async (TriviaId: string) => {
+
+        try {
+            const response = await axios.get<TriviaData>(`http://localhost:3000/trivia/${TriviaId}`);
+            setLobbyTriviaData(response.data);
+
+        } catch (error) {
+            console.error("Failed to fetch Trivia Data, reload the page", error);
+        }
+    }
+
+    const handlePlacementsCalculated = useCallback((data: {
+        sortedData: LobbyScoreBoard[];
+        placementsMap: Record<string, number>;
+        authUserPlacement?: number;
+    }) => {
+        if (JSON.stringify(placementsRef.current) !== JSON.stringify(data)) {
+            setPlacements(data);
+            placementsRef.current = data;
+            console.log("Placements updated:", data);
+        }
+    }, []);
+
+
+
+    const CheckStatus = () => {
+        // console.log(authUser);
+        // const AuthenticatedUser = localStorage.getItem("userData");
+        // const AuthUserWithToken = JSON.parse(localStorage.getItem('userDataWithToken') || '[]');
+        // // console.log(AuthenticatedUser);
+        // console.log(AuthUserWithToken);
+        // // console.log(authUser);
+
+        // const user = JSON.parse(localStorage.getItem("userDataWithToken") ||'[]');
+
+        // console.log(user.user.name);
+
+        const AuthUserPlacementData = placements?.sortedData.find((client) => client.UserId === authUser?.id);
+        console.log(AuthUserPlacementData?.placement);
+    }
+
     return (
         <>
             <div className="CustomMultiPlayer_page">
                 <Header />
                 <main className="main">
                     <MultiPlayer_title />
-                    {state.TriviaId ? (
+                    {TriviaId ? (
                         <>
                         {gameState === 'prep' && (
                             <>
                                 <CustomMultiplayerSettings 
+                                    triviaData={LobbyTriviaData}
                                     ranked={ranked}
                                     onRankedChange={setRanked}
                                     lobbyStatus={lobbyStatus}
@@ -733,6 +865,8 @@ const CustomMultiplayer: React.FC = () => {
                                 </div>
                                 <LobbyScoreBoardCard 
                                     lobbyScoreBoardData={LobbyScoreBoard}
+                                    authUser={authUser}
+                                    onPlacementsCalculated={handlePlacementsCalculated}
                                 />
                             </>
                         )}
@@ -858,6 +992,8 @@ const CustomMultiplayer: React.FC = () => {
                                         </div>
                                         <LobbyScoreBoardCard 
                                             lobbyScoreBoardData={LobbyScoreBoard}
+                                            authUser={authUser}
+                                            onPlacementsCalculated={handlePlacementsCalculated}
                                         />
                                     </>
                                 )}

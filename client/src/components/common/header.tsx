@@ -58,8 +58,8 @@ const Header = () => {
                             <Link to={RouterContainer.Homepage}>Home</Link>
                             <Link to={RouterContainer.SinglePlayer}>Play</Link>
                             <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
-                            <Link to={RouterContainer.CustomTrivia.replace(':id', id)}>Custom</Link>
-                            <Link to={RouterContainer.Leaderboard}>Leaderboard</Link>
+                            <Link to={RouterContainer.CustomTrivia.replace(':id', id)}>Custom Trivia</Link>
+                            {/* <Link to={RouterContainer.Leaderboard}>Leaderboard</Link> */}
                         </ul>
                         <div className="button-container">
                             <button 

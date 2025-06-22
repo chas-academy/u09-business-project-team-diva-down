@@ -5,17 +5,23 @@ import { Link } from "react-router-dom";
 import { all } from "axios";
 
 interface TriviaData {
-    id: number;
-    title: string;
-    data: {
-        results: {
-            category: string;
-            correct_answer: string;
-            incorrect_answers: string[];
-            question: string;
-            difficulty: string;
-        }[];
-    };
+  _id: string;
+  userId: string;
+  title: string;
+  data: {
+    results: Questions[];
+  };
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+type Questions = {
+  question: string;
+  correct_answer: string;
+  incorrect_answers: string[];
+  all_answers: string[];
+  difficulty: string;
+  category: string;
 }
 
 interface CustomMultiplayerSettingsProps {
@@ -26,13 +32,14 @@ interface CustomMultiplayerSettingsProps {
     onLobbyStatusChange: (lobbyStatus: string) => void;
     checkStatus: () => void;
     allClientsReady: boolean;
+    triviaData: TriviaData | null;
 }
 
 
 const CustomMultiplayerSettings: React.FC<CustomMultiplayerSettingsProps> = ({
     onRankedChange,
     ranked,
-    // triviaData,
+    triviaData,
     lobbyStatus,
     onLobbyStatusChange,
     checkStatus,
@@ -43,9 +50,8 @@ const CustomMultiplayerSettings: React.FC<CustomMultiplayerSettingsProps> = ({
     <div className="settings-container">
         <div className="settings-bar">
             <h2>Custom Trivia</h2>
-            <div className="trivia_title">
-                {/* {triviaData.title} */}
-                Title
+            <div className="trivia_title">                
+                {triviaData?.title}
             </div>
         </div>
         <div className="settings-bar">

@@ -33,17 +33,23 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Question = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
-const questionSchema = new mongoose_1.Schema({
+const QuestionSchema = new mongoose_1.Schema({
+    id: { type: String, required: true },
+    category: { type: String, required: true },
+    correct_answer: { type: String, required: true },
+    incorrect_answers: { type: [String], required: true },
     question: { type: String, required: true },
-    rightAnswer: { type: String, required: true },
-    answerOp2: { type: String, required: true },
-    answerOp3: { type: String, required: true },
-    answerOp4: { type: String, required: true },
-    createdBy: { type: mongoose_1.Schema.Types.ObjectId, ref: 'User' },
-}, {
-    collection: 'Questions'
+    difficulty: { type: String, enum: ['easy', 'medium', 'hard'], required: true }
 });
-const Question = mongoose_1.default.model('Questions', questionSchema);
-exports.Question = Question;
+const TriviaDataSchema = new mongoose_1.Schema({
+    results: { type: [QuestionSchema], required: true }
+});
+const TriviaTableSchema = new mongoose_1.Schema({
+    userId: { type: String, required: true },
+    title: { type: String, required: true },
+    data: { type: TriviaDataSchema, required: true },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+});
+exports.default = mongoose_1.default.model('TriviaTable', TriviaTableSchema);

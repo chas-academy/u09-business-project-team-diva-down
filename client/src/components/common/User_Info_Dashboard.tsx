@@ -4,7 +4,8 @@ import Save from "../hoc/loc/Save_button_dashboard";
 import Back from "../hoc/loc/Back_button_dashboard";
 import ChangePassword from "./user_dashboard/Change_password";
 import axios from "axios";
-import { PassThrough } from "stream";
+import { redirect, useNavigate } from "react-router-dom";
+import { RouterContainer } from "../../routes/RouteContainer";
 
 interface SelectValue {
   value: number;
@@ -20,178 +21,172 @@ interface UserData {
 }
 
 const UserInfo = () => {
-  const [AuthUserId, setAuthUserId] = useState<string>();
-  const [userData, setUserData] = useState<UserData | null>(null);
-  const [toggleWindow, setToggleWindow] = useState(false);
-  const [editUsername, setEditUsername] = useState(false);
-  const [editEmail, setEditEmail] = useState(false);
-  const [newEmailValue, setNewEmailValue] = useState("");
-  const [newUsernameValue, setNewUsernameValue] = useState("");
-  const [selectValue, setSelectValue] = useState<SelectValue>({ value: 0 });
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const userDataString = localStorage.getItem('userData');
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+
+  const [AuthUserData, setAuthUserData] = useState<UserData>();
+  const [editEmail, setEditEmail] = useState<boolean>(false);
+  const [newEmailValue, setNewEmailValue] = useState(AuthUserData?.email);
+  const [newUsernameValue, setNewUsernameValue] = useState(AuthUserData?.name);
+  const [editUsername, setEditUsername] = useState<boolean>(false); 
+  const [ChangePasswordWindow, setChangePasswordWindow] = useState<boolean>(false);
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   useEffect(() => {
-  const loadUserData = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        throw new Error("Not authenticated");
-      }
-
-      const storedData = localStorage.getItem('userData');
-      if (!storedData) {
-        throw new Error("No user data found in session storage.");
-      }
-
-      const parsedData = JSON.parse(storedData);
-
-      setAuthUserId(parsedData.id);
-      fetchAuthUser(parsedData.id);
-      // if (AuthUserId) {
-      //   fetchAuthUser(AuthUserId);
-      // } else {
-      //   console.log("No Id Found!");
-      // }
-      
-      // setUserData(parsedData);
-      // setNewEmailValue(parsedData.email);
-      // setNewUsernameValue(parsedData.name);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load user data");
-    } finally {
-      setIsLoading(false);
+    if (AuthUserData) {
+      setNewEmailValue(AuthUserData.email);
+      setNewUsernameValue(AuthUserData.name);
     }
-    }; 
-        loadUserData();
-    }, []);
+  }, [AuthUserData]);
 
 
-  const fetchAuthUser = (id: string) => {
-    try {
-      axios.get(`http://localhost/user/${id}`)
-        .then(response => {
-          const UserData = response.data;
-          setUserData(UserData);
-        })
-    } catch (error) {
-      console.error("Failed fetch Auth User", error);
-    }
+  const fetchUserData = () => {
+     axios.get(`http://localhost:3000/user/${userData.id}`)
+      .then(response => {
+        const UserData = response.data;
+        setAuthUserData(UserData);
+
+        const updatedUserData = { ...userData, name: newUsernameValue };
+        localStorage.setItem('userData', JSON.stringify(updatedUserData));
+      })
   }
 
-  const ToggleWindowFunction = () => {
-    setToggleWindow(!toggleWindow);
-  };
-
-  const ToggleEditEmailFunction = () => {
-    setEditEmail(!editEmail);
-  };
-
-  const ToggleEditUsernameFunction = () => {
-    setEditUsername(!editUsername);
-  };
-
-  const ToggleResetEditForm = () => {
-    setEditEmail(false);
-    setEditUsername(false);
-  };
-
-  const handleOptionChange = (newValue: SelectValue) => {
-    setSelectValue(newValue);
-  };
-
-  const handleUpdateEmail = async (e: React.FormEvent) => {
+  const SaveChangesToUsername = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const token = localStorage.getItem('authToken');
-      if (!token || !userData) return;
 
-      const response = await fetch("http://localhost:3000/update-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({ email: newEmailValue }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update email");
+    axios({
+      method: 'put',
+      url: `http://localhost:3000/user/${userData.id}`,
+      data: {
+        name: newUsernameValue
       }
-
-      const updatedUser = { ...userData, email: newEmailValue };
-      setUserData(updatedUser);
-      localStorage.setItem('userData', JSON.stringify(updatedUser));
-      setEditEmail(false);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Email update failed");
-    }
-  };
-
-  const handleUpdateUsername = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem('authToken');
-      if (!token || !userData) return;
-
-      const response = await fetch("http://localhost:3000/update-username", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({ name: newUsernameValue }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update username");
-      }
-
-      const updatedUser = { ...userData, name: newUsernameValue };
-      setUserData(updatedUser);
-      localStorage.setItem('userData', JSON.stringify(updatedUser));
+    }).then(response => {
+      const UserData = response.data;
+      setAuthUserData(UserData);
       setEditUsername(false);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Username update failed");
-    }
-  };
-
-  if (isLoading) {
-    return <div className="user_info">Loading user data...</div>;
+      window.location.reload();
+    });
   }
 
-  if (error) {
-    return <div className="user_info">{error}</div>;
-  }
+  const SaveChangesToEmail = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  if (!userData) {
-    return <div className="user_info">No user data available</div>;
-  }
-
-  const CheckStatus = () => {
-
-    const storedData = localStorage.getItem('userData');
-      if (!storedData) {
-        throw new Error("No user data found in session storage.");
+    axios({
+      method: 'put',
+      url: `http://localhost:3000/user/${userData.id}`,
+      data: {
+        email: newEmailValue
       }
+    }).then(response => {
+      const UserData = response.data;
+      setAuthUserData(UserData);
+      setEditEmail(false);
+      window.location.reload();
+    });
+  }
 
-    console.log(AuthUserId);
-    console.log(userData);
-    console.log(storedData);
+  const SaveNewPassword = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (password != confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+
+    axios({
+      method: 'put',
+      url: `http://localhost:3000/user/${userData.id}`,
+      data: {
+        password: password
+      }
+    }).then(response => {
+      if (response.status) {
+        console.log("password has been changed");
+        setPassword("");
+        setConfirmPassword("");
+        localStorage.removeItem('userData');
+        navigate(RouterContainer.Login);
+      } else {
+        console.error("Failed to update the password!");
+        setChangePasswordWindow(false);
+        setPassword("");
+        setConfirmPassword("");
+      }
+    }).catch(error => console.error("Failed to Save Password", error));
+  }
+
+  const DeleteAccount = (ClientId: string) => {
+
+    const isConfirmed = window.confirm("Are you sure you want to delete your account?");
+
+    if (!ClientId || !isConfirmed) {
+      return;
+    }
+
+    axios({
+      method: 'delete',
+      url: `http://localhost:3000/user/${userData.id}`,
+    }).then(response => {
+      if (response.status) {
+        console.log("User has been deleted!");
+
+        const ResetUser: UserData = {
+          id: '',
+          name: '',
+          email: '',
+          eloScore: 0,
+          wins: 0,
+          total_matches: 0
+        }
+
+        setAuthUserData(ResetUser);
+        navigate(RouterContainer.Login);
+        
+      } else {
+        console.error("Failed to delete User!");
+      }
+    })
+  }
+
+  useEffect(() => {
+    if (userData) {
+      fetchUserData();
+    }
+  }, [userDataString]);
+
+  const toggleEditUsername = () => {
+    setEditUsername(!editUsername);
+    setEditEmail(false);
+  }
+
+  const toggleEditEmail = () => {
+    setEditEmail(!editEmail);
+    setEditUsername(false);
+  }
+
+  const CancelEditing = () => {
+    setEditUsername(false);
+    setEditEmail(false);
+  }
+
+  const toggleChangePassword = () => {
+    setChangePasswordWindow(!ChangePasswordWindow);
   }
 
   return (
     <>
       <div className="user_info">
         <div className="game_title">Game Stats</div>
-        <button style={{color: '#FFF'}} onClick={() => CheckStatus()}>Check Status</button>
         <div className="game_stats">
-          <div className="title">Current Rating:</div>
-          <div className="data">{userData.elo || "N/A"}</div>
+          {/* <div className="title">Current Rating:</div>
+          <div className="data">{AuthUserData?.eloScore ?? 'N/A'}</div> */}
           <div className="title">Total Wins:</div>
-          <div className="data">{userData.wins || "N/A"}</div>
+          <div className="data">{AuthUserData?.wins ?? 'N/A'}</div>
           <div className="title">Total Matches:</div>
-          <div className="data">{userData.total_matches || "N/A"}</div>
+          <div className="data">{AuthUserData?.total_matches ?? 'N/A'}</div>
         </div>
 
         <div className="user_title">User Settings</div>
@@ -200,20 +195,20 @@ const UserInfo = () => {
         {editEmail === false && editUsername === false && (
           <div className="grid">
             <div className="title">Username</div>
-            <div className="data">{userData.name}</div>
-            <Edit onClick={ToggleEditUsernameFunction} />
+            <div className="data">{AuthUserData?.name}</div>
+            <Edit onClick={() => toggleEditUsername()}/>
             <div className="title">Email</div>
-            <div className="data">{userData.email}</div>
-            <Edit onClick={ToggleEditEmailFunction} />
+            <div className="data">{AuthUserData?.email}</div>
+            <Edit onClick={() => toggleEditEmail()}/>
           </div>
         )}
 
         {editEmail && (
           <div className="grid">
             <div className="title">Username</div>
-            <div className="data">{userData.name}</div>
-            <Back onClick={ToggleResetEditForm} />
-            <form className="grid-form" onSubmit={handleUpdateEmail}>
+            <div className="data">{AuthUserData?.name}</div>
+            <Back onClick={() => CancelEditing()}/>
+            <form className="grid-form" onSubmit={SaveChangesToEmail}>
               <div className="title">Email</div>
               <input
                 id="EmailData"
@@ -223,14 +218,14 @@ const UserInfo = () => {
                 onChange={(e) => setNewEmailValue(e.target.value)}
                 required
               />
-              <Save className="action" />
+              <Save className="action" type="submit"/>
             </form>
           </div>
         )}
 
         {editUsername && (
           <div className="grid">
-            <form className="grid-form" onSubmit={handleUpdateUsername}>
+            <form className="grid-form" onSubmit={SaveChangesToUsername}>
               <div className="title">Username</div>
               <input
                 type="text"
@@ -239,15 +234,15 @@ const UserInfo = () => {
                 onChange={(e) => setNewUsernameValue(e.target.value)}
                 required
               />
-              <Save className="action" />
+              <Save className="action" type="submit"/>
             </form>
             <div className="title">Email</div>
-            <div className="data">{userData.email}</div>
-            <Back className="action" onClick={ToggleResetEditForm} />
+            <div className="data">{AuthUserData?.email}</div>
+            <Back className="action"  onClick={() => CancelEditing()}/>
           </div>
         )}
 
-        <button onClick={ToggleWindowFunction} className="change_button">
+        <button className="change_button" onClick={() => toggleChangePassword()}>
           Change Password
         </button>
 
@@ -256,16 +251,46 @@ const UserInfo = () => {
           If you delete your account, it can't be recovered
         </div>
         <div className="button_container">
-          <button className="delete">Delete Account</button>
+          <button className="delete" onClick={() => {
+            if (AuthUserData?.id) {
+              DeleteAccount(AuthUserData?.id);
+            }
+           }}
+          >
+          Delete Account
+          </button>
         </div>
       </div>
 
-      {toggleWindow && (
-        <ChangePassword
-          selectedValue={selectValue}
-          onOptionChange={handleOptionChange}
-          ToggleWindowFunction={ToggleWindowFunction}
-        />
+      {ChangePasswordWindow && (
+          <div className="password-background">
+              <div className="change-password-container">
+                <form onSubmit={SaveNewPassword}>
+                  <label>New Password</label>
+                  <input 
+                    type="password" 
+                    name="password" 
+                    className="input"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <label>Confirm New Password</label>
+                  <input 
+                    type="password" 
+                    name="password" 
+                    className="input"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                  <div className="action_container">
+                    <button className="save" type="submit">Save</button>
+                    <button className="cancel" onClick={toggleChangePassword}>
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+              </div>
+          </div>
       )}
     </>
   );
