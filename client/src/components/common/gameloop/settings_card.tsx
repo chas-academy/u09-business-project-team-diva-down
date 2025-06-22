@@ -76,7 +76,7 @@ const GameloopSettingsCard: React.FC<GameloopSettingsCardProps> = ({
           </label>
         </div>
       </div>
-      <div className="settings-bar">
+      {/* <div className="settings-bar">
         <h2>Ranked</h2>
         <div className="radio-options">
             <label className={`input-styling ${ranked === "Yes" ? "checked" : ""}`}>
@@ -102,7 +102,7 @@ const GameloopSettingsCard: React.FC<GameloopSettingsCardProps> = ({
             No
             </label>
         </div>
-      </div>
+      </div> */}
       <div className="settings-bar empty">
         <Link style={{textDecoration: 'none', margin: '0'}} to={RouterContainer.Homepage}><Home /></Link>
         <Play onClick={checkStatus}/>

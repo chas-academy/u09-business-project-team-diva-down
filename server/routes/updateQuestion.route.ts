@@ -1,12 +1,12 @@
-import { Router } from "express";
-import { updateQuestion } from "../controllers/updateQuestion";
-import { authenticate } from "../middleware/authMiddleware";
-import dotenv from 'dotenv';
+// import { Router } from "express";
+// import { updateQuestion } from "../controllers/updateQuestion";
+// import { authenticate } from "../middleware/authMiddleware";
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
-const updateQuestionRouter = Router();
+// const updateQuestionRouter = Router();
 
-updateQuestionRouter.put('/update/:_id', authenticate, updateQuestion);
+// updateQuestionRouter.put('/update/:_id', authenticate, updateQuestion);
 
-export default updateQuestionRouter;
+// export default updateQuestionRouter;

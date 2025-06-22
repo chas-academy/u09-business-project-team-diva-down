@@ -1,13 +1,9 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const authMiddleware_1 = require("../middleware/authMiddleware");
-const deleteBook_1 = require("../controllers/deleteBook");
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
-const deleteQuestionRouter = (0, express_1.Router)();
-deleteQuestionRouter.delete('/delete/:_id', authMiddleware_1.authenticate, deleteBook_1.deleteQuestion);
-exports.default = deleteQuestionRouter;
+// import { Router } from "express";
+// import { authenticate } from "../middleware/authMiddleware";
+// import { deleteQuestion } from "../controllers/deleteBook";
+// import dotenv from 'dotenv';
+// dotenv.config();
+// const deleteQuestionRouter = Router();
+// deleteQuestionRouter.delete('/delete/:_id', authenticate, deleteQuestion);
+// export default deleteQuestionRouter;

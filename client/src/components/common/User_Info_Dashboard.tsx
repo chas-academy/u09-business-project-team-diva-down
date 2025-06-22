@@ -4,6 +4,8 @@ import Save from "../hoc/loc/Save_button_dashboard";
 import Back from "../hoc/loc/Back_button_dashboard";
 import ChangePassword from "./user_dashboard/Change_password";
 import axios from "axios";
+import { redirect, useNavigate } from "react-router-dom";
+import { RouterContainer } from "../../routes/RouteContainer";
 
 interface SelectValue {
   value: number;
@@ -19,17 +21,26 @@ interface UserData {
 }
 
 const UserInfo = () => {
+  const navigate = useNavigate();
+
   const userDataString = localStorage.getItem('userData');
   const userData = userDataString ? JSON.parse(userDataString) : null;
 
   const [AuthUserData, setAuthUserData] = useState<UserData>();
   const [editEmail, setEditEmail] = useState<boolean>(false);
-  const [newEmailValue, setNewEmailValue] = useState(userData.email);
-  const [newUsernameValue, setNewUsernameValue] = useState(userData.name);
+  const [newEmailValue, setNewEmailValue] = useState(AuthUserData?.email);
+  const [newUsernameValue, setNewUsernameValue] = useState(AuthUserData?.name);
   const [editUsername, setEditUsername] = useState<boolean>(false); 
   const [ChangePasswordWindow, setChangePasswordWindow] = useState<boolean>(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  useEffect(() => {
+    if (AuthUserData) {
+      setNewEmailValue(AuthUserData.email);
+      setNewUsernameValue(AuthUserData.name);
+    }
+  }, [AuthUserData]);
 
 
   const fetchUserData = () => {
@@ -56,6 +67,7 @@ const UserInfo = () => {
       const UserData = response.data;
       setAuthUserData(UserData);
       setEditUsername(false);
+      window.location.reload();
     });
   }
 
@@ -72,6 +84,7 @@ const UserInfo = () => {
       const UserData = response.data;
       setAuthUserData(UserData);
       setEditEmail(false);
+      window.location.reload();
     });
   }
 
@@ -79,24 +92,63 @@ const UserInfo = () => {
     e.preventDefault();
 
     if (password != confirmPassword) {
+      alert("Passwords don't match!");
       return;
     }
 
     axios({
       method: 'put',
-      url: `http://localhost:3000/${userData.id}`,
+      url: `http://localhost:3000/user/${userData.id}`,
       data: {
         password: password
       }
     }).then(response => {
       if (response.status) {
         console.log("password has been changed");
+        setPassword("");
+        setConfirmPassword("");
+        localStorage.removeItem('userData');
+        navigate(RouterContainer.Login);
       } else {
         console.error("Failed to update the password!");
         setChangePasswordWindow(false);
+        setPassword("");
+        setConfirmPassword("");
       }
+    }).catch(error => console.error("Failed to Save Password", error));
+  }
+
+  const DeleteAccount = (ClientId: string) => {
+
+    const isConfirmed = window.confirm("Are you sure you want to delete your account?");
+
+    if (!ClientId || !isConfirmed) {
+      return;
     }
-    )
+
+    axios({
+      method: 'delete',
+      url: `http://localhost:3000/user/${userData.id}`,
+    }).then(response => {
+      if (response.status) {
+        console.log("User has been deleted!");
+
+        const ResetUser: UserData = {
+          id: '',
+          name: '',
+          email: '',
+          eloScore: 0,
+          wins: 0,
+          total_matches: 0
+        }
+
+        setAuthUserData(ResetUser);
+        navigate(RouterContainer.Login);
+        
+      } else {
+        console.error("Failed to delete User!");
+      }
+    })
   }
 
   useEffect(() => {
@@ -104,12 +156,6 @@ const UserInfo = () => {
       fetchUserData();
     }
   }, [userDataString]);
-
-
-  const CheckSatus = () => {
-    console.log(AuthUserData);
-    console.log(AuthUserData?.eloScore);
-  }
 
   const toggleEditUsername = () => {
     setEditUsername(!editUsername);
@@ -133,11 +179,10 @@ const UserInfo = () => {
   return (
     <>
       <div className="user_info">
-        <button style={{color: '#FFF'}} onClick={() => CheckSatus()}>Check Status</button>
         <div className="game_title">Game Stats</div>
         <div className="game_stats">
-          <div className="title">Current Rating:</div>
-          <div className="data">{AuthUserData?.eloScore ?? 'N/A'}</div>
+          {/* <div className="title">Current Rating:</div>
+          <div className="data">{AuthUserData?.eloScore ?? 'N/A'}</div> */}
           <div className="title">Total Wins:</div>
           <div className="data">{AuthUserData?.wins ?? 'N/A'}</div>
           <div className="title">Total Matches:</div>
@@ -161,7 +206,7 @@ const UserInfo = () => {
         {editEmail && (
           <div className="grid">
             <div className="title">Username</div>
-            <div className="data"></div>
+            <div className="data">{AuthUserData?.name}</div>
             <Back onClick={() => CancelEditing()}/>
             <form className="grid-form" onSubmit={SaveChangesToEmail}>
               <div className="title">Email</div>
@@ -192,7 +237,7 @@ const UserInfo = () => {
               <Save className="action" type="submit"/>
             </form>
             <div className="title">Email</div>
-            <div className="data"></div>
+            <div className="data">{AuthUserData?.email}</div>
             <Back className="action"  onClick={() => CancelEditing()}/>
           </div>
         )}
@@ -206,7 +251,14 @@ const UserInfo = () => {
           If you delete your account, it can't be recovered
         </div>
         <div className="button_container">
-          <button className="delete">Delete Account</button>
+          <button className="delete" onClick={() => {
+            if (AuthUserData?.id) {
+              DeleteAccount(AuthUserData?.id);
+            }
+           }}
+          >
+          Delete Account
+          </button>
         </div>
       </div>
 
@@ -224,7 +276,7 @@ const UserInfo = () => {
                   />
                   <label>Confirm New Password</label>
                   <input 
-                    type="confirmpassword" 
+                    type="password" 
                     name="password" 
                     className="input"
                     value={confirmPassword}

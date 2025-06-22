@@ -3337,6 +3337,16 @@ iframe {
   align-items: center;
   gap: 1rem;
 }
+.edit_trivia_container .header .title_container .title-input {
+  color: var(--accent2);
+  font-size: 1.5rem;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 1px solid var(--accent2light);
+  border-radius: 7px;
+  width: 200px;
+}
 .edit_trivia_container .header .title_container h1 {
   color: var(--accent1);
   font-size: 2.4rem;

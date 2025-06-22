@@ -1,6 +1,6 @@
 import Header from "../components/common/header";
 import Footer from "../components/common/footer";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import SinglePlayer_title from "../components/hoc/loc/SinglePlayer_title";
 import SettingsCard from "../components/common/gameloop/settings_card";
 import axios from "axios";
@@ -10,6 +10,7 @@ import PlayAgain from "../components/hoc/loc/PlayAgain";
 import { Link } from "react-router-dom";
 import { RouterContainer } from "../routes/RouteContainer";
 import { MockDataGameLoop } from "../MockData/MockDataGameLoop";
+
 
 type GameState = 'prep' | 'playing' | 'finished';
 
@@ -29,7 +30,24 @@ type Questions = {
 
 type Difficulty = "easy" | "medium" | "hard";
 
+interface AuthUserData {
+  id: string;
+  name: string;
+  email: string;
+  eloScore?: number;
+  wins?: number;
+  total_matches?: number;
+}
+
 const SingePlayerGameLoop: React.FC = () => {
+
+    const isGuest = !localStorage.getItem('userData');
+
+    const userDataString = localStorage.getItem('userData');
+    const userData = userDataString ? JSON.parse(userDataString) : null;
+
+    const [AuthUserData, setAuthUserData] = useState<AuthUserData | null>(null);
+
     const [gameState, setGameState] = useState<GameState>('prep');
     const [selectedCategory, setSelectedCategory] = useState<selectedOption>({
         value: '',
@@ -124,6 +142,68 @@ const SingePlayerGameLoop: React.FC = () => {
         setRankTitle(title);
 };
 
+    useEffect(() => {
+        if (isGuest) {
+
+        }else if (gameState === 'prep') {
+            fetchUserData()
+                .catch(error => console.error('Error:', error));
+        }
+        if (gameState === 'finished') {
+            UpdateTotalMatches(AuthUserData)
+                .catch(error => console.error('Error:', error));
+        }
+    }, [gameState, isGuest]);
+
+    const fetchUserData = () => {
+        if (isGuest) return Promise.resolve(null);
+
+        return axios.get(`http://localhost:3000/user/${userData.id}`)
+            .then(response => {
+                const NewUserData = response.data;
+                setAuthUserData(NewUserData);
+                return NewUserData;
+            });
+    }
+
+    const UpdateTotalMatches = async (currentUser: AuthUserData | null) => {
+        if (isGuest || !currentUser) {
+            console.log("Guest Play - Matches not recorded!");
+            return;
+        }
+
+        try {
+            const response = await axios.get(`http://localhost:3000/user/${currentUser.id}`);
+            const userData = response.data;
+            
+            const FinalScore = score;
+
+            let updatedData = {
+                wins: (userData.wins || 0),
+                total_matches: (userData.total_matches || 0) + 1
+            };
+
+            if (FinalScore > 8) {
+                updatedData = {
+                    wins: (userData.wins || 0) + 1,
+                    total_matches: (userData.total_matches || 0) + 1
+                };
+            };
+
+            const updateResponse = await axios.put(
+                `http://localhost:3000/user/${currentUser.id}`,
+                updatedData
+            );
+            
+            setAuthUserData(updateResponse.data.user);
+            console.log(updateResponse);
+        } catch (error) {
+            console.error('Failed to Update Total matches', error);
+        }
+    }
+    
+
+
     const shuffleArray = (array: any[]): any[] => {
         return [...array].sort(() => Math.random() - 0.5);
     };
@@ -170,8 +250,6 @@ const SingePlayerGameLoop: React.FC = () => {
             setSelectedAnswer(null);
             handleReset();
         } else {
-            
-
             setGameState('finished');
         }
     }
@@ -212,16 +290,18 @@ const SingePlayerGameLoop: React.FC = () => {
                                         <Countdown 
                                             key={resetKey}
                                             onTimeUpdate={(time) => {
-                                                setRemainingTime(time);
-                                                if (time <= 0 && !hasTimeExpired.current) {
-                                                    console.log("Missed Question!");
-                                                    setSkippedQuestions((prev) => prev + 1);
-                                                    handleNextQuestion();
-                                                    hasTimeExpired.current = true;
-                                                }
-                                                if (time > 0) {
-                                                    hasTimeExpired.current = false;
-                                                }
+                                                setTimeout(() => {
+                                                    setRemainingTime(time);
+                                                    if (time <= 0 && !hasTimeExpired.current) {
+                                                        console.log("Missed Question!");
+                                                        setSkippedQuestions((prev) => prev + 1);
+                                                        handleNextQuestion();
+                                                        hasTimeExpired.current = true;
+                                                    }
+                                                    if (time > 0) {
+                                                        hasTimeExpired.current = false;
+                                                    }
+                                                }, 0);
                                             }}
                                         />
                                     </div>

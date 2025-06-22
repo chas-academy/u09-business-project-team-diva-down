@@ -26,12 +26,11 @@ const Friendslist_card: React.FC = () => {
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [requestValue, setRequestValue] = useState("");
 
-    useEffect(() => {
-        if (!userId) return;
-        fetchFriends();
-        fetchPending();
-        fetchAllUsers();
-    }, [userId]);
+    // useEffect(() => {
+    //     fetchFriends();
+    //     fetchPending();
+    //     fetchAllUsers();
+    // }, []);
 
     const fetchFriends = async () => {
         const res = await API.get<Relationship[]>(`/${userId}`);

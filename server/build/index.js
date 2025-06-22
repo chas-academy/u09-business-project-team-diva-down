@@ -13,10 +13,8 @@ const registerUser_route_1 = __importDefault(require("./routes/registerUser.rout
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
 const passport_config_1 = __importDefault(require("./config/passport.config"));
 const login_route_1 = __importDefault(require("./routes/login.route"));
-const createQuestion_route_1 = __importDefault(require("./routes/createQuestion.route"));
-const updateQuestion_route_1 = __importDefault(require("./routes/updateQuestion.route"));
-const delete_route_1 = __importDefault(require("./routes/delete.route"));
 const friends_route_1 = __importDefault(require("./routes/friends.route"));
+const trivia_route_1 = __importDefault(require("./routes/trivia.route"));
 const ws_1 = require("ws");
 const cors_1 = __importDefault(require("cors"));
 const uuid_1 = require("uuid");
@@ -52,12 +50,10 @@ app.get('/live', (req, res) => {
 });
 app.use('/', registerUser_route_1.default);
 app.use('/', login_route_1.default);
-app.use('/', createQuestion_route_1.default);
-app.use('/', updateQuestion_route_1.default);
-app.use('/', delete_route_1.default);
 app.use('/auth', auth_route_1.default);
 app.use('/friends', friends_route_1.default);
 app.use('/user', user_route_1.default);
+app.use('/trivia', trivia_route_1.default);
 mongoose_1.default.connect(URI)
     .then(() => {
     console.log('Connected to MongoDB successfully.');
