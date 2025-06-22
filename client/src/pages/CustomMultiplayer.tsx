@@ -130,8 +130,8 @@ const CustomMultiplayer: React.FC = () => {
     const [authUser, setAuthUser] = useState<AuthUser | null>(null);
     const AuthUserName = authUser?.name;
     const location = useLocation();
-    const { TriviaId } = location.state || {};
-    const state = location.state as LocationState; // TrivaID regarding the mockData questions
+    const { TriviaId } = location.state as LocationState | null || {};
+    // const state = location.state as LocationState; // TrivaID regarding the mockData questions
     const [lobbyStatus, setLobbyStatus] = useState<string>('');
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const ws = useRef<WebSocket | null>(null);
@@ -719,8 +719,7 @@ const CustomMultiplayer: React.FC = () => {
                 <Header />
                 <main className="main">
                     <MultiPlayer_title />
-                    <button style={{color: '#FFF'}} onClick={() => CheckStatus()}>Check Status</button>
-                    {state.TriviaId ? (
+                    {TriviaId ? (
                         <>
                         {gameState === 'prep' && (
                             <>
@@ -843,8 +842,7 @@ const CustomMultiplayer: React.FC = () => {
                         {gameState === 'finished' && (
                             <>
                                 <div className="score_card">
-                                    <h2 className="title">Quiz Completed!</h2>¨
-                                    <button style={{ color: '#FFF'}} onClick={() => CheckStatus()}>Check Status</button>
+                                    <h2 className="title">Quiz Completed!</h2>
                                     <div className="score">{score}/{questions.length} </div>
                                     {10 + (score - questions.length) >= 9 && (
                                         <div className="congrats-text">Excellent Work! You're a trivia master!</div>
