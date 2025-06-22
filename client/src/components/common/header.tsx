@@ -39,11 +39,7 @@ const Header = () => {
 
     const handleCombinedClick = () => {
         handleClick();
-<<<<<<< HEAD
-        ChangeTheme(); // Passing the event to EChangeTheme where it's actually used
-=======
-        ChangeTheme(e);
->>>>>>> main
+        ChangeTheme();
     };
 
     const handleLogout = () => {

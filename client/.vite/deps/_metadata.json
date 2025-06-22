@@ -2,11 +2,6 @@
   "hash": "2f084ccc",
   "configHash": "e3ca0d25",
   "lockfileHash": "6f252d90",
-<<<<<<< HEAD
-  "browserHash": "b2920891",
-  "optimized": {},
-  "chunks": {}
-=======
   "browserHash": "9d7cf83f",
   "optimized": {
     "react/jsx-dev-runtime": {
@@ -60,5 +55,4 @@
       "file": "chunk-G3PMV62Z.js"
     }
   }
->>>>>>> main
 }

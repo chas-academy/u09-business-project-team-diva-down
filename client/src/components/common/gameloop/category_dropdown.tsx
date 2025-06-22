@@ -1,23 +1,17 @@
-<<<<<<< HEAD
-// import React, { useState, useRef, useEffect } from "react";
-=======
+
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
->>>>>>> main
 
 interface SelectOption {
     value: string;
     label: string;
 }
 
-<<<<<<< HEAD
     // const apiCall = 'https://opentdb.com/api_category.php'
-=======
 interface Categories {
     id: string;
     name: string;
 }
->>>>>>> main
 
 interface CategoryDropdownProps {
     selectedOption: SelectOption;
