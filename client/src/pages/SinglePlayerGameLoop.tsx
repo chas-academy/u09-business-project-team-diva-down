@@ -53,17 +53,17 @@ const SingePlayerGameLoop: React.FC = () => {
         value: '',
         label: 'Select Category'
     });
-    const [currentRating, setCurrentRating] = useState<number>(711); // Initial rating
-    const [ratingChange, setRatingChange] = useState<number>(0);
-    const [rankTitle, setRankTitle] = useState<string>("");
+    const [currentRating, _setCurrentRating] = useState<number>(711); // Initial rating
+    const [ratingChange, _setRatingChange] = useState<number>(0);
+    const [rankTitle, _setRankTitle] = useState<string>("");
     const [difficulty, setDifficulty] = useState("");
-    const [ranked, setRanked] = useState("");
+    const [ranked, _setRanked] = useState("");
     const [questions, setQuestions] = useState<Questions[]>([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
     const [score, setScore] = useState<number>(0);
     const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
     const [resetKey, setResetKey] = useState(0);
-    const [remainingTime, setRemainingTime] = useState<number>(30);
+    const [, setRemainingTime] = useState<number>(30);
     const hasTimeExpired = useRef(false);
     const [skippedQuestions, setSkippedQuestions] =  useState<number>(0);
 
@@ -91,56 +91,6 @@ const SingePlayerGameLoop: React.FC = () => {
     //     console.log(score);
     //     console.log();
     // };
-
-    const getPoints = (scorePercentage: number, difficulty: Difficulty): number => {
-    const pointsBracket: [number, number][] = [
-        [1.00, 800], [0.99, 677], [0.90, 366], [0.80, 240], [0.70, 149],
-        [0.60, 72], [0.50, 0], [0.40, -72], [0.30, -149], [0.20, -240],
-        [0.10, -366], [0.01, -677], [0.00, -800]
-    ];
-
-    const difficultyScale: Record<Difficulty, number> = {
-        easy: 0.50,
-        medium: 0.75,
-        hard: 1.0,
-    };
-
-        const scale = difficultyScale[difficulty];
-
-        for (const [threshold, points] of pointsBracket) {
-            if (scorePercentage >= threshold) {
-                return Math.round(points * scale);
-            }
-        }
-        return 0;
-    };
-
-    const checkUserBracket = (rating: number): string => {
-        const rankingSystem: [string, number][] = [
-            ['Senior Master', 2400], ['National Master', 2200], ['Expert Master', 2000], 
-            ['Class A', 1800], ['Class B', 1600], ['Class C', 1400], ['Class D', 1200], 
-            ['Class E', 1000], ['Class F', 800], ['Class G', 600], ['Class H', 400], 
-            ['Class I', 200], ['Class J', 100]
-        ];
-
-        for (const [title, minRating] of rankingSystem) {
-            if (rating >= minRating) {
-                return title;
-            }
-        };
-        return "Unrated";
-    };
-
-    const calculateRating = () => {
-        const scorePercentage = score / questions.length;
-        const pointsEarned = getPoints(scorePercentage, difficulty as Difficulty);
-        const newRating = currentRating + pointsEarned;
-        const title = checkUserBracket(newRating);
-        
-        setRatingChange(pointsEarned);
-        setCurrentRating(newRating);
-        setRankTitle(title);
-};
 
     useEffect(() => {
         if (isGuest) {
@@ -276,9 +226,7 @@ const SingePlayerGameLoop: React.FC = () => {
                             selectedOption={selectedCategory}
                             onOptionChange={setSelectedCategory}
                             onDifficutlyChange={setDifficulty}
-                            onRankedChange={setRanked}
                             difficulty={difficulty}
-                            ranked={ranked}
                             checkStatus={StartGame}
                         />
                         </>
