@@ -72,7 +72,9 @@ const userSchema = new mongoose_1.Schema({
     password: { type: String },
     oauthProvider: { type: String },
     oauthID: { type: String },
-    eloScore: { type: Number, default: 1000 }
+    eloScore: { type: Number, default: 1000 },
+    wins: { type: Number, default: 0 },
+    total_matches: { type: Number, default: 0 }
 }, {
     collection: 'Users',
     timestamps: true,

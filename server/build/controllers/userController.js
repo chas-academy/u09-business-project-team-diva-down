@@ -42,7 +42,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllusers = exports.getUser = void 0;
+exports.updateUser = exports.getAllusers = exports.getUser = void 0;
 const User_model_1 = require("../models/User.model");
 const mongoose_1 = __importStar(require("mongoose"));
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -81,3 +81,33 @@ const getAllusers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getAllusers = getAllusers;
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { userId } = req.params;
+        if (!userId) {
+            return res.status(400).json({ _id: "_id params is required! " });
+        }
+        if (!mongoose_1.default.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({ error: "Invalid user ID format" });
+        }
+        const user = yield User_model_1.User.findOne({ _id: new mongoose_1.Types.ObjectId(userId) });
+        if (!user) {
+            res.status(404).json({ message: 'No user found with that ID' });
+            return;
+        }
+        const { name, email, password, eloScore, wins, total_matches } = req.body;
+        user.name = name || user.name;
+        user.email = email || user.email;
+        user.password = password || user.password;
+        user.eloScore = eloScore || user.eloScore;
+        user.wins = wins || user.wins;
+        user.total_matches = total_matches || user.total_matches;
+        yield user.save();
+        res.status(200).json(user);
+    }
+    catch (err) {
+        res.status(500).json({ message: "Failed to Update User", error: err });
+        return;
+    }
+});
+exports.updateUser = updateUser;

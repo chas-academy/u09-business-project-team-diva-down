@@ -11,4 +11,5 @@ dotenv_1.default.config();
 const userRouter = (0, express_1.Router)();
 userRouter.get('/:userId', userController_1.getUser);
 userRouter.get('/', userController_2.getAllusers);
+userRouter.put('/:userId', userController_1.updateUser);
 exports.default = userRouter;

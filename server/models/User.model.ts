@@ -46,6 +46,8 @@ export interface IUser extends Document {
   eloScore: number;
   createdAt: Date;
   updatedAt: Date;
+  wins: number;
+  total_matches: number;
 }
 
 const userSchema = new Schema<IUser>(
@@ -55,7 +57,9 @@ const userSchema = new Schema<IUser>(
     password: { type: String },
     oauthProvider: { type: String }, 
     oauthID: { type: String },
-    eloScore: { type: Number, default: 1000 }
+    eloScore: { type: Number, default: 1000 },
+    wins: { type: Number, default: 0 },
+    total_matches: { type: Number, default: 0 }
   },
   { 
     collection: 'Users',
