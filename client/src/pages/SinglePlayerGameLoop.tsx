@@ -28,7 +28,7 @@ type Questions = {
   category: string;
 };
 
-type Difficulty = "easy" | "medium" | "hard";
+// type Difficulty = "easy" | "medium" | "hard";
 
 interface AuthUserData {
   id: string;
