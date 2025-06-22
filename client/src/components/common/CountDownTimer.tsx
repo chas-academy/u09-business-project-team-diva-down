@@ -12,8 +12,6 @@ interface CountdownProps {
 const Countdown: React.FC<CountdownProps> = ({
   duration = 30,
   size = '3em',
-  color1 = '#00ccff',
-  color2 = 'hotpink',
   onTimeUpdate,
 }) => {
   const countdownRef = useRef<HTMLDivElement>(null);
@@ -27,8 +25,6 @@ const Countdown: React.FC<CountdownProps> = ({
       countdownRef.current.style.setProperty('--t-initial', duration.toString());
       countdownRef.current.style.setProperty('--d', size);
       countdownRef.current.style.setProperty('--t', duration.toString());
-      countdownRef.current.style.setProperty('--c1', color1);
-      countdownRef.current.style.setProperty('--c2', color2);
     }
 
     const timer = setInterval(() => {
@@ -42,7 +38,7 @@ const Countdown: React.FC<CountdownProps> = ({
 
     return () => clearInterval(timer); // Cleanup
 
-  }, [duration, size, color1, color2, onTimeUpdate]);
+  }, [duration, size, onTimeUpdate]);
 
   return (
     <>

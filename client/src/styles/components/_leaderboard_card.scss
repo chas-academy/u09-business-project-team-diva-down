@@ -1,0 +1,51 @@
+@import '../variables/variables';
+
+
+.leaderboard_container {
+    max-height: 600px;
+    width: 600px;
+    background-color: $darker;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    font-family: $font1;
+    padding: 40px;
+
+    .leaderboard_bar {
+        background-color: $card-bg;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 24px;
+        border-radius: 7px;
+        border: 1px solid $border;
+
+        .username {
+            color: $text1;
+            width: 150px;
+
+        }
+        .rank {
+            display: flex;
+            color: $text1;
+
+        }
+        .eloRating {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $accent1;
+            border-radius: 7px;
+            background-color: $accent1light;
+            border: 1px solid $accent1;
+            text-align: center;
+            padding: 12px;
+            font-weight: 600;
+        }
+    }
+}

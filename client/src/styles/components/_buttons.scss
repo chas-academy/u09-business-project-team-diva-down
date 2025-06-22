@@ -8,7 +8,7 @@
     padding: 12px 24px;
     font-family: $font2;
     background-color: $accent1;
-    color: $text1;
+    color: $switch1;
     transition: all 0.3s ease-in-out;
 
     &:hover {
@@ -17,6 +17,7 @@
 }
 
 .hollow_active_button {
+    min-width: 100px;
     border-radius: 24px;
     display: flex;
     justify-content: center;
@@ -63,10 +64,58 @@
     padding: 12px 24px;
     font-family: $font2;
     background-color: $accent2;
-    color: $pt2;
+    color: $switch1;
     transition: all 0.3s ease-in-out;
 
     &:hover {
         transform: translateY(-5px);
+    }
+}
+
+.hollow_active_button_version3 {
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font1;
+    font-weight: 600;
+    font-size: 1rem;
+    background-color: transparent;
+    border: 1px solid $accent2;
+    color: $accent2;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background-color: $accent2light;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        padding: 12px 24px;
+    }
+}
+
+.invitationDetails {
+    margin: 20px 0;
+
+    .connect_button {
+        color: $accent1;
+        background-color: $accent1light;
+        border: 1px solid $accent1;
+        padding: 6px 12px;
+        border-radius: 7px;
+        font-family: $font1;
+        font-size: 1.1rem;
+
+        &:hover {
+            background-color: $accent1;
+            color: $switch1;
+        }
+
+        &:active {
+            color: $accent1;
+            background-color: $accent1light;
+        }
     }
 }

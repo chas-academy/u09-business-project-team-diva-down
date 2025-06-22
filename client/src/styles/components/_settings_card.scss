@@ -8,7 +8,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin: 20px 0;
     border: 1px solid $border;
 
     .settings-bar {
@@ -23,11 +23,42 @@
         padding: 0 10px;
         align-items: center;
 
+        .play-button-ready {
+            * {
+                border-color: $accent1;
+                margin: 0 5px;
+            }
+        }
+
+        .play-button-waiting {
+            * {
+                border-color: $border !important;
+                color: $border !important;
+                margin: 0 5px;
+
+                &:hover {
+                    background-color: transparent;
+                    transform: none;
+                }
+            }
+        }
+
         h2 {
             font-size: 1.5rem;
             color: $accent1;
             font-family: $font1;
             font-weight: 400;
+        }
+
+        .trivia_title {
+            font-size: 1rem;
+            font-family: $font1;
+            color: $text1;
+            background-color: $dark;
+            padding: 7px 45px;
+            border: 1px solid $border;
+            border-radius: 7px;
+
         }
     }
 
@@ -40,6 +71,11 @@
 
         * {
             margin: 0 10px;
+
+            &:disabled {
+                border-color: $border;
+                color: $border;
+            }
         }
     }
 }

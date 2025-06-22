@@ -13,14 +13,34 @@ async function registerNewUser(req: Request, res: Response): Promise<any> {
         }
         
         const hashedPassword = await bcrypt.hash(password, saltRounds);
+        
+        const eloScore = 0;
+        const wins = 0;
+        const total_matches = 0;
 
         const newUser = new User({
             name: name,
             email: email,
             password: hashedPassword,
+            eloScore: eloScore,
+            wins: wins,
+            total_matches: total_matches,
         });
 
-        await newUser.save()
+        await newUser.save();
+
+        return res.status(201).json({
+            message: "User registered successfully",
+            user: {
+                id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                eloScore: newUser.eloScore,
+                wins: wins,
+                total_matches: total_matches,
+            }
+        });
+        
     } catch(error) {
         console.error("Registration error:", error);
         res.status(500).json({ message: "Failed to register new user" });

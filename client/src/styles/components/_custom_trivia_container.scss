@@ -1,0 +1,638 @@
+@import '../variables/variables';
+
+.add_question_container {
+    min-width: 400px;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: $font1;
+
+    .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        
+        h1 {
+            color: $accent1;
+            text-shadow: 0 0 10px $accent1;
+        }
+    }
+
+    .form_container {
+        width: 100%;
+        height: 100%;
+        background-color: $darker;
+        padding: 20px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $text1;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .form_group {
+                display: flex;
+                flex-direction: column;
+
+                label {
+                    color: $accent1;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                    font-size: 1.2rem;
+                    position: relative;
+
+                    .radio-btn {
+                        position: absolute;
+                        opacity: 0;
+                        width: 0;
+                        height: 0;
+
+                        &::before {
+                            content: '';
+                            display: inline-block;
+                            width: 16px;
+                            height: 16px;
+                            border-radius: 50%;
+                            border: 2px solid $accent1;
+                        }
+                    }
+                }
+
+                .user_input {
+                    border-radius: 7px;
+                    background-color: $card_bg;
+                    border: 2px solid $border;
+                    color: $text2;
+                    padding: 5px;
+                    outline: none;
+                    margin-bottom: 5px;
+                    
+                    &:focus {
+                        border-color: $accent1;
+                    }
+                }
+
+                .radio_container {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+
+                    .difficulty {
+                        padding: 6px 12px;
+                        border: 1px solid;
+                        display: flex;
+                        gap: 10px;
+                        border-radius: 7px;
+                    }
+
+                    .easy {
+                        color: $success;
+                        background-color: $sucesslight;
+                    }
+
+                    .medium {
+                        color: $warning;
+                        background-color: $warninglight;
+                    }
+
+                    .hard {
+                        color: $error;
+                        background-color: $errorlight;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.edit_trivia_container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: $font1;
+  background-color: $darker;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid $border;
+
+    .title_container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .title-input {
+        color: $accent2;
+        font-size: 1.5rem;
+        padding: 5px 20px;
+        box-sizing: border-box;
+        background-color: transparent;
+        border: 1px solid $accent2light;
+        border-radius: 7px;
+        width: 200px;
+      }
+
+      h1 {
+        color: $accent1;
+        font-size: 2.4rem;
+        font-weight: 600;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba($accent1light, 0.3);
+      }
+
+      .edit {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        border: 1px solid $success;
+        color: $success;
+        background-color: rgba($success, 0.1);
+        font-size: 1rem;
+        padding: 0.4rem 0.8rem;
+        cursor: pointer;
+        transition: all 0.2s ease-out;
+
+        &:hover {
+          background-color: $success;
+          color: white;
+          transform: translateY(-1px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    .btn-container {
+      display: flex;
+      gap: 1rem;
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        border: 1px solid;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 0.6rem 1.2rem;
+        cursor: pointer;
+        transition: all 0.2s ease-out;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+
+      .add_question {
+        border-color: $accent2;
+        background-color: rgba($accent2, 0.1);
+        color: $accent2;
+
+        &:hover {
+          background-color: $accent2;
+          color: white;
+        }
+      }
+
+      .back {
+        background-color: rgba($error, 0.1);
+        color: $error;
+        border-color: $error;
+
+        &:hover {
+          background-color: $error;
+          color: white;
+        }
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: $card_bg;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    thead {
+      background-color: $dark;
+      
+      th {
+        color: $accent1;
+        font-weight: 600;
+        padding: 1rem;
+        font-size: 1.2rem;
+        text-align: center;
+        vertical-align: center;
+        width: 20%;
+      }
+    }
+
+    tbody {
+      tr {
+        transition: all 0.2s ease;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover {
+          background-color: $accent1light;
+        }
+
+        td {
+          padding: 1rem;
+          color: $text1;
+          text-align: center;
+          color: $text1;
+          font-size: 1rem;
+          vertical-align: center;
+          position: relative;
+          width: 20%;
+          
+          &:hover {
+            color: $accent1;
+          }
+        }
+        .correct_option {
+          position: relative;
+
+          .other_options {
+            display: none;
+            position: absolute;
+            top: 65px;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 40%;
+            background-color: $card_bg;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 100000;
+            margin-top: 5px;
+            transition: all 0.3s ease;
+            
+            li {
+              padding: 10px 15px;
+              text-align: center;
+              color: $text1;
+              list-style: none;
+              
+              &:hover {
+                background-color: $accent1light;
+                color: $accent1;
+              }
+
+              &:last-child {
+                border-radius: 0 0 10px 10px;
+              }
+            }
+          }
+        }
+        
+        .btn_container {
+          display: flex;
+          gap: 20px;
+
+          .btn {
+            border-radius: 7px;
+            border: 1px solid;
+            padding: 6px 12px;
+            font-weight: 600;
+          }
+
+          .edit-btn {
+            background-color: $accent2light;
+            color: $accent2;
+            border-color: $accent2;
+
+            &:hover {
+              background-color: $accent2;
+              color: $switch1;
+            }
+          }
+
+          .delete-btn {
+            background-color: $errorlight;
+            color: $error;
+            border-color: $error;
+
+            &:hover {
+              background-color: $error;
+              color: $switch1;
+            }
+          }
+        }
+      }
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: flex-end;
+
+      .btn {
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+
+      .edit-btn {
+        background-color: rgba($success, 0.1);
+        border-color: $success;
+        color: $success;
+
+        &:hover {
+          background-color: $success;
+          color: white;
+        }
+      }
+
+      .delete-btn {
+        background-color: rgba($error, 0.1);
+        border-color: $error;
+        color: $error;
+
+        &:hover {
+          background-color: $error;
+          color: white;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .btn-container {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+}
+
+.custom_trivia_container {
+  min-width: 400px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: $font1;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    gap: 50px;
+
+    h1 {
+      color: $accent1;
+      font-size: 2.2em;
+      text-shadow: 0 0 10px $accent1light;
+    }
+
+    .create-btn {
+      color: $success;
+      font-size: 1rem;
+      border: 1px solid $success;
+      border-radius: 12px;
+      padding: 6px 12px;
+      background-color: $sucesslight;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $successdark;
+        color: $switch1;
+      }
+    }
+  }
+
+  .subheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 50px;
+
+    h4 {
+      color: $text2;
+    }
+
+    .create-btn {
+      color: $accent2;
+      font-size: 1rem;
+      border: 1px solid $accent2;
+      border-radius: 12px;
+      padding: 6px 12px;
+      background-color: $accent2light;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $accent2;
+        color: $switch1;
+      }
+    }
+  }
+
+  .table_container {
+    background-color: $darker;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: $card_bg;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+      td {
+        padding:12px;
+        color: $text1;
+
+        .title {
+          font-size: 1.1rem;
+        }
+      }
+
+        tr {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 6px 12px;
+          transition: all 0.3s ease;
+          border-bottom: 1px solid $border;
+        }
+
+        tr:last-child {
+          border-bottom: none;
+        }
+
+        tr:hover {
+          background-color: $dark;
+        }
+
+        .btn-group {
+          display: flex;
+          justify-content: flex-end;
+          gap: 10px;
+
+        .btn {
+          padding: 8px 15px;
+          border-radius: 12px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: all 0.3s ease;
+        }
+
+        .edit-btn {
+          background-color: $sucesslight;
+          border: 1px solid $success;
+          color: $success;
+
+          &:hover {
+            background-color: $successdark;
+            color: $switch1;
+          }
+        }
+
+        .delete-btn {
+          background-color: $errorlight;
+          border: 1px solid $error;
+          color: $error;
+
+          &:hover {
+            background-color: $errordark;
+            color: $switch1;
+          }
+        }
+
+        .start-btn {
+          background-color: $accent1light;
+          border: 1px solid $accent1;
+          color: $accent1;
+
+          &:hover {
+            background-color: $accent1;
+            color: $switch1;
+          }
+        }
+      }
+    }    
+  }
+}
+
+.createNewTriviaContainer {
+    position: fixed;
+    top: -20%;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    form {
+        background-color: $dark;
+        border-radius: 7px;
+        color: $text1;
+        padding: 12px;
+        font-family: $font1;
+        display: flex;
+        gap: 10px;
+        border: 1px solid $border;
+
+        label {
+            padding: 6px 12px;
+            font-weight: 600;
+        }
+
+        .submit {
+            border-radius: 7px;
+            background-color: $sucesslight;
+            border: 1px solid $success;
+            padding: 6px 12px;
+            color: $success;
+            font-weight: 600;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: $success;
+                color: $switch1;
+            }
+        }
+
+        .user_input {
+            background-color: $darker;
+            border-radius: 7px;
+            border: 1px solid $accent1;
+            color: $text1;
+            padding: 0 10px;
+            font-weight: 600;
+        }
+
+        .cancel {
+            border-radius: 7px;
+            background-color: $errorlight;
+            border: 1px solid $error;
+            padding: 6px 12px;
+            color: $error;
+            font-weight: 600;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: $error;
+                color: $switch1;
+          }
+        }
+    }
+}
