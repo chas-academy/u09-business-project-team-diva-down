@@ -13,9 +13,9 @@ interface GameloopSettingsCardProps {
   selectedOption: SelectOption;
   onOptionChange: (option: SelectOption) => void;
   onDifficutlyChange: (difficulty: string) => void;
-  onRankedChange: (ranked: string) => void;
+  // onRankedChange: (ranked: string) => void;
   difficulty: string;
-  ranked: string;
+  // ranked: string;
   checkStatus: () => void;
 }
 
@@ -23,9 +23,7 @@ const GameloopSettingsCard: React.FC<GameloopSettingsCardProps> = ({
   selectedOption: selectedCategory,
   onOptionChange: setSelectedCategory,
   onDifficutlyChange,
-  onRankedChange,
   difficulty,
-  ranked,
   checkStatus
 }) => {
 

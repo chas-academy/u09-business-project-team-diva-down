@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { AxiosInstance, InternalAxiosRequestConfig, AxiosError, AxiosRequestConfig } from 'axios';
+import type { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from 'axios';
 
 declare module 'axios' {
   interface InternalAxiosRequestConfig<D = any> extends AxiosRequestConfig<D> {

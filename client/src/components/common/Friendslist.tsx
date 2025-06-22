@@ -1,5 +1,5 @@
 // REMOVE `userId` from props
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 import API from "../../services/api";
 import axios from "axios";

@@ -12,10 +12,10 @@ import Lobby_title from "../components/hoc/loc/Lobby_title";
 import ReciveInvitationscard from "../components/common/mutliplayer-Custom-Comp/ReciveInvitations_card";
 import { v4 as uuidv4 } from "uuid";
 import FullClientLobbyDisplay from "../components/common/mutliplayer-Custom-Comp/Full_Client_Lobby_Display_card";
-import { MockDataGameLoop } from "../MockData/MockDataGameLoop";
+// import { MockDataGameLoop } from "../MockData/MockDataGameLoop";
 import Countdown from "../components/common/CountDownTimer";
 import Home_button from "../components/hoc/loc/Home_button";
-import PlayAgain from "../components/hoc/loc/PlayAgain";
+// import PlayAgain from "../components/hoc/loc/PlayAgain";
 import { RouterContainer } from "../routes/RouteContainer";
 import LobbyScoreBoardCard from "../components/common/gameloop/Lobby_ScoreBoard";
 import axios from "axios";
@@ -65,10 +65,10 @@ interface Invitation {
 
 type GameState = 'prep' | 'playing' | 'finished';
 
-interface selectedOption {
-    value: string;
-    label: string;
-}
+// interface selectedOption {
+//     value: string;
+//     label: string;
+// }
 
 type Questions = {
   question: string;
@@ -114,11 +114,11 @@ const CustomMultiplayer: React.FC = () => {
     const [score, setScore] = useState<number>(0);
     const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
     const [resetKey, setResetKey] = useState(0);
-    const [remainingTime, setRemainingTime] = useState<number>(30);
+    const [_remainingTime, setRemainingTime] = useState<number>(30);
     const hasTimeExpired = useRef(false);
     const [skippedQuestions, setSkippedQuestions] =  useState<number>(0);
     const [ranked, setRanked] = useState<string>('');
-    const [finalScore, setFinalScore] = useState<FinalScore>();
+    const [_finalScore, setFinalScore] = useState<FinalScore>();
     const [placements, setPlacements] = useState<{
         sortedData: LobbyScoreBoard[];
         placementsMap: Record<string, number>;
@@ -135,7 +135,7 @@ const CustomMultiplayer: React.FC = () => {
     const [lobbyStatus, setLobbyStatus] = useState<string>('');
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const ws = useRef<WebSocket | null>(null);
-    const [lobbies, setLobbies] = useState<LobbyInfo[]>([]);
+    const [_lobbies, setLobbies] = useState<LobbyInfo[]>([]);
     const [clients, setClients] = useState<Client[]>([]); // Specific For Lobby, if no lobby found, then all clients,
     const [allClients, setAllClients] = useState<Client[]>([]);
     const [isReady, setIsReady] = useState<boolean>(false);
@@ -694,24 +694,6 @@ const CustomMultiplayer: React.FC = () => {
             console.log("Placements updated:", data);
         }
     }, []);
-
-
-
-    const CheckStatus = () => {
-        // console.log(authUser);
-        // const AuthenticatedUser = localStorage.getItem("userData");
-        // const AuthUserWithToken = JSON.parse(localStorage.getItem('userDataWithToken') || '[]');
-        // // console.log(AuthenticatedUser);
-        // console.log(AuthUserWithToken);
-        // // console.log(authUser);
-
-        // const user = JSON.parse(localStorage.getItem("userDataWithToken") ||'[]');
-
-        // console.log(user.user.name);
-
-        const AuthUserPlacementData = placements?.sortedData.find((client) => client.UserId === authUser?.id);
-        console.log(AuthUserPlacementData?.placement);
-    }
 
     return (
         <>

@@ -18,7 +18,7 @@ const Register_Page = () => {
     const [password, setPassword] = useState('');
     const [ConfirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
-    const [newUser, setNewUser] = useState<NewUser>();
+    const [_newUser, setNewUser] = useState<NewUser>();
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();

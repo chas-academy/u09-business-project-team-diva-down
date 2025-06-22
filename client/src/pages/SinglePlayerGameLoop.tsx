@@ -9,7 +9,7 @@ import Home_button from "../components/hoc/loc/Home_button";
 import PlayAgain from "../components/hoc/loc/PlayAgain";
 import { Link } from "react-router-dom";
 import { RouterContainer } from "../routes/RouteContainer";
-import { MockDataGameLoop } from "../MockData/MockDataGameLoop";
+// import { MockDataGameLoop } from "../MockData/MockDataGameLoop";
 
 
 type GameState = 'prep' | 'playing' | 'finished';

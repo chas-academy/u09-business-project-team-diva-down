@@ -2,7 +2,6 @@ import Home from "../../hoc/loc/Home_button";
 import Play from "../../hoc/loc/Play.button";
 import { RouterContainer } from "../../../routes/RouteContainer";
 import { Link } from "react-router-dom";
-import { all } from "axios";
 
 interface TriviaData {
   _id: string;

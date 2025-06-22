@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 interface selectValue {
     value: number;
@@ -13,7 +13,7 @@ interface ChangePasswordProps {
 
 const ChangePassword: React.FC<ChangePasswordProps> = ({ selectedValue, onOptionChange, ToggleWindowFunction }) => {
     
-    const [value, setValue] = useState<selectValue>();
+    // const [value, setValue] = useState<selectValue>();
 
     const handleValueClick = () => {
         const NewValue = Math.random();

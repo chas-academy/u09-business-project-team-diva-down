@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import Edit from "../hoc/loc/Edit_button_dashboard";
 import Save from "../hoc/loc/Save_button_dashboard";
 import Back from "../hoc/loc/Back_button_dashboard";
-import ChangePassword from "./user_dashboard/Change_password";
 import axios from "axios";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RouterContainer } from "../../routes/RouteContainer";
 
-interface SelectValue {
-  value: number;
-}
+// interface SelectValue {
+//   value: number;
+// }
 
 interface UserData {
   id: string;
