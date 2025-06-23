@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
-import session from 'express-session';
+import session from 'cookie-session';
 import passport from 'passport';
 import http from 'http';
 import routerRegister from "./routes/registerUser.route";
@@ -35,14 +35,11 @@ app.use(cors({
 }));
 
 app.use(session({
-    secret: process.env.SESSION_SECRET!,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: process.env.NODE_ENV === 'production',
-        httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000 
-    }
+    name: 'session',
+    keys: [process.env.SESSION_SECRET!],
+    maxAge: 24 * 60 * 60 * 1000,
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true
 }));
 
 app.use(passport.initialize());
