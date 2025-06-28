@@ -177,4 +177,7 @@ in both client and server maps
 
 ---
 
+## Developers
+Ciarán Hayes & David Segerbo
+
 
