@@ -2,6 +2,12 @@
 
 A fullstack Trivia Game app that uses the Open Trivia Database https://opentdb.com/api_config.php. Play solo or challenge friends in multiplayer mode — test your knowledge and have fun!
 
+## Front-end 
+https://neonix.netlify.app
+
+## Back-end
+https://u09-business-project-team-diva-down.onrender.com
+
 ## Features ✨
 
 ✅ User registration & authentication (JWT + Google OAuth) ✅ Create, read, update, delete trivia questions ✅ Friend request system: send, accept, view friends ✅ RESTful API built with Express ✅ Single-player & multiplayer support (via WebSockets)
