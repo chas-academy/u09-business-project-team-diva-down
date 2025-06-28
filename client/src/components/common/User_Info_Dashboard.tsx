@@ -22,6 +22,8 @@ interface UserData {
 const UserInfo = () => {
   const navigate = useNavigate();
 
+  const baseUrl = import.meta.env.VITE_API_URL;
+
   const userDataString = localStorage.getItem('userData');
   const userData = userDataString ? JSON.parse(userDataString) : null;
 
@@ -43,7 +45,7 @@ const UserInfo = () => {
 
 
   const fetchUserData = () => {
-     axios.get(`http://localhost:3000/user/${userData.id}`)
+     axios.get(`${baseUrl}/${userData.id}`)
       .then(response => {
         const UserData = response.data;
         setAuthUserData(UserData);
@@ -58,7 +60,7 @@ const UserInfo = () => {
 
     axios({
       method: 'put',
-      url: `http://localhost:3000/user/${userData.id}`,
+      url: `${baseUrl}/user/${userData.id}`,
       data: {
         name: newUsernameValue
       }
@@ -75,7 +77,7 @@ const UserInfo = () => {
 
     axios({
       method: 'put',
-      url: `http://localhost:3000/user/${userData.id}`,
+      url: `${baseUrl}/user/${userData.id}`,
       data: {
         email: newEmailValue
       }
@@ -97,7 +99,7 @@ const UserInfo = () => {
 
     axios({
       method: 'put',
-      url: `http://localhost:3000/user/${userData.id}`,
+      url: `${baseUrl}/user/${userData.id}`,
       data: {
         password: password
       }
@@ -127,7 +129,7 @@ const UserInfo = () => {
 
     axios({
       method: 'delete',
-      url: `http://localhost:3000/user/${userData.id}`,
+      url: `${baseUrl}/user/${userData.id}`,
     }).then(response => {
       if (response.status) {
         console.log("User has been deleted!");

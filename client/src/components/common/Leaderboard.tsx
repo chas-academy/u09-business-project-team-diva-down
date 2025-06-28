@@ -19,9 +19,6 @@ const MockDataFriends = [
     }
 ]
 
-
-
-
 const Leaderboard_Card = () => {
 
     const sortedElo = [...MockDataFriends].sort((a, b) => b.elo - a.elo);

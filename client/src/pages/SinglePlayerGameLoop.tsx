@@ -41,6 +41,8 @@ interface AuthUserData {
 
 const SingePlayerGameLoop: React.FC = () => {
 
+    const baseUrl = import.meta.env.VITE_API_URL;
+
     const isGuest = !localStorage.getItem('userData');
 
     const userDataString = localStorage.getItem('userData');
@@ -108,7 +110,7 @@ const SingePlayerGameLoop: React.FC = () => {
     const fetchUserData = () => {
         if (isGuest) return Promise.resolve(null);
 
-        return axios.get(`http://localhost:3000/user/${userData.id}`)
+        return axios.get(`${baseUrl}/user/${userData.id}`)
             .then(response => {
                 const NewUserData = response.data;
                 setAuthUserData(NewUserData);
@@ -123,7 +125,7 @@ const SingePlayerGameLoop: React.FC = () => {
         }
 
         try {
-            const response = await axios.get(`http://localhost:3000/user/${currentUser.id}`);
+            const response = await axios.get(`${baseUrl}/user/${currentUser.id}`);
             const userData = response.data;
             
             const FinalScore = score;
@@ -141,7 +143,7 @@ const SingePlayerGameLoop: React.FC = () => {
             };
 
             const updateResponse = await axios.put(
-                `http://localhost:3000/user/${currentUser.id}`,
+                `${baseUrl}/user/${currentUser.id}`,
                 updatedData
             );
             

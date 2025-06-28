@@ -36,6 +36,7 @@ interface AuthUserData {
 }
 
 const CustomTrivia: React.FC = () => {
+    const baseUrl = import.meta.env.VITE_API_URL;
     const [toggleTriviaTable, setToggleTriviaTable] = useState(true);
     const [toggleCreateNewTrivia, setToggleCreateNewTrivia] = useState(false);
     const [triviaTables, setTriviaTables] = useState<TriviaTable[]>([]);
@@ -64,7 +65,7 @@ const CustomTrivia: React.FC = () => {
             
             const userData = JSON.parse(userDataString);
             try {
-                const response = await axios.get(`http://localhost:3000/user/${userData.id}`);
+                const response = await axios.get(`${baseUrl}/user/${userData.id}`);
                 setAuthUserData(response.data);
             } catch (error) {
                 console.error("Error fetching user data:", error);
@@ -82,7 +83,7 @@ const CustomTrivia: React.FC = () => {
 
     const fetchTriviaTables = async (userId: string) => {
         try {
-            const response = await axios.get(`http://localhost:3000/trivia/user/${userId}`);
+            const response = await axios.get(`${baseUrl}/trivia/user/${userId}`);
             setTriviaTables(response.data);
         } catch (error) {
             console.error("Error fetching trivia tables:", error);
@@ -91,7 +92,7 @@ const CustomTrivia: React.FC = () => {
 
     const fetchTriviaTable = async (id: string) => {
         try {
-            const response = await axios.get(`http://localhost:3000/trivia/${id}`);
+            const response = await axios.get(`${baseUrl}/trivia/${id}`);
             return response.data;
         } catch (error) {
             console.error("Error fetching trivia table:", error);
@@ -137,7 +138,7 @@ const CustomTrivia: React.FC = () => {
         if (!EditTriviaContent) return;
 
         try {
-            await axios.put(`http://localhost:3000/trivia/${EditTriviaContent._id}`, {
+            await axios.put(`${baseUrl}/trivia/${EditTriviaContent._id}`, {
                 action: 'addQuestion',
                 questionData: addQuestion
             });
@@ -198,7 +199,7 @@ const CustomTrivia: React.FC = () => {
         }
         
         try {
-            await axios.put(`http://localhost:3000/trivia/${EditTriviaContent._id}`, {
+            await axios.put(`${baseUrl}/trivia/${EditTriviaContent._id}`, {
                 action: 'updateQuestion',
                 questionData: addQuestion
             });
@@ -269,7 +270,7 @@ const CustomTrivia: React.FC = () => {
         if (!NewTriviaListName || !AuthUserData) return;
         
         try {
-            const response = await axios.post(`http://localhost:3000/trivia`, {
+            const response = await axios.post(`${baseUrl}/trivia`, {
                 userId: AuthUserData.id,
                 title: NewTriviaListName
             });
@@ -285,7 +286,7 @@ const CustomTrivia: React.FC = () => {
 
     const deleteTriviaList = async (id: string) => {
         try {
-            await axios.delete(`http://localhost:3000/trivia/${id}`);
+            await axios.delete(`${baseUrl}/trivia/${id}`);
             setTriviaTables(prev => prev.filter(table => table._id !== id));
         } catch (error) {
             console.error("Error deleting trivia table:", error);
@@ -297,7 +298,7 @@ const CustomTrivia: React.FC = () => {
         if (!EditTriviaContent) return;
         
         try {
-            await axios.delete(`http://localhost:3000/trivia/${EditTriviaContent._id}/question/${id}`);
+            await axios.delete(`${baseUrl}/trivia/${EditTriviaContent._id}/question/${id}`);
             
             const updatedTable = await fetchTriviaTable(EditTriviaContent._id);
             if (updatedTable) {
@@ -317,7 +318,7 @@ const CustomTrivia: React.FC = () => {
         if (!EditTriviaContent) return;
         
         try {
-            await axios.put(`http://localhost:3000/trivia/${EditTriviaContent._id}`, {
+            await axios.put(`${baseUrl}/trivia/${EditTriviaContent._id}`, {
                 action: 'updateTitle',
                 questionData: { title: newTitle }
             });

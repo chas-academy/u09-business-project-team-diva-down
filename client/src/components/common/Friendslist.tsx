@@ -19,6 +19,7 @@ interface Relationship {
 }
 
 const Friendslist_card: React.FC = () => {
+    const baseUrl = import.meta.env.BASE_URL;
     const userId = localStorage.getItem("userId") ?? "";
 
     const [friendsList, setFriendList] = useState<Relationship[]>([]);
@@ -44,7 +45,7 @@ const Friendslist_card: React.FC = () => {
 
     const fetchAllUsers = async () => {
         try {
-            axios.get('http://localhost:3000/user')
+            axios.get(`${baseUrl}user`)
                 .then(response => {
                     console.log(response.data)
                     const data = response.data;

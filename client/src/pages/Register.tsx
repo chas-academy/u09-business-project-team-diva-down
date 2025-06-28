@@ -13,6 +13,7 @@ interface NewUser {
 }
 
 const Register_Page = () => {
+    const baseUrl = import.meta.env.VITE_API_URL;
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -30,7 +31,7 @@ const Register_Page = () => {
                 return;
             }
 
-            const response = await fetch("http://localhost:3000/register", {
+            const response = await fetch(`${baseUrl}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

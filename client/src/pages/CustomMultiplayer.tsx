@@ -106,6 +106,7 @@ interface TriviaData {
 }
 
 const CustomMultiplayer: React.FC = () => {
+    const baseUrl = import.meta.env.VITE_API_URL;
     const [LobbyTriviaData, setLobbyTriviaData] = useState<TriviaData | null>(null);
     const [LobbyScoreBoard, setLobbyScoreBoard] = useState<LobbyScoreBoard[]>([]);
     const [gameState, setGameState] = useState<GameState>('prep');
@@ -246,7 +247,7 @@ const CustomMultiplayer: React.FC = () => {
 
             const AuthUserPlacementData = placements?.sortedData.find((client) => client.UserId === authUser?.id);
 
-            const response = await axios.get(`http://localhost:3000/user/${currentUserId}`);
+            const response = await axios.get(`${baseUrl}/${currentUserId}`);
             const userData = response.data;
 
             let updatedData = {
@@ -262,7 +263,7 @@ const CustomMultiplayer: React.FC = () => {
             }
 
             const updateResponse = await axios.put(
-                `http://localhost:3000/user/${currentUserId}`,
+                `${baseUrl}/${currentUserId}`,
                 updatedData
             );
 
@@ -675,7 +676,7 @@ const CustomMultiplayer: React.FC = () => {
     const FetchSpecificTriviaTable = async (TriviaId: string) => {
 
         try {
-            const response = await axios.get<TriviaData>(`http://localhost:3000/trivia/${TriviaId}`);
+            const response = await axios.get<TriviaData>(`${baseUrl}/trivia/${TriviaId}`);
             setLobbyTriviaData(response.data);
 
         } catch (error) {

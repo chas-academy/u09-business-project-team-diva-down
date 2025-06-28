@@ -18,6 +18,7 @@ interface LoginResponse {
 
 }
 const Login = () => {
+    const baseUrl = import.meta.env.VITE_API_URL;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:3000/login", {
+            const response = await fetch(`${baseUrl}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -53,6 +54,10 @@ const Login = () => {
         }
     }
 
+    const checkstatus = () => {
+        console.log(baseUrl);
+    }
+
 
     return (
         <>
@@ -63,6 +68,7 @@ const Login = () => {
                             <div className="login-card">
                                 <header className="login-header">
                                     <Login_Title />
+                                    <button style={{color: '#FFF'}} onClick={() => checkstatus()}>Check Status</button>
                                 </header>
                                 <form className="login-form" onSubmit={handleLogin} method="POST">
                                     <div className="form-group">
