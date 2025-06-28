@@ -30,7 +30,7 @@ const socket = new ws_1.WebSocketServer({ server });
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)({
-    origin: /http:\/\/localhost:\d+/,
+    origin: true,
     credentials: true
 }));
 app.use((0, express_session_1.default)({

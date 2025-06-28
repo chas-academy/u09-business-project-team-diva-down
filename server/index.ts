@@ -55,7 +55,7 @@ app.get('/live', (req, res) => {
 
 app.use('/', routerRegister);
 app.use('/', loginRouter);
-app.use('/auth', authRouter);
+app.use('/auth', authRouter)
 app.use('/friends', friendRouter);
 app.use('/user', userRouter);
 app.use('/trivia', TriviaRouter);
