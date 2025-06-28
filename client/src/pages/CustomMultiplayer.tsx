@@ -107,6 +107,7 @@ interface TriviaData {
 
 const CustomMultiplayer: React.FC = () => {
     const baseUrl = import.meta.env.VITE_API_URL;
+    const baseWsUrl = import.meta.env.VITE_WS_URL;
     const [LobbyTriviaData, setLobbyTriviaData] = useState<TriviaData | null>(null);
     const [LobbyScoreBoard, setLobbyScoreBoard] = useState<LobbyScoreBoard[]>([]);
     const [gameState, setGameState] = useState<GameState>('prep');
@@ -276,7 +277,7 @@ const CustomMultiplayer: React.FC = () => {
 
     const connect = () => {
 
-        ws.current = new WebSocket(`ws://localhost:3000`);
+        ws.current = new WebSocket(`${baseWsUrl}`);
 
         ws.current.onopen = () => {
             console.log('connected to Webscoket Server!');
