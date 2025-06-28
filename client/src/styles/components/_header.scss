@@ -57,6 +57,11 @@
         list-style: none;
         position: relative;
 
+        * {
+            text-decoration: none;
+            margin: 5px 0;
+        }
+
         li {
             text-decoration: none;
             color: $text1;

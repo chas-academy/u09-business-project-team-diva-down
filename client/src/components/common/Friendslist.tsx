@@ -19,7 +19,7 @@ interface Relationship {
 }
 
 const Friendslist_card: React.FC = () => {
-    const baseUrl = import.meta.env.BASE_URL;
+    const baseUrl = import.meta.env.VITE_API_URL;
     const userId = localStorage.getItem("userId") ?? "";
 
     const [friendsList, setFriendList] = useState<Relationship[]>([]);

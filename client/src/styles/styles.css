@@ -253,6 +253,11 @@ iframe {
   flex-direction: row;
   gap: 40px;
 }
+@media (max-width: 600px) {
+  .Homepage .main .card-container {
+    flex-direction: column;
+  }
+}
 .Homepage .main .homepage-button-container {
   display: flex;
   justify-content: center;
@@ -1066,6 +1071,10 @@ iframe {
   list-style: none;
   position: relative;
 }
+.mobile_nav_menu_container .mobile_navlinks * {
+  text-decoration: none;
+  margin: 5px 0;
+}
 .mobile_nav_menu_container .mobile_navlinks li {
   text-decoration: none;
   color: var(--text1);
@@ -1515,6 +1524,23 @@ iframe {
   .hollow_active_button_version3 {
     padding: 12px 24px;
   }
+}
+
+.hollow_active_button_version4 {
+  min-width: 100px;
+  border-radius: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  font-family: "Tilt Warp", sans-serif;
+  background-color: transparent;
+  color: var(--accent1);
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+}
+.hollow_active_button_version4:hover {
+  transform: translateY(-2px);
 }
 
 .invitationDetails {
@@ -2342,6 +2368,14 @@ iframe {
   --rbg1: #e2e2e2;
 }
 
+.title_homepage_section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .title_section {
   display: flex;
   justify-content: center;
@@ -2744,6 +2778,36 @@ iframe {
   color: var(--border);
 }
 
+@media (max-width: 600px) {
+  .settings-container {
+    width: 95%;
+    padding: 15px;
+    margin: 15px auto;
+  }
+  .settings-container .settings-bar {
+    height: auto;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+  .settings-container .settings-bar h2 {
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+  }
+  .settings-container .settings-bar .trivia_title {
+    padding: 5px 20px;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .settings-container .empty {
+    justify-content: center;
+  }
+  .settings-container .empty * {
+    margin: 0 5px;
+  }
+}
 :root {
   --darker: #0A0A0A;
   --dark: #121212;

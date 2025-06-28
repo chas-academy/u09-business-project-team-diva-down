@@ -1,5 +1,13 @@
 @import '../variables/variables.scss';
 
+.title_homepage_section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .title_section {
     display: flex;
     justify-content: center;

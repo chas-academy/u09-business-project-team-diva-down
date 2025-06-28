@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 import { RouterContainer } from "../../routes/RouteContainer";
 import { id } from "../../common/GenerateUserId";
 import LogOut from "../hoc/loc/LogOut";
+import PlayerStatsNav from "../hoc/loc/Nav_Buttons/Player_Stats_Nav_button";
+import HomeNav from "../hoc/loc/Nav_Buttons/Home_Nav_button";
+import CustomNav from "../hoc/loc/Nav_Buttons/Custom_Trivia_Nav_button";
+import PlayNav from "../hoc/loc/Nav_Buttons/Play_Nav_button";
 
 const Header = () => {
 
@@ -85,9 +89,9 @@ const Header = () => {
                         <ul className="navlinks">
                             <Link to={RouterContainer.Homepage}>Home</Link>
                             <Link to={RouterContainer.SinglePlayer}>Play</Link>
-                            <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
+                            {/* <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
                             <Link to={RouterContainer.CustomTrivia.replace(':id', id)}>Custom</Link>
-                            <Link to={RouterContainer.Leaderboard}>Leaderboard</Link>
+                            <Link to={RouterContainer.Leaderboard}>Leaderboard</Link> */}
                         </ul>
                         <div className="button-container">
                             <button 
@@ -112,25 +116,52 @@ const Header = () => {
                 )} 
                 {Navbar === true && (
                     <>
-                        <div className="mobile_nav_menu_container">
-                            <div onClick={toggleNavMenu} className="cross-placement">
-                                <div className="cross-container">
-                                    <div className="cross-bar top"></div>
-                                    <div className="cross-bar btm"></div>
+                        {AuthToken ? (
+                            <>
+                                <div className="mobile_nav_menu_container">
+                                    <div onClick={toggleNavMenu} className="cross-placement">
+                                        <div className="cross-container">
+                                            <div className="cross-bar top"></div>
+                                            <div className="cross-bar btm"></div>
+                                        </div>
+                                    </div>
+                                    <ul className="mobile_navlinks">
+                                        <Link to={RouterContainer.Homepage}><HomeNav /></Link>
+                                        <Link to={RouterContainer.SinglePlayer}><PlayNav /></Link>
+                                        <Link to={RouterContainer.UserDashboard.replace(':id', id)}><PlayerStatsNav /></Link>
+                                        <Link to={RouterContainer.CustomTrivia.replace(':id', id)}><CustomNav /></Link>
+                                        <button onClick={handleLogout}><LogOut /></button>
+                                        {/* <Link to={RouterContainer.Leaderboard}>Leaderboard</Link> */}
+                                    </ul>
                                 </div>
-                            </div>
-                            <ul className="mobile_navlinks">
-                                <Link to={RouterContainer.Homepage}>Home</Link>
-                                <Link to={RouterContainer.SinglePlayer}>Play</Link>
-                                <Link to={RouterContainer.UserDashboard.replace(':id', id)}>Player Stats</Link>
-                                <Link to={RouterContainer.Leaderboard}>Leaderboard</Link>
-                            </ul>
-                        </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="mobile_nav_menu_container">
+                                    <div onClick={toggleNavMenu} className="cross-placement">
+                                        <div className="cross-container">
+                                            <div className="cross-bar top"></div>
+                                            <div className="cross-bar btm"></div>
+                                        </div>
+                                    </div>
+                                    <ul className="mobile_navlinks">
+                                        <Link to={RouterContainer.Homepage}><HomeNav /></Link>
+                                        <Link to={RouterContainer.SinglePlayer}><PlayNav /></Link>
+                                        <Link to={RouterContainer.Login}><Login/></Link>
+                                        <Link to={RouterContainer.Register}><Register/></Link>
+                                    </ul>
+                                </div>
+                            </>
+                        )}
+                    
                     </>
                 )}
+                
             </header>
         </>
     );
 };
 
 export default Header;
+
+

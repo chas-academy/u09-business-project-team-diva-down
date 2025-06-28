@@ -96,6 +96,24 @@
     }
 }
 
+.hollow_active_button_version4 {
+    min-width: 100px;
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 24px;
+    font-family: $font2;
+    background-color: transparent;
+    color: $accent1;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+}
+
 .invitationDetails {
     margin: 20px 0;
 

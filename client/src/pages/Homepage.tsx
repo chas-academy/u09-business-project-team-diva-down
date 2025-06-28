@@ -14,7 +14,7 @@ const Homepage = () => {
             <div id="container" className="Homepage">
                 <Header />
                 <main className="main">
-                    <section className="title-section">
+                    <section className="title_homepage_section">
                         <Homepage_title_info />
                     </section>
                     <section className="homepage-button-container">
