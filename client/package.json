@@ -13,6 +13,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.10.0",
+    "cookie-session": "^2.1.0",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "react": "^19.1.0",

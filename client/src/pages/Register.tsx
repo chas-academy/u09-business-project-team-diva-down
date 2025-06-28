@@ -30,7 +30,14 @@ const Register_Page = () => {
                 return;
             }
 
-            const response = await fetch("http://localhost:3000/register", {
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1';
+    
+            const apiUrl = isLocalhost 
+                ? 'http://localhost:3000/register' 
+                : 'https://u09-business-project-team-diva-down.onrender.com/register';
+
+            const response = await fetch( apiUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -158,7 +158,7 @@ const SingePlayerGameLoop: React.FC = () => {
     const fetchUserData = () => {
         if (isGuest) return Promise.resolve(null);
 
-        return axios.get(`http://localhost:3000/user/${userData.id}`)
+        return axios.get(`http://localhost:3000/user/${userData.id}` || `https://u09-business-project-team-diva-down.onrender.com/trivia/${userData.id}}`)
             .then(response => {
                 const NewUserData = response.data;
                 setAuthUserData(NewUserData);
@@ -173,7 +173,7 @@ const SingePlayerGameLoop: React.FC = () => {
         }
 
         try {
-            const response = await axios.get(`http://localhost:3000/user/${currentUser.id}`);
+            const response = await axios.get(`http://localhost:3000/user/${currentUser.id}` || `https://u09-business-project-team-diva-down.onrender.com/trivia/${currentUser.id}`);
             const userData = response.data;
             
             const FinalScore = score;
@@ -191,7 +191,7 @@ const SingePlayerGameLoop: React.FC = () => {
             };
 
             const updateResponse = await axios.put(
-                `http://localhost:3000/user/${currentUser.id}`,
+                `http://localhost:3000/user/${currentUser.id}` || `https://u09-business-project-team-diva-down.onrender.com/trivia/${currentUser.id}`,
                 updatedData
             );
             

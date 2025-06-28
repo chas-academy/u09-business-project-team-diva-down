@@ -44,7 +44,14 @@ const Friendslist_card: React.FC = () => {
 
     const fetchAllUsers = async () => {
         try {
-            axios.get('http://localhost:3000/user')
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1';
+    
+            const apiUrl = isLocalhost 
+                ? 'http://localhost:3000/user' 
+                : 'https://u09-business-project-team-diva-down.onrender.com/user';
+
+            axios.get(apiUrl)
                 .then(response => {
                     console.log(response.data)
                     const data = response.data;

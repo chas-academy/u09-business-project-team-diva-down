@@ -44,7 +44,14 @@ const UserInfo = () => {
 
 
   const fetchUserData = () => {
-     axios.get(`http://localhost:3000/user/${userData.id}`)
+      const isLocalhost = window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1';
+    
+        const apiUrl = isLocalhost 
+            ? `http://localhost:3000/user/${userData.id} `
+            : `https://u09-business-project-team-diva-down.onrender.com/user/${userData.id}`;
+
+     axios.get(apiUrl)
       .then(response => {
         const UserData = response.data;
         setAuthUserData(UserData);
@@ -59,7 +66,7 @@ const UserInfo = () => {
 
     axios({
       method: 'put',
-      url: `http://localhost:3000/user/${userData.id}`,
+      url: `http://localhost:3000/user/${userData.id}` || `https://u09-business-project-team-diva-down.onrender.com/user/${userData.id}` ,
       data: {
         name: newUsernameValue
       }
@@ -76,7 +83,7 @@ const UserInfo = () => {
 
     axios({
       method: 'put',
-      url: `http://localhost:3000/user/${userData.id}`,
+      url: `http://localhost:3000/user/${userData.id}` || `https://u09-business-project-team-diva-down.onrender.com/user/${userData.id}`,
       data: {
         email: newEmailValue
       }
@@ -98,7 +105,7 @@ const UserInfo = () => {
 
     axios({
       method: 'put',
-      url: `http://localhost:3000/user/${userData.id}`,
+      url: `http://localhost:3000/user/${userData.id}` || `https://u09-business-project-team-diva-down.onrender.com/user/${userData.id}`,
       data: {
         password: password
       }
@@ -128,7 +135,7 @@ const UserInfo = () => {
 
     axios({
       method: 'delete',
-      url: `http://localhost:3000/user/${userData.id}`,
+      url: `http://localhost:3000/user/${userData.id}` || `https://u09-business-project-team-diva-down.onrender.com/user/${userData.id}`,
     }).then(response => {
       if (response.status) {
         console.log("User has been deleted!");

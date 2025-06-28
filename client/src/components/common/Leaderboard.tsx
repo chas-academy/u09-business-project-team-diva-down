@@ -28,7 +28,14 @@ const Leaderboard_Card = () => {
     const [LeaderBoardData, SetLeaderBoardData] = useState();
 
     const FetchUsers = () => {
-        axios.get(`http://localhost:3000/user`)
+        const isLocalhost = window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1';
+    
+        const apiUrl = isLocalhost 
+            ? 'http://localhost:3000/user' 
+            : 'https://u09-business-project-team-diva-down.onrender.com/user';
+
+        axios.get(apiUrl)
             .then(response => {
                 const AllUserData = response.data;
                 SetLeaderBoardData(AllUserData);

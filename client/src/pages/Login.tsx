@@ -26,7 +26,14 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:3000/login", {
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                        window.location.hostname === '127.0.0.1';
+    
+            const apiUrl = isLocalhost 
+                ? 'http://localhost:3000/login' 
+                : 'https://u09-business-project-team-diva-down.onrender.com/login';
+
+            const response = await fetch( apiUrl, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
