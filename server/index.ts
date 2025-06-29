@@ -29,9 +29,21 @@ const socket = new WebSocketServer({ server });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const allowedOrigins = [
+  'https://neonix.netlify.app',
+  'http://localhost:3000'
+];
+
 app.use(cors({
-    origin: /http:\/\/localhost:\d+/,
-    credentials: true
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error('CORS not allowed for this origin'));
+    }
+  },
+  credentials: true,
 }));
 
 app.use(session({
