@@ -36,24 +36,19 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: true, // Allow all origins
-  credentials: true, // Allow cookies/auth headers
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['*'] // Allow all headers
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.options('*', cors());
-
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    return res.status(200).end();
-  }
-  next();
-});
 
 app.use(session({
   secret: process.env.SESSION_SECRET!,
