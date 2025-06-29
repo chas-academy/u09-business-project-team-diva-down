@@ -248,7 +248,7 @@ const CustomMultiplayer: React.FC = () => {
 
             const AuthUserPlacementData = placements?.sortedData.find((client) => client.UserId === authUser?.id);
 
-            const response = await axios.get(`${baseUrl}/${currentUserId}`);
+            const response = await axios.get(`${baseUrl}/user/${currentUserId}`);
             const userData = response.data;
 
             let updatedData = {
@@ -264,7 +264,7 @@ const CustomMultiplayer: React.FC = () => {
             }
 
             const updateResponse = await axios.put(
-                `${baseUrl}/${currentUserId}`,
+                `${baseUrl}/user/${currentUserId}`,
                 updatedData
             );
 
