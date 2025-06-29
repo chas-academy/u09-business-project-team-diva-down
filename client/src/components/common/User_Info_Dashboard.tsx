@@ -45,7 +45,7 @@ const UserInfo = () => {
 
 
   const fetchUserData = () => {
-     axios.get(`${baseUrl}/${userData.id}`)
+     axios.get(`${baseUrl}/user/${userData.id}`)
       .then(response => {
         const UserData = response.data;
         setAuthUserData(UserData);
